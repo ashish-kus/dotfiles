@@ -1,0 +1,48 @@
+setopt INC_APPEND_HISTORY
+setopt HIST_IGNORE_SPACE
+setopt HIST_EXPIRE_DUPS_FIRST
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
+setopt HIST_SAVE_NO_DUPS
+export COMPLETION_WAITING_DOTS="true"
+
+# Download Znap, if it's not there yet.
+Plugin_path="$HOME/.zsh_plugins"
+[[ -r $Plugin_path/znap/znap.zsh ]] ||
+    git clone --depth 1 -- \
+        https://github.com/marlonrichert/zsh-snap.git $Plugin_path/znap
+
+source $Plugin_path/znap/znap.zsh  # Start Znap
+
+# Initialize Prompt
+znap eval starship 'starship init zsh --print-full-init'
+hash colorscript && colorscript -r 
+znap prompt
+
+# `znap source` starts plugins.
+znap source jeffreytse/zsh-vi-mode
+znap source zsh-users/zsh-autosuggestions
+znap source z-shell/F-Sy-H
+znap source zsh-users/zsh-completions
+znap source chrissicool/zsh-256color
+
+# For that plugin to work, you do need to load the required libraries first
+
+ znap source ohmyzsh/ohmyzsh plugins/{sudo,colored-man-pages}
+ znap source ohmyzsh/ohmyzsh lib/theme-and-appearance 
+
+# Completions
+znap function _starship starship 'eval "$( starship completions zsh )"'
+compctl -K _starship starship
+
+
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+# Initialize Zoxide for better directory navigatio
+eval "$(zoxide init zsh --cmd cd --hook pwd)"
+
+alias ../="cd ../"
+alias ../../="cd ../../"
+alias ../../../="cd ../../../"
+

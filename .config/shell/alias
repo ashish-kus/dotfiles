@@ -1,0 +1,104 @@
+#
+#  █████╗ ███████╗██╗  ██╗██╗███████╗██╗  ██╗      ██╗  ██╗██╗   ██╗███████╗
+# ██╔══██╗██╔════╝██║  ██║██║██╔════╝██║  ██║      ██║ ██╔╝██║   ██║██╔════╝
+# ███████║███████╗███████║██║███████╗███████║█████╗█████╔╝ ██║   ██║███████╗
+# ██╔══██║╚════██║██╔══██║██║╚════██║██╔══██║╚════╝██╔═██╗ ██║   ██║╚════██║
+# ██║  ██║███████║██║  ██║██║███████║██║  ██║      ██║  ██╗╚██████╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝      ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#
+###############################################################################
+
+alias termcode="lvim"
+#============================== [ GENERAL ] ===================================
+alias sudo="sudo "
+alias bye="shutdown now"
+alias sleep="systemctl suspend"
+alias mkdir="mkdir -p"
+alias c="clear -x"
+alias clear="clear -x"
+alias q="exit"
+alias governer="cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor"
+alias cpufreq='watch -n1 -t "$HOME/solis/bin/cpufreq"'
+alias gc="git clone"
+alias f="find . | grep "
+
+# Alias's for archives
+alias mktar='tar -cvf'
+alias mkbz2='tar -cvjf' 
+alias mkgz='tar -cvzf'
+alias untar='tar -xvf'
+alias unbz2='tar -xvjf'
+alias ungz='tar -xvzf'
+
+#=========================== [ Modified Command ] ===========================
+# alias cp="cp -i"
+# alias mv="mv -i"
+# alias rm="rm -iv"
+alias mkdir="mkdir -p"
+alias ping="ping -c 10"
+alias less="less -R"
+alias clock="watch -n1 -t 'date +%A%n%x%n%X | figlet  | center-align -a'"
+
+#============================ [ MOVEMENT ] ===================================
+
+alias downloads="cd ~/Downloads"
+alias cdow="downloads"
+alias documents="cd ~/Documents"
+alias cdoc="documents"
+[ -d "$HOME/Work" ] && alias work="cd $HOME/Work"
+[ -d "$HOME/Work/Repo" ] && alias repo="cd $HOME/Work/Repo"
+[ -d "/run/media/ashishk/Data/" ] && alias cdd="cd /run/media/ashishk/Data/"
+[ -d "$HOME/Work/Repo/Learning/" ] && alias cdl="cd $HOME/Work/Repo/Learning/"
+[ -d "$HOME/Downloads/temp" ] && alias cdt="cd $HOME/Downloads/temp" || alias cdt="echo 'temp dir not found' "
+[ -d "$HOME/.config/" ] && alias cdc="cd $HOME/.config"
+[ -d "$HOME/ashishk/bin" ] && alias cdb="cd $HOME/ashishk/bin"
+[ -d "$HOME/Documents/Work" ] && alias cdw="cd $HOME/Documents/Work"
+[ -d "$HOME/.config/shell" ] && alias cds="cd $HOME/.config/shell"
+[ -d "$HOME/Pictures/" ] && alias cdp="cd $HOME/Pictures"
+[ -d "$HOME/Work/Repo/CLI-config/shell/" ] && alias shell="cd $HOME/Work/Repo/CLI-config/shell"
+
+[ -f "$HOME/.config/shell/alias" ] && alias ealias="vim $HOME/.config/shell/alias"
+[ -f "$HOME/.config/shell/path" ] && alias epath="vim $HOME/.config/shell/path"
+[ -f "$HOME/.config/shell/func" ] && alias efunc="vim $HOME/.config/shell/func"
+#=========================== [ CHECK_ALIAS ] ================================
+# check_alias for conditional based aliases, IF file or tool on which alias depend exist then aliass this 
+check_alias(){
+    if command -v $1 &>/dev/null;then
+        alias $2="$3"
+    fi
+}
+check_alias wl-copy copy "wl-copy"
+check_alias wl-past past "wl-past"
+check_alias figlet stime 'watch -n1 -t "date +%T | figlet"'
+check_alias 0x0 transfer '0x0'
+check_alias speed-test speedtest "speed-test"
+check_alias glow mcat "glow"
+check_alias bpython python "bpython"
+check_alias sl sl "sl | lolcat"
+check_alias sensors wsensors 'watch -n1 -t "sensors"'
+check_alias center-align clock 'watch -n1 -t "date +%A%n%x%n%X | figlet  | center-align -a"'
+# check_alias nvim vim "nvim"
+# check_alias lvim vim "lvim"
+# unset -f check_alias
+
+#============================= [ alias for EXA ] ==================================
+if hash exa 2>/dev/null;then
+ alias l='exa -lahF --color=auto --icons --sort=size --group-directories-first'
+ alias lss='exa -hF --color=auto --icons --sort=size --group-directories-first'
+ alias la='exa -ahF --color=auto --icons --sort=size --group-directories-first'
+ alias ls='exa -lhF --color=auto --icons --sort=Name --group-directories-first'
+ alias lst='exa -lahFT --color=auto --icons --sort=size --group-directories-first'
+ alias lt='exa -aT --icons --group-directories-first --color=auto --sort=size'
+fi
+#============================= [ EXTRAS ] ==========================================
+# MYSQL:
+alias mysql="sudo systemctl start mysql && sudo mysql -u root ; systemctl stop mysql"
+alias mysql="sudo systemctl start mysql && sudo mycli -u root ; systemctl stop mysql"
+
+#============================ [ ARCH - Special ] ===================================
+alias getix='curl http://ix.io/$1'
+alias mygip="curl ipecho.net/ip;echo "
+
+
+#============================ [ dotfiles - Special ] ===================================
+alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"

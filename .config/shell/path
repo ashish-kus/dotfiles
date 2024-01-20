@@ -1,0 +1,23 @@
+# I update the PATH Variable for the system
+
+add_path(){
+  ARR=("$@")
+  for i in "${ARR[@]}"
+    do
+     if [[ -d $i ]] && [[ ":$PATH:" != *":$i:"* ]]; then
+      export PATH="${PATH:+"$PATH:"}$i"
+     fi
+    done
+}
+
+PATHLIST=(
+    "$HOME/.local/bin"
+    "$HOME/ashishk/.bin"
+    # "$HOME/ashishk/bin/other"
+    # "$HOME/ashishk/bin/sys"
+    "$HOME/.npm-global/bin"
+    "$HOME/.cargo/bin"
+)
+
+add_path ${PATHLIST[@]}
+unset -f add_path
