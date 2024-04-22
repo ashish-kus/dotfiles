@@ -1,0 +1,185 @@
+{
+  "layer": "top",
+  "position": "bottom",
+  "modules-left": [   "clock",  "custom/weather", "disk", "memory", "temperature", "cpu", "custom/powerDraw", "custom/governor"],
+  "modules-center": [ "wlr/workspaces"],
+  "modules-right": [ "tray","wlr/taskbar", "custom/updates", "backlight","idle_inhibitor","bluetooth",  "pulseaudio", "pulseaudio#mic", "network", "battery"],
+
+ "custom/governor":{
+      "format": "{}", 
+      "exec": "cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor",
+      "interval": "1",
+
+ },
+
+ "wlr/workspaces": {
+      "format": "{icon}",
+      "sort-by-number": true,
+      "active-only": false,
+      "on-click": "activate",
+      "on-scroll-up": "hyprctl dispatch workspace e+1",
+      "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+  "clock": {
+      "format": "{:%I:%M:%S %p}",
+      "interval":1,
+      "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+      "calendar-weeks-pos": "right",
+      "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+      "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+      "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+      "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+      },
+
+  "custom/weather": {
+      "format": {},
+      "return-type": "json",
+      "exec": "~/.config/waybar/scripts/weather.sh",
+      "interval": 10,
+      "on-click": "firefox https://wttr.in"
+      },
+
+  "tray": {
+    "spacing": 10
+  },
+
+  "battery": {
+      "interval":1,
+          "states": {
+              "good": 95,
+              "warning": 30,
+              "critical": 20
+          },
+          "format": "{capacity}%  {icon}",
+          "format-charging": " {capacity}%  ",
+          "format-plugged": "{capacity}% ",
+          "format-alt": "{time} {icon}",
+          "format-icons": [ "", "", "", "", "", "", "", "", "" ]
+      },
+
+  "network": {
+        "format-wifi": "<span font='12'>直</span>",
+        /* "format-ethernet":"<span font='18'> </span>", */
+        "format-ethernet":"<span font='10'>🖧 </span>",
+        "format-disconnected": "  !",
+        "tooltip-format": "{ipaddr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+        "tooltip-format-ethernet": "{ifname}  | {ipaddr}",
+        "on-click": "networkmanager_dmenu"
+      },
+
+  "cpu": {
+                  "interval": 1,
+                  "format": " {usage}% 𝌞 ",
+                  "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+             },
+    "memory": {
+      "format": "{used}GB"
+    },
+   "temperature": {
+              "interval": 1,
+              "critical-threshold": 80,
+              "on-click": "foot btop",
+              "format-critical": "{temperatureC}°C ",
+              "format": " {temperatureC}°C "            
+         },
+    "idle_inhibitor": {
+        "format": "<span font='18'>{icon}</span>",
+        "format-icons": {
+          "activated": "",
+          "deactivated": ""
+        },
+    },
+
+   "pulseaudio": {
+      "format": "{icon}",
+      "format-bluetooth":"",
+      "format-muted": "🔇",
+      "format-icons": {
+        "headphones": "🎧",
+        "bluetooth": "🎧",
+        "handsfree": "",
+        "headset": "",
+        "phone": "",
+        "portable": "",
+        "car": "",
+        "default": ["🕨","🕩","🕪"]
+      },
+      "on-click": "pavucontrol",
+      "tooltip-format": "{icon}  {volume}%"
+    },
+    "pulseaudio#mic": {
+      "format": "{format_source}",
+      "format-source": "",
+      "format-source-muted": "",
+      "tooltip-format": "  {volume}%",
+      "on-click": "pactl set-source-mute 0 toggle",
+      "on-scroll-up": "pactl set-source-volume 0 -1%",
+      "on-scroll-down": "pactl set-source-volume 0 +1%",
+   },
+  
+   "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon} ",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+    ],
+    "on-scroll-down": "light -A 10",
+    "on-scroll-up": "light -U 10",
+    "smooth-scrolling-threshold": 1
+  },
+
+  "bluetooth": {
+  "format-on": "<span font='10'></span>",
+  "format-off": "",
+  "format-disabled": "",
+  "format-connected": "",
+  "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+  "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+  "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+  "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+  "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+  "on-click": "rofi-bluetooth",
+ }, 
+ "disk": {
+    "interval": 30,
+    "format": " {percentage_used}% ",
+    "path": "/"
+  },
+   "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 16,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": [
+        "foot"
+    ],
+    "app_ids-mapping": {
+         "firefoxdeveloperedition": "firefox-developer-edition"
+    }
+},
+  "custom/updates": {
+    "format": "{}",
+    "interval": 3600,                     // every hour
+    "exec": "~/.config/waybar/scripts/myupdate.sh",       // # of updates
+    "return-type": "json",
+    "exec-if": "exit 0",                  // always run; consider advanced run conditions
+  },
+
+  "custom/powerDraw": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/powerdraw.sh",
+    "return-type": "json"
+  }
+}
