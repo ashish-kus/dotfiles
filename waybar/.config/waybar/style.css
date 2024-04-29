@@ -1,0 +1,113 @@
+* {
+    border: none;
+    border-radius: 0;
+    font-family: Liberation Mono;
+    min-height: 20px;
+}
+
+window#waybar {
+    background: rgba(00, 00, 00, 0.5);
+    /* background: #000; */
+    border: 1px solid #7645ad ;
+    border-radius: 5px;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+#workspaces {
+    margin-right: 8px;
+    border-radius: 10px;
+    transition: none;
+    background: transparent;
+}
+
+#workspaces button {
+    transition: none;
+    color: #ffffff;
+    background: transparent;
+    padding: 5px;
+    font-size: 18px;
+}
+
+
+/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
+#workspaces button:hover {
+    transition: none;
+    box-shadow: inherit;
+    text-shadow: inherit;
+    border-radius: inherit;
+    color: #7645ad ;
+    background: transparent;
+}
+
+#workspaces button.focused {
+    color: #7645ad ;
+}
+
+
+#clock,
+#disk,
+#memory,
+#temperature,
+#cpu,
+#backlight,
+#idle_inhibitor,
+#bluetooth, 
+#pulseaudio,
+#network , 
+#battery,
+#custom-powerDown,
+#custom-governor,
+#custom-weather{
+  padding: 0 6px;
+}
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
+#battery {
+    padding-left: 5px;
+    border-radius: 5px;
+    transition: none;
+    color: #ffffff;
+    background: transparent;
+}
+
+
+#battery.charging {
+    color: #ffffff;
+    background-color: #26A65B;
+}
+
+#battery.warning:not(.charging) {
+    background-color: #ffbe61;
+    color: black;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#tray {
+    padding-left: 10px;
+    padding-right: 10px;
+    border-radius: 10px;
+    transition: none;
+    color: #ffffff;
+    background: transparent;
+}
+
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
