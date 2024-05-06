@@ -1,0 +1,3 @@
+#!/bin/bash
+	cat /proc/cpuinfo | grep "^[c]pu MHz" 
+	cat /proc/cpuinfo | grep "^[c]pu MHz" | awk -F' ' '{sum+=$4;}END{print "Average         : "  sum/8;}'

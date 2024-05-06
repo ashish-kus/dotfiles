@@ -1,0 +1,110 @@
+#!/bin/bash
+
+############### [ tempclear [ script to clear temp directories ]  #################
+#
+#
+#  █████╗ ███████╗██╗  ██╗██╗███████╗██╗  ██╗      ██╗  ██╗██╗   ██╗███████╗
+# ██╔══██╗██╔════╝██║  ██║██║██╔════╝██║  ██║      ██║ ██╔╝██║   ██║██╔════╝
+# ███████║███████╗███████║██║███████╗███████║█████╗█████╔╝ ██║   ██║███████╗
+# ██╔══██║╚════██║██╔══██║██║╚════██║██╔══██║╚════╝██╔═██╗ ██║   ██║╚════██║
+# ██║  ██║███████║██║  ██║██║███████║██║  ██║      ██║  ██╗╚██████╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝      ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#
+#                                         Gmail: ashish.kus2408@gmail.com
+##################################################################################
+# This script is to remove all files in temp directories created by user and whoes
+# path is added in the billow TEMPDIR array.
+# If script is automaticaly run on boot it will act as /tmp directory in Linux based 
+# systems contains necessary files that are temporarily required by the system as 
+# well as other software and applications running on the machine.
+
+CHECK=1
+TEMPDIR=(
+        "$HOME/Downloads/temp"
+        "$HOME/Documents/temp"
+        "$HOME/Documents/work/temp"
+        )
+
+        help()                        # help function for the script
+        {
+          echo "  This script is to delete all content of temp files mentioned in"
+          echo "  list i.e. 'TEMPDIR' in script"
+          echo "  syntax: tempclear [ OPTION ]"
+          echo "  options:"
+          echo "      -h, --help   Print help for tempclear."
+          echo "      -l, --list   list all the temp directory in array."
+          echo "      -c, --clear  delete all content of temp directory in list."
+          echo "      -b, --broken display all the broken path to temp in list."
+          echo
+        }
+
+        clear()                         # clear all temp directory in list
+        {
+          for i in "${TEMPDIR[@]}"
+          do
+             if [ -d "$i" ]; then
+                  rm -rf /$i/*
+                  rm -rf /$i/*.*
+             else
+              CHECK=0
+             fi
+          done
+          echo -e "\033[1;31m TEMP CLEARED "
+         notify-send -i ~/solis/Personal/ICONS/script/tempclear.png -u normal -a Tempclear -t 3000 -c MY_SCRIPT "TEMP DIRECTIRIES CLEARED"   
+        }
+
+        list()                          # mention all the directory in the list
+        {
+         for i in "${TEMPDIR[@]}"
+                  do
+                    if [ -d $i ]; then
+                    echo $i
+                    fi
+                 done
+        }
+
+          broken()                          # mention all the broken directory in the list
+          {
+           for i in "${TEMPDIR[@]}"
+                    do
+                      [[ -d  $i  ]] || echo $i
+                   done
+          }
+
+
+        if [ $# -eq 0 ]; then          # if there is no argument 
+          help
+          exit 1;
+        elif [ $# -eq 1 ]; then        # if only one argument then
+          while test $# -eq 1          # checking for argument
+          do
+             case "$1" in
+                 -h)  help
+                    ;;
+                 --help) help
+                    ;;
+                 -l) list
+                    ;;
+                 --list) list
+                    ;;
+                 -c) clear
+                    ;;
+                 --clear) clear
+                   ;;
+                 -b) broken
+                   ;;
+                 --broken) broken
+                    ;;
+                 *) help
+                    exit 1;
+             esac
+                 shift
+           done
+         else
+           help                       # if no of argument are more then 1
+           exit 1;
+        fi
+        if [ $CHECK != 1 ]; then
+          echo " Some path to directories are broken. "
+          echo " Use tempclear -b to see the list of broken path."
+        fi

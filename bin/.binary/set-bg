@@ -1,0 +1,23 @@
+#!/bin/bash
+
+PATH(){
+	[ -d $HOME/Pictures/System/wallpapers ] && WALLPAPERS=(/bin/ls $HOME/Pictures/System/wallpapers/* )
+}
+SET_BG() {
+  PATH
+	BG=${WALLPAPERS[ $RANDOM % ${#WALLPAPERS[@]} ]}
+	killall -q wbg &>/dev/null
+	wbg "$BG" &>/dev/null
+}
+MAIN() {
+  if [ $# -eq 0 ]; then
+    echo $#
+    SET_BG 
+  else 
+	  wbg "$1" &>/dev/null
+  fi
+}
+MAIN &>/dev/null &
+
+
+

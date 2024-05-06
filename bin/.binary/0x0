@@ -1,0 +1,127 @@
+#!/bin/sh
+#####################    [  0x0  [  script for file hosting  ]    #################
+#
+#
+#  █████╗ ███████╗██╗  ██╗██╗███████╗██╗  ██╗      ██╗  ██╗██╗   ██╗███████╗
+# ██╔══██╗██╔════╝██║  ██║██║██╔════╝██║  ██║      ██║ ██╔╝██║   ██║██╔════╝
+# ███████║███████╗███████║██║███████╗███████║█████╗█████╔╝ ██║   ██║███████╗
+# ██╔══██║╚════██║██╔══██║██║╚════██║██╔══██║╚════╝██╔═██╗ ██║   ██║╚════██║
+# ██║  ██║███████║██║  ██║██║███████║██║  ██║      ██║  ██╗╚██████╔╝███████║
+# ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═╝╚══════╝╚═╝  ╚═╝      ╚═╝  ╚═╝ ╚═════╝ ╚══════╝
+#
+#                                         Gmail: ashish.kus2408@gmail.com
+##################################################################################
+
+# File hosting and URL shortening service.
+# File URLs are valid for at least 30 days and up to a year (see below).
+# Shortened URLs do not expire.
+# Maximum file size: 512.0 MiB
+# Blocked file types: application/x-dosexec, application/x-executable, 
+#                     application/x-hdf5, application/java-archive,
+#                     Android APKs and system images.
+################ [ FOR MORE INFO VISIT: https://0x0.st/  ] ########################
+RED='\033[1;31m'
+CLEAR='\033[0m'
+
+  help()
+  {
+    echo -e "  0x0: File hosting and URL shortening service.
+             File URLs are valid for at least 30 days and up to a year.
+             Shortened URLs do not expire.
+             Maximum file size: 512.0 MiB
+             Blocked file types: application/x-dosexec, application/x-executable, 
+                                 application/x-hdf5, application/java-archive."
+     echo -e "              \033[1;35m USE 0x0 <path_of_file>"
+     echo -e "                      or"
+     echo -e "             USE 0x0 <URL_to_be_shortened>\033[0m"
+     echo -e "\n\033[1;31m -> \033[0m if you are trying to sorten an URL this function is not yet added"
+     echo -e "     FOR MORE INFO VISIT:\033[1;34m https://0x0.st/ \033[0m"
+     echo
+  }
+
+if [ $# -eq 0 ]; then
+   echo -e  "$RED  No file provided $CLEAR"
+   help
+elif [ $# -eq 1 ]; then 
+  while test $# -eq 1
+  do
+       case "$1" in
+           -h)  help
+               ;;
+           --help) help
+               ;;
+                *)    
+                     URL="https://0x0.st"
+                     FILE=$1
+                     if [ ! -f "$FILE" ]; then
+                       echo -e "  \033[0;31mFile ${FILE} not found\033[0m"
+                       help
+                       exit 1
+                     else
+                       RESPONSE=$(curl -# -F "file=@${FILE}" "${URL}")
+                       echo -e "${RESPONSE}" | wl-copy 
+                       echo -e "\n\033[0;32m${RESPONSE}\033[0;36m  copied\033[0m\n"
+                     fi
+               ;;
+       esac
+        shift
+  done
+else
+  help
+fi
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+  

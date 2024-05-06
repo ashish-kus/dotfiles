@@ -1,0 +1,39 @@
+#!/bin/bash
+# pgrep -x swaylock && exit
+# [ -d $HOME/Pictures/System/lockScreen ] && LOCKSCREENS=($HOME/Pictures/System/lockScreen/*) || LOCKSCREENS=("")
+# BACKGROUND=${LOCKSCREENS[ $RANDOM % ${#LOCKSCREENS[@]} ]} 
+
+check(){
+    hash swaylock 2>/dev/null || exit
+}
+ pgrep -x swaylock && exit
+
+check
+swaylock \
+  --indicator-radius 170 --indicator-thickness 15 \
+  --inside-color 00000000 \
+  --inside-clear-color 00000000 \
+  --inside-ver-color 00000000 \
+  --inside-wrong-color 00000000 \
+  --key-hl-color 04344C  \
+  --bs-hl-color f4a261   \
+  --ring-color 548494 \
+  --ring-clear-color f4a261 \
+  --ring-wrong-color C3242C \
+  --ring-ver-color 023e8a \
+  --font 'NotoSans Nerd Font Mono' \
+  --text-color 000000 \
+  --text-clear-color  00000000 \
+  --text-wrong-color 00000000 \
+  --text-ver-color 00000000 \
+  --separator-color 548494 \
+  --screenshot \
+  --line-color 00000000 \
+  --grace 1  \
+  --fade-in 1 \
+  --effect-blur 20x20 \
+  --effect-compose "16.7%x29.6%;center;$HOME/Pictures/System/Icons/color-tux.png" \
+  --ignore-empty-password \
+  --show-failed-attempts \
+  --daemonize 
+

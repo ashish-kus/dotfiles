@@ -1,5 +1,4 @@
 # I update the PATH Variable for the system
-
 add_path(){
   ARR=("$@")
   for i in "${ARR[@]}"
@@ -12,9 +11,8 @@ add_path(){
 
 PATHLIST=(
     "$HOME/.local/bin"
-    "$HOME/ashishk/.bin"
-    # "$HOME/ashishk/bin/other"
-    # "$HOME/ashishk/bin/sys"
+    "$HOME/.bin"
+    "$HOME/.binary/"
     "$HOME/.npm-global/bin"
     "$HOME/.cargo/bin"
 )

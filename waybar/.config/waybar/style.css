@@ -1,80 +1,63 @@
 * {
     border: none;
-    border-radius: 0;
-    font-family: Liberation Mono;
-    min-height: 20px;
+    font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
+    min-height: 25px;
 }
 
 window#waybar {
-    background: rgba(00, 00, 00, 0.5);
-    /* background: #000; */
-    border: 1px solid #7645ad ;
-    border-radius: 5px;
-}
-
-window#waybar.hidden {
-    opacity: 0.2;
-}
-
-#workspaces {
-    margin-right: 8px;
-    border-radius: 10px;
-    transition: none;
     background: transparent;
+  /* background: rgba(00, 00, 00, 0.005); */
+  margin: 5px;
+ }
+
+#custom-logo {
+  padding: 0 10px;
 }
 
-#workspaces button {
-    transition: none;
-    color: #ffffff;
-    background: transparent;
-    padding: 5px;
-    font-size: 18px;
+.modules-right {
+  border-radius: 15px 0 0 15px;
+  margin-top: 2px;
+  background: #000000;
 }
 
-
-/* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-#workspaces button:hover {
-    transition: none;
-    box-shadow: inherit;
-    text-shadow: inherit;
-    border-radius: inherit;
-    color: #7645ad ;
-    background: transparent;
+.modules-center {
+  padding: 0 15px;
+  margin-top: 2px;
+  border-radius: 15px 15px 15px 15px;
+  background: #000000;
 }
 
-#workspaces button.focused {
-    color: #7645ad ;
+.modules-left {
+  border-radius: 0 15px 15px 0;
+  margin-top: 2px;
+  background: #000000;
 }
 
-
-#clock,
+#battery,
+#custom-clipboard,
+#bluetooth,
+#pulseaudio,
+#network,
 #disk,
 #memory,
-#temperature,
-#cpu,
 #backlight,
+#cpu,
 #idle_inhibitor,
-#bluetooth, 
-#pulseaudio,
-#network , 
-#battery,
-#custom-powerDown,
-#custom-governor,
-#custom-weather{
-  padding: 0 6px;
-}
-#temperature.critical {
-    background-color: #eb4d4b;
+#jack,
+#window,
+#clock {
+  padding: 0 7px;
 }
 
-#battery {
-    padding-left: 5px;
-    border-radius: 5px;
-    transition: none;
-    color: #ffffff;
-    background: transparent;
+#network,
+#pulseaudio {
+  padding-top: 3px;
 }
 
+#clock{
+  color: #5fd1fa;
+}
 
 #battery.charging {
     color: #ffffff;
@@ -96,14 +79,6 @@ window#waybar.hidden {
     animation-direction: alternate;
 }
 
-#tray {
-    padding-left: 10px;
-    padding-right: 10px;
-    border-radius: 10px;
-    transition: none;
-    color: #ffffff;
-    background: transparent;
-}
 
 @keyframes blink {
     to {

@@ -1,0 +1,6 @@
+#!/bin/bash
+
+hash kanshi 2>/dev/null || exit
+
+pgrep -x kanshi && killall kanshi 
+kanshi -c "$HOME/.config/kanshi/config" &

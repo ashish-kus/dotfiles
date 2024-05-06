@@ -1,0 +1,20 @@
+#!/bin/bash
+
+hash swayidle 2>/dev/null || echo "swayidel not found" 
+hash swaylock 2>/dev/null || echo "swaylock not found" 
+pgrep -x swaylock &>/dev/null && killall swaylock &>/dev/null
+pgrep -x swayidle &>/dev/null && killall swayidle &>/dev/null
+
+LOCK_TIME=100
+SUSPEND_TIME=300
+lock="swaylock -f"
+suspend="systemctl suspend"
+[ -f "$HOME/ashishk/bin/sys/lock" ] && lock="$HOME/ashishk/bin/sys/lock"
+
+swayidle -w \
+before-sleep "$lock" \
+lock "$lock" \
+unlock "killall -q swaylock" \
+timeout $LOCK_TIME 'loginctl lock-session' \
+timeout $SUSPEND_TIME 'systemctl suspend' &>/dev/null &
+ 

@@ -1,0 +1,26 @@
+#!/bin/bash
+selected=$(echo -e "Lock\nSleep\nLogout\nShutdown\nReboot" | bemenu -l -1 -c -W .3 -i -p "[]=") 
+
+
+case $selected in 
+
+  "Logout")
+    kill -9 -1
+    ;;
+
+  "Shutdown")
+    systemctl poweroff
+    ;;
+  "Sleep")
+    systemctl suspend
+    ;;
+  "Lock")
+    loginctl lock-session
+    ;;
+  "Reboot")
+    systemctl reboot
+    ;;
+  *)
+    ;;
+esac
+
