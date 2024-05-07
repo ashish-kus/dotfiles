@@ -60,5 +60,13 @@
   dbg:  #19191902;
   abg:  #5a514902;
 
+  debug:                          rgba(225, 000, 000, 100%);        
+  bg:                             rgba(000, 000, 000, 50%);
+  text:                           rgba(255, 255, 255, 100%);
+  primery:                        rgba(38, 139, 210,   80%);
+  secondary:                      rgba(38, 139, 210, 100 %);
+  transparent:                    rgba(255, 255, 255, 0%);
+
 }
+
 

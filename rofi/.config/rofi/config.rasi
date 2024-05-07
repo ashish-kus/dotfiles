@@ -1,7 +1,7 @@
 configuration {
   show-icons:           true;
   drun-display-format:  "{name}";
-  hide-scrollbar:       true;
+  hide-scrollbar:       false;
   sidebar-mode:         false;
   kb-remove-to-eol:     "Control+p";
   kb-secondary-copy:    "Control+c";
@@ -26,5 +26,3 @@ configuration {
 }
 
 @theme "./themes/default.rasi"
-
-// @theme "/usr/share/rofi/themes/glue_pro_blue.rasi"

@@ -1,6 +1,8 @@
 
 /*****----- Configuration -----*****/
 
+@theme './default.rasi'
+
 configuration {
 	modi:                       "drun";
   show-icons:                 true;
