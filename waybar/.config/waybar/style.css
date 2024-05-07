@@ -15,6 +15,7 @@ window#waybar {
 }
 
 .modules-right {
+  padding-left: 5px;
   border-radius: 15px 0 0 15px;
   margin-top: 2px;
   background: #000000;
@@ -35,6 +36,8 @@ window#waybar {
 
 #battery,
 #custom-clipboard,
+#custom-colorpicker,
+#custom-powerDraw,
 #bluetooth,
 #pulseaudio,
 #network,
@@ -42,17 +45,28 @@ window#waybar {
 #memory,
 #backlight,
 #cpu,
+#temperature,
+#custom-weather,
 #idle_inhibitor,
 #jack,
+#tray,
 #window,
+#workspaces,
 #clock {
-  padding: 0 7px;
+  padding: 0 5px;
 }
-
-#network,
 #pulseaudio {
   padding-top: 3px;
 }
+
+#temperature.critical,
+#pulseaudio.muted {
+  color: #FF0000;
+  padding-top: 0;
+}
+
+
+
 
 #clock{
   color: #5fd1fa;

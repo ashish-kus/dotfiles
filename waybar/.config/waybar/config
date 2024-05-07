@@ -1,8 +1,8 @@
 {
   "layer": "top", "position": "top",
-  "modules-left": ["custom/logo",  "hyprland/window" ],
-  "modules-center": [  "hyprland/workspaces","tray"],
-  "modules-right": [ "disk", "memory", "cpu", "custom/clipboard", "backlight", "idle_inhibitor", "bluetooth", "pulseaudio", "network", "custom/weather", "clock", "battery" ],
+  "modules-left": ["custom/logo", "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
+  "modules-center": [  "hyprland/workspaces"],
+  "modules-right": ["tray",  "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network",  "battery" ],
   "reload_style_on_change":true,
 
   "custom/logo": {
@@ -36,7 +36,7 @@
 },
 
 "custom/weather": {
-  "format": {},
+  "format": "{}",
   "return-type": "json",
   "exec": "~/.config/waybar/scripts/weather.sh",
   "interval": 10,
@@ -76,11 +76,11 @@
 
 "network": {
       "format-wifi": " ",
-      "format-ethernet":"🖧 ",
+      "format-ethernet":" ",
       "format-disconnected": "",
       "tooltip-format": "{ipaddr}",
       "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
-      "tooltip-format-ethernet": "{ifname}  | {ipaddr}",
+      "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
       "on-click": "networkmanager_dmenu"
     },
 
@@ -126,18 +126,29 @@
 
  "disk": {
     "interval": 30,
-    "format": " {percentage_used}% ",
+    "format": "  {percentage_used}%",
     "path": "/"
+  },
+
+  "custom/colorpicker": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": "once",
+    "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
+    "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
+    "signal": 1
   },
 
   "cpu": {
       "interval": 1,
-      "format": "{usage}% 󰠰 ",
+      "format": " {usage}%",
+      "min-length": 6,
+      "max-length": 6,
       "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
  },
 
 "memory": {
-  "format": "{percentage}% "
+  "format": " {percentage}%"
 },
 
  "hyprland/window": {
@@ -148,21 +159,31 @@
     }
 },
 
+"temperature": {
+  "format": " {temperatureC}°C",            
+  "format-critical": " {temperatureC}°C",
+  "interval": 1,
+  "critical-threshold": 80,
+  "on-click": "foot btop",
+ },
+
 "pulseaudio": {
   "format": "{volume}% {icon}",
   "format-bluetooth":"󰂰",
-  "format-muted": "",
+  "format-muted": "<span font='12'></span>",
   "format-icons": {
     "headphones": "",
     "bluetooth": "󰥰",
     "handsfree": "",
-    "headset": "",
+    "headset": "󱡬",
     "phone": "",
     "portable": "",
     "car": "",
     "default": ["🕨","🕩","🕪"]
   },
-  "on-click": "pavucontrol",
+  "justify": "center",
+  "on-click": "amixer sset Master toggle",
+  "on-click-right": "pavucontrol",
   "tooltip-format": "{icon}  {volume}%"
 },
 
@@ -183,7 +204,14 @@
     "hide-if-empty": true,
     "tooltip": true,
     "tooltip-spacing": 20
-}
+},
+
+  "custom/powerDraw": {
+    "format": "{}",
+    "interval": 1,
+    "exec": "~/.config/waybar/scripts/powerdraw.sh",
+    "return-type": "json"
+  }
 
 }
 

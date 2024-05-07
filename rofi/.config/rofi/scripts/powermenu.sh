@@ -1,14 +1,5 @@
 #!/usr/bin/env bash
 
-## Author : Aditya Shakya (adi1090x)
-## Github : @adi1090x
-#
-## Rofi   : Power Menu
-#
-## Available Styles
-#
-## style-1   style-2   style-3   style-4   style-5
-
 # Current Theme
 dir="$HOME/.config/rofi/themes"
 theme='powermenu'
@@ -32,7 +23,6 @@ rofi_cmd() {
 		-theme ${dir}/${theme}.rasi
 }
 
-
 # Pass variables to rofi dmenu
 run_rofi() {
 	echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi_cmd
@@ -40,7 +30,7 @@ run_rofi() {
 
 # Execute Command
 run_cmd() {
-		if [[ $1 == '--shutdown' ]]; then
+    if [[ $1 == '--shutdown' ]]; then
 			systemctl poweroff
 		elif [[ $1 == '--reboot' ]]; then
 			systemctl reboot
@@ -65,7 +55,7 @@ case ${chosen} in
 		run_cmd --reboot
         ;;
     $lock)
-  run_cmd --lock    
+    run_cmd --lock    
         ;;
     $suspend)
 		run_cmd --suspend
