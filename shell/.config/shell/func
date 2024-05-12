@@ -134,4 +134,7 @@ cpp()
 }
 
 
-
+cup() {
+  checkupdates --nocolor
+  pacman -Qm | aur vercmp
+}

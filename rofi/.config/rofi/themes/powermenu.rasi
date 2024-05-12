@@ -69,13 +69,13 @@ dummy {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "SYSTEM";
+    str:                         "POWER MENU";
     padding:                     var(general-padding);
     border:                      1px solid;
     border-color:                @primery;
     border-radius:               var(general-radius);
     background-color:            @primery;
-    text-color:                  @background;
+    text-color:                  @text;
 }
 prompt {
     enabled:                     true;
@@ -144,7 +144,7 @@ element {
     padding:                     var(element-padding);
     border:                      1px solid;
     border-radius:               var(element-radius);
-    border-color:                transparent;
+    border-color:                white;
     background-color:            black;
     text-color:                  @text;
     cursor:                      pointer;
@@ -158,8 +158,8 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            black;
-    border:                      2px solid;
+    background-color:            @primery;
+    border:                      1px solid;
     border-color:                @primery;
-    text-color:                  @primery;
+    text-color:                  black;
 }

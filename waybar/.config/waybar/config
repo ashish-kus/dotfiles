@@ -2,15 +2,76 @@
   "layer": "top", "position": "top",
   "modules-left": ["custom/logo", "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
   "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray",  "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio", "network",  "battery" ],
+  "modules-right": ["tray", "custom/updates", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio",  "network",  "battery" ],
   "reload_style_on_change":true,
 
-  "custom/logo": {
-    "format": "",
-    "tooltip": false
-  },
 
-  "hyprland/workspaces": {
+"custom/logo": {
+  "format": "",
+  "tooltip": false
+},
+
+"clock": {
+  "format": "{:%I:%M:%S %p}",
+  "interval":1,
+  "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+  "calendar-weeks-pos": "right",
+  "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
+  "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
+  "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
+  "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+},
+
+"custom/weather": {
+  "format": "{}",
+  "return-type": "json",
+  "exec": "~/.config/waybar/scripts/weather.sh",
+  "interval": 10,
+  "on-click": "firefox https://wttr.in"
+},
+
+"disk": {
+  "interval": 30,
+  "format": "  {percentage_used}%",
+  "path": "/"
+},
+
+"memory": {
+  "format": " {percentage}%"
+},
+
+"cpu": {
+  "interval": 1,
+  "format": " {usage}%",
+  "min-length": 6,
+  "max-length": 6,
+  "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
+},
+
+"temperature": {
+  "format": " {temperatureC}°C",            
+  "format-critical": " {temperatureC}°C",
+  "interval": 1,
+  "critical-threshold": 80,
+  "on-click": "foot btop",
+ },
+
+"custom/powerDraw": {
+  "format": "{}",
+  "interval": 1,
+  "exec": "~/.config/waybar/scripts/powerdraw.sh",
+  "return-type": "json"
+},
+
+"hyprland/window": {
+  "format": "( {class} )",
+  "rewrite": {
+       "(.*) - Mozilla Firefox": "🌎 $1",
+       "(.*) - zsh": "> [$1]"
+  }
+},
+
+"hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
 		"1": "",
@@ -27,6 +88,66 @@
        }
 },
 
+"network": {
+  "format-wifi": " ",
+  "format-ethernet":" ",
+  "format-disconnected": "",
+  "tooltip-format": "{ipaddr}",
+  "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
+  "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
+  "on-click": "networkmanager_dmenu"
+},
+
+
+"custom/hotspot":{
+  "format":"{}",
+  "exec":"~/.config/waybar/scripts/hotspot.sh",
+  "return-type": "json",
+  "on-click":"wihotspot",
+  "interval":1
+},
+
+"battery": {
+  "interval":1,
+      "states": {
+          "good": 95,
+          "warning": 30,
+          "critical": 20
+      },
+      "format": "{capacity}%  {icon} ",
+      "format-charging": "{capacity}% 󰂄 ",
+      "format-plugged": "{capacity}% 󰂄 ",
+      "format-alt": "{time} {icon}",
+          "format-icons": [
+        "󰁻",
+        "󰁼",
+        "󰁾",
+        "󰂀",
+        "󰂂",
+        "󰁹"
+      ],
+},
+
+"pulseaudio/slider": {
+  "min": 0,
+  "max": 140,
+  "orientation": "vertical"
+},
+
+"group/audio": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "pulseaudio",
+      "pulseaudio#mic",
+      "pulseaudio/slider"
+    ]
+  },
+
+
 "idle_inhibitor":{
   "format": "<span font='12'>{icon} </span>",
   "format-icons": {
@@ -35,12 +156,13 @@
   }
 },
 
-"custom/weather": {
+"custom/updates": {
   "format": "{}",
+  "interval": 60,
+  "exec": "~/.config/waybar/scripts/checkupdate.sh",
   "return-type": "json",
-  "exec": "~/.config/waybar/scripts/weather.sh",
-  "interval": 10,
-  "on-click": "firefox https://wttr.in"
+  "exec-if": "exit 0",
+  "signal": 8
 },
 
 "custom/clipboard":{
@@ -48,18 +170,6 @@
   "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy",
   "interval":86400
 },
-
-
-"clock": {
-      "format": "{:%I:%M:%S %p}",
-      "interval":1,
-      "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-      "calendar-weeks-pos": "right",
-      "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
-      "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
-      "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
-      "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
-      },
 
   "bluetooth": {
   "format-on": "",
@@ -73,37 +183,6 @@
   "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
   "on-click": "rofi-bluetooth",
  }, 
-
-"network": {
-      "format-wifi": " ",
-      "format-ethernet":" ",
-      "format-disconnected": "",
-      "tooltip-format": "{ipaddr}",
-      "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
-      "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
-      "on-click": "networkmanager_dmenu"
-    },
-
-"battery": {
-    "interval":1,
-        "states": {
-            "good": 95,
-            "warning": 30,
-            "critical": 20
-        },
-        "format": "{capacity}%  {icon} ",
-        "format-charging": "{capacity}% 󰂄 ",
-        "format-plugged": "{capacity}% 󰂄 ",
-        "format-alt": "{time} {icon}",
-            "format-icons": [
-          "󰁻",
-          "󰁼",
-          "󰁾",
-          "󰂀",
-          "󰂂",
-          "󰁹"
-        ],
-    },
 "backlight": {
   "device": "intel_backlight",
   "format": "<span font='12'>{icon}</span>",
@@ -123,13 +202,6 @@
   "on-scroll-up": "light -U 10",
   "smooth-scrolling-threshold": 1
   },
-
- "disk": {
-    "interval": 30,
-    "format": "  {percentage_used}%",
-    "path": "/"
-  },
-
   "custom/colorpicker": {
     "format": "{}",
     "return-type": "json",
@@ -138,34 +210,6 @@
     "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
     "signal": 1
   },
-
-  "cpu": {
-      "interval": 1,
-      "format": " {usage}%",
-      "min-length": 6,
-      "max-length": 6,
-      "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
- },
-
-"memory": {
-  "format": " {percentage}%"
-},
-
- "hyprland/window": {
-    "format": "( {class} )",
-    "rewrite": {
-         "(.*) - Mozilla Firefox": "🌎 $1",
-         "(.*) - zsh": "> [$1]"
-    }
-},
-
-"temperature": {
-  "format": " {temperatureC}°C",            
-  "format-critical": " {temperatureC}°C",
-  "interval": 1,
-  "critical-threshold": 80,
-  "on-click": "foot btop",
- },
 
 "pulseaudio": {
   "format": "{volume}% {icon}",
@@ -204,14 +248,6 @@
     "hide-if-empty": true,
     "tooltip": true,
     "tooltip-spacing": 20
-},
-
-  "custom/powerDraw": {
-    "format": "{}",
-    "interval": 1,
-    "exec": "~/.config/waybar/scripts/powerdraw.sh",
-    "return-type": "json"
-  }
-
+}
 }
 
