@@ -56,6 +56,7 @@ alias cdoc="documents"
 [ -d "$HOME/.config/shell" ] && alias cds="cd $HOME/.config/shell"
 [ -d "$HOME/Pictures/" ] && alias cdp="cd $HOME/Pictures"
 [ -d "$HOME/.dotfiles/" ] && alias cd.="cd $HOME/.dotfiles"
+[ -d "$HOME/.dotfiles/" ] && alias cd.="cd $HOME/.dotfiles"
 [ -d "$HOME/Work/Repo/CLI-config/shell/" ] && alias shell="cd $HOME/Work/Repo/CLI-config/shell"
 
 [ -f "$HOME/.config/shell/alias" ] && alias ealias="vim $HOME/.config/shell/alias"
