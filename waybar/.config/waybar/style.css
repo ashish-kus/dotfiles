@@ -44,6 +44,8 @@ window#waybar {
 #custom-updates,
 #bluetooth,
 #pulseaudio,
+#pulseaudio.mic,
+#pulseaudio.bluetooth,
 #network,
 #disk,
 #memory,
@@ -59,17 +61,37 @@ window#waybar {
 #clock {
   padding: 0 5px;
 }
-#pulseaudio {
+
+#pulseaudio{
   padding-top: 3px;
 }
 
-#temperature.critical,
-#pulseaudio.muted {
+#pulseaudio.muted{
   color: #FF0000;
-  padding-top: 0;
+  padding-top: 2px;
+  padding-right: 10px;
 }
 
+#pulseaudio-slider {
+  padding: 0 5px 0 8px;
+}
 
+#pulseaudio-slider slider {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+#pulseaudio-slider trough {
+  min-width: 50px;
+  min-height: 5px;
+  border-radius: 8px;
+}
+
+#pulseaudio-slider highlight {
+   min-width: 5px;
+   min-height: 5px;
+   background-color: green;
+}
 
 
 #clock{

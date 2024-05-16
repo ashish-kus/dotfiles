@@ -2,7 +2,7 @@
   "layer": "top", "position": "top",
   "modules-left": ["custom/logo", "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
   "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray", "custom/updates", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "pulseaudio",  "network",  "battery" ],
+  "modules-right": ["tray", "custom/updates", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "group/audio", "network",  "battery" ],
   "reload_style_on_change":true,
 
 
@@ -42,7 +42,7 @@
 
 "cpu": {
   "interval": 1,
-  "format": " {usage}%",
+  "format": "  {usage}%",
   "min-length": 6,
   "max-length": 6,
   "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
@@ -67,6 +67,7 @@
   "format": "( {class} )",
   "rewrite": {
        "(.*) - Mozilla Firefox": "🌎 $1",
+       "org.telegram.desktop": "> [$1]",
        "(.*) - zsh": "> [$1]"
   }
 },
@@ -80,7 +81,7 @@
 		"4": "",
 		"5": "",
 		"6": "",
-		"active": "",
+		"active": "󰊠",
 		"default": "" 
 	},
        "persistent-workspaces": {
@@ -90,8 +91,8 @@
 
 "network": {
   "format-wifi": " ",
-  "format-ethernet":" ",
-  "format-disconnected": "",
+  "format-ethernet":"󰈀",
+  "format-disconnected": "󱐅",
   "tooltip-format": "{ipaddr}",
   "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
   "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
@@ -114,8 +115,8 @@
           "warning": 30,
           "critical": 20
       },
-      "format": "{capacity}%  {icon} ",
-      "format-charging": "{capacity}% 󰂄 ",
+      "format": "{capacity}% {icon} ",
+      "format-charging": "{capacity}% 󰂄",
       "format-plugged": "{capacity}% 󰂄 ",
       "format-alt": "{time} {icon}",
           "format-icons": [
@@ -131,11 +132,11 @@
 "pulseaudio/slider": {
   "min": 0,
   "max": 140,
-  "orientation": "vertical"
+  "orientation": "horizontal"
 },
 
 "group/audio": {
-    "orientation": "inherit",
+    "orientation": "horizontal",
     "drawer": {
       "transition-duration": 500,
       "transition-left-to-right": false
@@ -149,10 +150,10 @@
 
 
 "idle_inhibitor":{
-  "format": "<span font='12'>{icon} </span>",
+  "format": "<span font='12'>{icon}</span>",
   "format-icons": {
-    "activated":"󰈈",
-    "deactivated":"󰈉"
+    "activated":"󰅶",
+    "deactivated":"󰾪"
   }
 },
 
@@ -166,13 +167,13 @@
 },
 
 "custom/clipboard":{
-  "format":"",
+  "format":"󰅍",
   "on-click": "cliphist list | rofi -dmenu | cliphist decode | wl-copy",
   "interval":86400
 },
 
   "bluetooth": {
-  "format-on": "",
+  "format-on": "󰂰",
   "format-off": "",
   "format-disabled": "󰂲",
   "format-connected": "󰂴",
@@ -212,9 +213,10 @@
   },
 
 "pulseaudio": {
-  "format": "{volume}% {icon}",
+  "format": "{icon}",
   "format-bluetooth":"󰂰",
-  "format-muted": "<span font='12'></span>",
+  "format-muted": "",
+  "tooltip-format": "{volume}% {icon}",
   "format-icons": {
     "headphones": "",
     "bluetooth": "󰥰",
@@ -225,10 +227,23 @@
     "car": "",
     "default": ["🕨","🕩","🕪"]
   },
+   "scroll-step": 5 ,
   "justify": "center",
   "on-click": "amixer sset Master toggle",
   "on-click-right": "pavucontrol",
-  "tooltip-format": "{icon}  {volume}%"
+  "tooltip-format": "{volume}%  {icon}",
+  "on-scroll-up": "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+  "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+},
+
+"pulseaudio#mic": {
+  "format": "{format_source}",
+  "format-source": "",
+  "format-source-muted": "",
+  "tooltip-format": "{volume}% {format_source} ",
+  "on-click": "pactl set-source-mute 0 toggle",
+  "on-scroll-down": "pactl set-source-volume 0 -1%",
+  "on-scroll-up": "pactl set-source-volume 0 +1%"
 },
 
 "jack": {
