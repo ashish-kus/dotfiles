@@ -62,6 +62,10 @@ window#waybar {
   padding: 0 5px;
 }
 
+
+#workspaces button.active {
+  color: cyan;
+}
 #pulseaudio{
   padding-top: 3px;
 }

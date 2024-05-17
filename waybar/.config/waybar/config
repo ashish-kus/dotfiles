@@ -73,25 +73,24 @@
 },
 
 "hyprland/workspaces": {
-	"format": "{icon}",
+	"format": "<span font='18px'>{icon}</span>",
 	"format-icons": {
-		"1": "",
-		"2": "",
-		"3": "",
-		"4": "",
-		"5": "",
-		"6": "",
-		"active": "󰊠",
+		"1": "१",
+		"2": "२",
+		"3": "३",
+		"4": "४",
+		"5": "५",
+    "6": "६",
 		"default": "" 
 	},
        "persistent-workspaces": {
-         "*": [ 2, 3, 4, 5, 6 ]
+         "*": [1, 2, 3, 4, 5, 6 ]
        }
 },
 
 "network": {
   "format-wifi": " ",
-  "format-ethernet":"󰈀",
+  "format-ethernet":"🖧 ",
   "format-disconnected": "󱐅",
   "tooltip-format": "{ipaddr}",
   "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
@@ -152,8 +151,8 @@
 "idle_inhibitor":{
   "format": "<span font='12'>{icon}</span>",
   "format-icons": {
-    "activated":"󰅶",
-    "deactivated":"󰾪"
+    "activated":"󰾪",
+    "deactivated":"󰅶"
   }
 },
 
