@@ -1,14 +1,29 @@
 {
   "layer": "top", "position": "top",
-  "modules-left": ["custom/logo", "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
+  "modules-left": ["custom/logo",  "clock",  "custom/weather", "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
   "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray", "custom/updates", "custom/clipboard", "backlight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "group/audio", "network",  "battery" ],
+  "modules-right": ["tray", "custom/clipboard", "group/blight", "idle_inhibitor", "custom/colorpicker", "bluetooth", "group/audio", "custom/hotspot", "network",  "battery" ],
   "reload_style_on_change":true,
 
 
+"custom/hotspot": {
+  "format":"{icon}{}",
+  "tooltip":true,
+  "interval":5,
+  "return-type":"json",
+  "format-icons":{
+    "active":"󱜠",
+    "notactive":"󱜡"
+  },
+  "exec":"~/.config/waybar/scripts/hotspot.sh -a watch",
+  "on-click":"~/.config/waybar/scripts/hotspot.sh -a toggle"
+},
+
+
 "custom/logo": {
-  "format": "",
-  "tooltip": false
+  "format": "󰊠",
+  "tooltip": false,
+  "on-click":"~/.config/rofi/scripts/powermenu.sh"
 },
 
 "clock": {
@@ -90,21 +105,12 @@
 
 "network": {
   "format-wifi": " ",
-  "format-ethernet":"🖧 ",
+  "format-ethernet":" 󰈀",
   "format-disconnected": "󱐅",
   "tooltip-format": "{ipaddr}",
   "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
   "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
   "on-click": "networkmanager_dmenu"
-},
-
-
-"custom/hotspot":{
-  "format":"{}",
-  "exec":"~/.config/waybar/scripts/hotspot.sh",
-  "return-type": "json",
-  "on-click":"wihotspot",
-  "interval":1
 },
 
 "battery": {
@@ -126,12 +132,21 @@
         "󰂂",
         "󰁹"
       ],
+      "on-click":"~/.config/rofi/scripts/powermenu.sh"
 },
 
 "pulseaudio/slider": {
   "min": 0,
   "max": 140,
   "orientation": "horizontal"
+},
+
+"idle_inhibitor":{
+  "format": "<span font='12'>{icon}</span>",
+  "format-icons": {
+    "activated":"󰾪",
+    "deactivated":"󰅶"
+  }
 },
 
 "group/audio": {
@@ -148,12 +163,43 @@
   },
 
 
-"idle_inhibitor":{
+"group/blight": {
+    "orientation": "horizontal",
+    "drawer": {
+      "transition-duration": 500,
+      "transition-left-to-right": false
+    },
+    "modules": [
+      "backlight",
+      "backlight/slider"
+     ]
+  },
+
+"backlight": {
+  "device": "intel_backlight",
   "format": "<span font='12'>{icon}</span>",
-  "format-icons": {
-    "activated":"󰾪",
-    "deactivated":"󰅶"
-  }
+  "format-icons": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+  ],
+  "on-scroll-down": "light -U 10",
+  "on-scroll-up": "light -A 10",
+  "smooth-scrolling-threshold": 1
+  },
+
+"backlight/slider": {
+   "min": 0,
+   "max": 100,
+   "orientation": "horizontal",
+   "device": "intel_backlight"
 },
 
 "custom/updates": {
@@ -162,7 +208,6 @@
   "exec": "~/.config/waybar/scripts/checkupdate.sh",
   "return-type": "json",
   "exec-if": "exit 0",
-  "signal": 8
 },
 
 "custom/clipboard":{
@@ -182,33 +227,14 @@
   "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
   "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
   "on-click": "rofi-bluetooth",
- }, 
-"backlight": {
-  "device": "intel_backlight",
-  "format": "<span font='12'>{icon}</span>",
-  "format-icons": [
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-    "",
-  ],
-  "on-scroll-down": "light -A 10",
-  "on-scroll-up": "light -U 10",
-  "smooth-scrolling-threshold": 1
-  },
+ },
+
   "custom/colorpicker": {
     "format": "{}",
     "return-type": "json",
     "interval": "once",
     "exec": "~/.config/waybar/scripts/colorpicker.sh -j",
     "on-click": "sleep 1 && ~/.config/waybar/scripts/colorpicker.sh",
-    "signal": 1
   },
 
 "pulseaudio": {
@@ -263,5 +289,6 @@
     "tooltip": true,
     "tooltip-spacing": 20
 }
+
 }
 

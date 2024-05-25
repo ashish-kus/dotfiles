@@ -41,7 +41,7 @@ text=${#updates[@]}
 
 tooltip="<b>$text  updates (arch+aur) </b>\n"
 # tooltip+=" <b>$(stringToLen "PkgName" 20) $(stringToLen "PrevVersion" 20) $(stringToLen "NextVersion" 20)</b>\n"
-[ "$text" -eq 0 ] && text="" || text="󱠂 $text"
+[ "$text" -eq 0 ] && text="" || text=" $text"
 
 cat <<EOF
 { "text":"$text", "tooltip":"$tooltip"}

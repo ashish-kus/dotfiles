@@ -3,6 +3,7 @@
     font-size: 14px;
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
     min-height: 25px;
+    color: #ffffff;
 }
 
 window#waybar {
@@ -42,8 +43,10 @@ window#waybar {
 #custom-colorpicker,
 #custom-powerDraw,
 #custom-updates,
+#custom-pacman,
 #bluetooth,
 #pulseaudio,
+#custom-hotspot,
 #pulseaudio.mic,
 #pulseaudio.bluetooth,
 #network,
@@ -62,7 +65,6 @@ window#waybar {
   padding: 0 5px;
 }
 
-
 #workspaces button.active {
   color: cyan;
 }
@@ -76,25 +78,30 @@ window#waybar {
   padding-right: 10px;
 }
 
+#backlight-slider,
 #pulseaudio-slider {
   padding: 0 5px 0 8px;
 }
 
+#backlight-slider slider,
 #pulseaudio-slider slider {
   background-color: transparent;
   box-shadow: none;
 }
 
+#backlight-slider trough,
 #pulseaudio-slider trough {
   min-width: 50px;
   min-height: 5px;
   border-radius: 8px;
 }
 
+#backlight-slider highlight,
 #pulseaudio-slider highlight {
    min-width: 5px;
    min-height: 5px;
-   background-color: green;
+   background-color: #FFFFFF;
+
 }
 
 

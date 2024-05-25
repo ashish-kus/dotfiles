@@ -1,0 +1,199 @@
+#!/bin/bash
+# Define default values
+interval=1
+
+CONFIG_FILE="${CONFIG_FILE:-$HOME/.config/create_ap/create_ap.conf}"
+WIFI_IFACE="${WIFI_IFACE:-wlan0}"
+INTERNET_IFACE="${INTERNET_IFACE:-enp4s0}"
+SSID="${SSID:-MyHotspot}"
+PASSPHRASE="${PASSPHRASE:-1234500000}"
+CHANNEL="${CHANNEL:-default}"
+ACTION="${ACTION:-toggle}"
+
+# Function to display usage
+usage() {
+    echo "Usage: $0 -c config_file [-a action]"
+    echo "  -c config_file      Path to configuration file"
+    echo "  -a action           Action to perform: start, stop, or toggle (default: toggle)"
+    exit 1
+}
+
+# check command exist or not.
+check() {
+  command -v "$1" >/dev/null 2>&1
+}
+
+# notify function
+notify() {
+  check notify-send && {
+    notify-send -a "waybar-Hotspot" "$@"
+    return
+  }
+  echo "$@"
+}
+
+# json formatter function for waybar
+json() {
+  jq --unbuffered --null-input --compact-output \
+    --arg text "$1" \
+    --arg alt "$2" \
+    --arg tooltip "$3" \
+    --arg class "$4" \
+    '{"text": $text, "alt": $alt, "tooltip": $tooltip, "class": $class}'
+}
+
+# Function to prompt user with zenity and fill in the details
+prompt_zenity() {
+    form_output=$(zenity --forms --title="Hotspot Configuration" --text="Enter Hotspot Details" \
+        --add-entry="Wi-Fi Interface (e.g., wlan0)" \
+        --add-entry="Share Interface (e.g., eth0)" \
+        --add-entry="SSID (Network name)" \
+        --add-entry="Passphrase" \
+        --add-entry="Channel (e.g., default or a number)" \
+        --add-combo="Action" --combo-values="toggle|start|stop")
+
+    if [ $? -eq 0 ]; then
+        IFS="|" read -r WIFI_IFACE INTERNET_IFACE SSID PASSPHRASE CHANNEL ACTION <<< "$form_output"
+    else
+        zenity --error --text="No input provided, exiting."
+        exit 1
+    fi
+}
+
+create_config() {
+  prompt_zenity
+  cat <<EOL > "$CONFIG_FILE"
+CHANNEL=default
+GATEWAY=10.0.0.1
+WPA_VERSION=2
+ETC_HOSTS=0
+DHCP_DNS=gateway
+NO_DNS=0
+NO_DNSMASQ=0
+HIDDEN=0
+MAC_FILTER=0
+MAC_FILTER_ACCEPT=/etc/hostapd/hostapd.accept
+ISOLATE_CLIENTS=0
+SHARE_METHOD=nat
+IEEE80211N=0
+IEEE80211AC=0
+HT_CAPAB=[HT40+]
+VHT_CAPAB=
+NO_VIRT=0
+COUNTRY=
+FREQ_BAND=2.4
+NEW_MACADDR=
+DAEMONIZE=0
+NO_HAVEGED=0
+WIFI_IFACE=$WIFI_IFACE
+INTERNET_IFACE=$INTERNET_IFACE
+SSID=$SSID
+PASSPHRASE=$PASSPHRASE
+USE_PSK=0
+EOL
+  notify "Configuration saved to $CONFIG_FILE"
+}
+
+# load the config file
+load_config() {
+    if [ -f "$CONFIG_FILE" ]; then
+        source "$CONFIG_FILE"
+    else
+        notify "Configuration file not found!"
+        create_config
+        source "$CONFIG_FILE"
+    fi
+}
+
+# Function to start the hotspot
+start_hotspot() {
+    load_config 
+    notify "Starting hotspot..."
+    # Prompt for sudo password using zenity
+    PASSWORD=$(zenity --password --title="Authentication Required")
+    
+    # Check if the password was entered
+    if [ -z "$PASSWORD" ]; then
+        notify "No password entered. Exiting."
+        exit 1
+    fi
+    
+    if [ "$CHANNEL" == "default" ]; then
+        echo "$PASSWORD" | sudo -S create_ap "$WIFI_IFACE" "$INTERNET_IFACE" "$SSID" "$PASSPHRASE" >/dev/null 2>&1 &
+    else
+        echo "$PASSWORD" | sudo -S create_ap -c "$CHANNEL" "$WIFI_IFACE" "$INTERNET_IFACE" "$SSID" "$PASSPHRASE" >/dev/null 2>&1 &
+    fi
+}
+
+# Function to stop the hotspot
+stop_hotspot() {
+    notify "Stopping hotspot..."
+    PASSWORD=$(zenity --password --title="Authentication Required")
+    echo "$PASSWORD" | sudo -S pkill create_ap >/dev/null 2>&1
+}
+
+# Function to toggle the hotspot
+toggle_hotspot() {
+    if pgrep -x "create_ap" > /dev/null; then
+        stop_hotspot
+    else
+        start_hotspot
+    fi
+}
+
+# Parse command-line options
+while getopts ":c:a:" opt; do
+    case ${opt} in
+        c)
+            CONFIG_FILE=$OPTARG
+            ;;
+        a)
+            ACTION=$OPTARG
+            ;;
+        \?)
+            notify "Invalid option: -$OPTARG" >&2
+            usage
+            ;;
+        :)
+            notify "Option -$OPTARG requires an argument." >&2
+            usage
+            ;;
+    esac
+done
+
+# Validate that required options are provided
+if [ -z "$CONFIG_FILE" ]; then
+    usage
+fi
+
+# Execute the action
+case $ACTION in
+    watch)
+        #do nothing
+        ;;
+    start)
+        start_hotspot
+        ;;
+    stop)
+        stop_hotspot
+        ;;
+    toggle)
+        toggle_hotspot
+        ;;
+    *)
+        zenity --error --text="Invalid action: $ACTION"
+        exit 1
+        ;;
+esac
+
+# Infinite loop to output JSON status to Waybar
+while true; do
+  if pgrep -x create_ap > /dev/null; then
+    json "" "Active" "<b>$SSID : $PASSPHRASE</b>" "active"
+  else
+    json "" "Not Active" "<b>$SSID : $PASSPHRASE</b>\n <b>Leftclick to start hotspot</b>" "not-active"
+  fi
+  
+  sleep "$interval"
+done
+
