@@ -81,7 +81,6 @@
   "rewrite": {
        "(.*) - Mozilla Firefox": "🌎 $1",
        "org.telegram.desktop": "> [$1]",
-       "org.gnome.Nautilus": "> [$1]",
        "(.*) - zsh": "> [$1]"
   }
 },
