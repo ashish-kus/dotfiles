@@ -1,41 +1,59 @@
+@import "./waybar.css";
+
+@define-color active @color0;
+
 * {
     border: none;
-    font-size: 14px;
+    font-size: 15px;
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
     min-height: 10px;
-    color: #ffffff;
+    color: @active;
+    /* color: White; */
 }
 
 window#waybar {
   background: transparent;
-  margin: 5px;
  }
+
+tooltip {
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.9);
+  color: @active;
+}
+
+tooltip label{
+  color: @active;
+}
 
 #custom-logo {
   padding: 0 10px;
 }
 
 .modules-right {
-  padding-left: 5px;
-  border: solid black 1px;
-  border-radius: 15px 0 0 15px;
-  margin: 2px 0px;
-  background: #000000;
+  /* border: 1px solid lighter(@active); */
+  border: 1px solid @active;
+  border-radius: 15px;
+  padding: 0px 5px;
+  margin: 2px 5px;
+  background: rgba(000, 000, 000, 0.8);
 }
 
 .modules-center {
+  /* border: 1px solid lighter(@active); */
+  border: 1px solid @active;
   padding: 0 15px;
   margin: 2px 0px;
-  border: solid black 1px;
   border-radius: 15px 15px 15px 15px;
-  background: #000000;
+  background: rgba(000, 000, 000, 0.8);
 }
 
 .modules-left {
-  border: solid black 1px;
-  border-radius: 0 15px 15px 0;
-  margin: 2px 0px;
-  background: #000000;
+  /* border: 1px solid lighter(@active); */
+  border: 1px solid @active;
+  padding: 0px 5px;
+  border-radius: 15px;
+  margin: 2px 5px;
+  background: rgba(000, 000, 000, 0.8);
 }
 
 #battery,
@@ -60,14 +78,19 @@ window#waybar {
 #jack,
 #tray,
 #window,
-#workspaces,
+/* #workspaces, */
 #clock {
   padding: 0 5px;
 }
 
-#workspaces button.active {
-  color: cyan;
+#workspaces button {
+  border-radius: 0px;
 }
+
+#workspaces button.active {
+    border-bottom: solid 2px @active;
+}
+
 #pulseaudio{
   padding-top: 3px;
 }
@@ -104,9 +127,9 @@ window#waybar {
 
 }
 
-#clock{
-  color: #5fd1fa;
-}
+/* #clock{ */
+/*   color: #5fd1fa; */
+/* } */
 
 #battery.charging {
     color: #77DD77;
