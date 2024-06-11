@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
   "modules-left": [
     "custom/logo",
     "clock",
@@ -10,11 +10,10 @@
     "temperature",
     "custom/powerDraw"
   ],
-
   "modules-center": [
-  "hyprland/workspaces"
+    "hyprland/workspaces",
+    "mpd"
   ],
-
   "modules-right": [
     "hyprland/window",
     "tray",
@@ -30,14 +29,11 @@
     "battery"
   ],
   "reload_style_on_change": true,
-
-
   "custom/logo": {
     "format": "󰊠",
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },
-
   "clock": {
     "format": "{:%I:%M:%S %p}",
     "interval": 1,
@@ -48,24 +44,20 @@
     "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
     "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
   },
-
   "hyprland/language": {
     "format": "Lang: {long}",
     "format-en": "AMERICA, HELL YEAH!",
     "format-tr": "As bayrakları",
     "keyboard-name": "at-translated-set-2-keyboard"
   },
-
   "disk": {
     "interval": 30,
     "format": " {percentage_used}%",
     "path": "/"
   },
-
   "memory": {
     "format": " {percentage}%"
   },
-
   "cpu": {
     "interval": 1,
     "format": " {usage}%",
@@ -80,7 +72,6 @@
       "█"
     ],
   },
-
   "temperature": {
     "format": " {temperatureC}°C",
     "format-critical": " {temperatureC}°C",
@@ -88,14 +79,12 @@
     "critical-threshold": 80,
     "on-click": "foot btop",
   },
-
   "custom/powerDraw": {
     "format": "{}",
     "interval": 1,
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
   },
-
   "hyprland/workspaces": {
     "format": "<span font='18px'>{icon}</span>",
     "format-icons": {
@@ -118,7 +107,6 @@
       ]
     }
   },
-
   "hyprland/window": {
     "format": "( {class} )",
     "rewrite": {
@@ -128,12 +116,10 @@
       "(.*) - zsh": "> [$1]"
     }
   },
-
   "tray": {
     "icon-size": 14,
     "spacing": 10
   },
-
   "custom/updates": {
     "format": "{}",
     "interval": 60,
@@ -141,16 +127,14 @@
     "return-type": "json",
     "exec-if": "exit 0",
   },
- 
   "custom/clipboard": {
-    "exec": "echo '󰅍'",
+    // "exec": "echo '󰅍'",
     "interval": 5,
     "tooltip": true,
-    "tooltip-format": "{output}",
-    "exec-tooltip": "sh -c cliphist list | head -n 5",
+    // "tooltip-format": "{output}",
+    // "exec-tooltip": "sh -c cliphist list | head -n 5",
     "on-click": "sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'"
   },
-
   "group/blight": {
     "orientation": "horizontal",
     "drawer": {
@@ -162,7 +146,6 @@
       "backlight/slider"
     ]
   },
-
   "backlight": {
     "device": "intel_backlight",
     "format": "<span font='12'>{icon}</span>",
@@ -182,14 +165,12 @@
     "on-scroll-up": "light -A 10",
     "smooth-scrolling-threshold": 1
   },
-
   "backlight/slider": {
     "min": 0,
     "max": 100,
     "orientation": "horizontal",
     "device": "intel_backlight"
   },
-
   "idle_inhibitor": {
     "format": "<span font='12'>{icon}</span>",
     "format-icons": {
@@ -197,7 +178,6 @@
       "deactivated": "󰅶"
     }
   },
-
   "custom/colorpicker": {
     "format": "{}",
     "return-type": "json",
@@ -217,7 +197,6 @@
     "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
     "on-click": "rofi-bluetooth",
   },
-
   "pulseaudio": {
     "format": "{icon}",
     "format-bluetooth": "󰂰",
@@ -273,15 +252,15 @@
   },
   "custom/hotspot": {
     "format": "{icon}",
-    "interval":5,
+    "interval": 5,
     "tooltip": true,
     "return-type": "json",
     "format-icons": {
       "active": "󱜠",
       "notactive": "󱜡"
     },
-    "exec":"waybar-hotspot -a watch",
-    "on-click":"waybar-hotspot -a toggle",
+    "exec": "waybar-hotspot -a watch",
+    "on-click": "waybar-hotspot -a toggle",
   },
   "network": {
     "format-wifi": " ",
@@ -339,5 +318,30 @@
       "󰪥"
     ],
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
+  },
+  "mpd": {
+    "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
+    "format-disconnected": "Disconnected <U+F001>",
+    "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
+    "interval": 2,
+    "consume-icons": {
+      "on": "<U+F0C4> " 
+    },
+    "random-icons": {
+      "off": "<span color=\"#f53c3c\"><U+F074></span> ", 
+      "on": "<U+F074> "
+    },
+    "repeat-icons": {
+      "on": "<U+F01E> "
+    },
+    "single-icons": {
+      "on": "<U+F01E>1 "
+    },
+    "state-icons": {
+      "paused": "<U+F04C>",
+      "playing": "<U+F04B>"
+    },
+    "tooltip-format": "MPD (connected)",
+    "tooltip-format-disconnected": "MPD (disconnected)"
   }
 }

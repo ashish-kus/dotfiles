@@ -75,7 +75,7 @@ textbox-prompt-colon {
     border-color:                @primery;
     border-radius:               var(general-radius);
     background-color:            @primery;
-    text-color:                  @background;
+    text-color:                  @text;
 }
 prompt {
     enabled:                     true;

@@ -12,7 +12,8 @@
 }
 
 window#waybar {
-  background: transparent;
+  /* background: transparent; */
+  background: rgba(0, 0, 0, 0.9);
  }
 
 tooltip {
@@ -31,7 +32,7 @@ tooltip label{
 
 .modules-right {
   /* border: 1px solid lighter(@active); */
-  border: 1px solid @active;
+  /* border: 1px solid @active; */
   border-radius: 15px;
   padding: 0px 5px;
   margin: 2px 5px;
@@ -40,7 +41,7 @@ tooltip label{
 
 .modules-center {
   /* border: 1px solid lighter(@active); */
-  border: 1px solid @active;
+  /* border: 1px solid @active; */
   padding: 0 15px;
   margin: 2px 0px;
   border-radius: 15px 15px 15px 15px;
@@ -49,7 +50,7 @@ tooltip label{
 
 .modules-left {
   /* border: 1px solid lighter(@active); */
-  border: 1px solid @active;
+  /* border: 1px solid @active; */
   padding: 0px 5px;
   border-radius: 15px;
   margin: 2px 5px;

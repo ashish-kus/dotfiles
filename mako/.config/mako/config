@@ -21,7 +21,7 @@ on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 font= monospace 10
 
 # background color of notification( #RRGGBB | #RRGGBBAA )
-background-color=#00000080
+background-color=#000000E6
 # Text color inside the notification( #RRGGBB | #RRGGBBAA )
 
 # color of border of each notification( #RRGGBB | #RRGGBBAA )
@@ -90,5 +90,5 @@ layer=top
 # Show notifications at the specified position on the output.
 anchor=bottom-right
 
-text-color=#A9785F
-border-color=#A9785F
+text-color=#3B6AF2
+border-color=#3B6AF2
