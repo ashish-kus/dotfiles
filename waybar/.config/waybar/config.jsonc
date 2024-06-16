@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "modules-left": [
     "custom/logo",
     "clock",
@@ -12,6 +12,7 @@
   ],
   "modules-center": [
     "hyprland/workspaces",
+    "privacy",
     "mpd"
   ],
   "modules-right": [
@@ -252,7 +253,7 @@
   },
   "custom/hotspot": {
     "format": "{icon}",
-    "interval": 5,
+    "interval": 1,
     "tooltip": true,
     "return-type": "json",
     "format-icons": {
@@ -325,10 +326,10 @@
     "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
     "interval": 2,
     "consume-icons": {
-      "on": "<U+F0C4> " 
+      "on": "<U+F0C4> "
     },
     "random-icons": {
-      "off": "<span color=\"#f53c3c\"><U+F074></span> ", 
+      "off": "<span color=\"#f53c3c\"><U+F074></span> ",
       "on": "<U+F074> "
     },
     "repeat-icons": {

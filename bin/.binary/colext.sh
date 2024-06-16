@@ -6,16 +6,6 @@ if ! command -v magick &> /dev/null; then
     exit 1
 fi
 
-# COLORS_DIR="$HOME/.colors/"
-
-# Check if directory exists, if not, create it
-# if [ ! -d "$COLORS_DIR" ]; then
-#     mkdir -p "$COLORS_DIR"
-# fi
-
-# Store the directory path in a variable
-# TEMPLATE_DIR=$COLORS_DIR
-
 # Directory containing wallpapers
 wallpaper_dir="$HOME/Pictures/Wallpaper"
 
@@ -30,15 +20,12 @@ if ! pgrep -x "swww-daemon" > /dev/null; then
     swww init
 fi
 
-
 # Select a random wallpaper from the directory
 random_wallpaper=$(find "$wallpaper_dir" -type f | shuf -n 1)
 
+echo $random_wallpaper
 # Create or update symlink in home directory
-# ln -sf "$random_wallpaper" "$HOME/.Current_wall.png"
-
-echo "$random_wallpaper" > ~/.Current_wall.txt
-
+ln -sf "$random_wallpaper" "./.Current_wall.png"
 
 cursor_pos="$(hyprctl cursorpos)"
 
@@ -50,13 +37,10 @@ swww img "$random_wallpaper" \
     --transition-duration=$transition_duration \
     --transition-pos "$cursor_pos"
 
-# notify-send "walpaper changed"
-# echo $TEMPLET_DIR
 # Input image file
 INPUT_IMAGE="$random_wallpaper"
 
 # Extract colors directly into a variable
-# ALLCOL=$(magick "$INPUT_IMAGE" -resize 100x100 -colors 256 -unique-colors txt:-)
 ALLCOL=$(magick "$INPUT_IMAGE" -resize 100x100 -colors 256 -format %c histogram:info:-)
 # Array to hold bright colors
 BRIGHT_COLORS=()
@@ -120,7 +104,6 @@ function mako_col_inj(){
   local border_color="${BRIGHT_COLORS[0]}"
   file_content+="text-color=${text_color}\nborder-color=${border_color}"
 
-  # echo -e "$file_content" 
   echo -e "$file_content" > $file_path
   makoctl reload
   notify-send "mako reloaded"
@@ -131,14 +114,12 @@ function rasi_col() {
       COLORS+="   color0: ${BRIGHT_COLORS[0]};\n    color1: ${BRIGHT_COLORS[1]};\n    color2: ${BRIGHT_COLORS[2]};\n    color3: ${BRIGHT_COLORS[3]};\n    color4: ${BRIGHT_COLORS[4]};\n    color5: ${BRIGHT_COLORS[5]};\n    color6: ${BRIGHT_COLORS[6]};\n    color7: ${BRIGHT_COLORS[7]};\n"
   COLORS+="}\n"
   echo -e "$COLORS" > $HOME/.config/rofi/wal_color.rasi
-  # echo -e $COLORS
 }
-# Call the function
 
+# Call the functions
 hyprland_col
 waybar_col
 raw_col
 mako_col_inj
 rasi_col
-
 

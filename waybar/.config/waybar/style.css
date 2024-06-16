@@ -12,8 +12,7 @@
 }
 
 window#waybar {
-  /* background: transparent; */
-  background: rgba(0, 0, 0, 0.9);
+ background: rgba(0, 0, 0, 0);
  }
 
 tooltip {
@@ -33,10 +32,10 @@ tooltip label{
 .modules-right {
   /* border: 1px solid lighter(@active); */
   /* border: 1px solid @active; */
-  border-radius: 15px;
+  border-radius: 15px 0 0 15px;
   padding: 0px 5px;
-  margin: 2px 5px;
-  background: rgba(000, 000, 000, 0.8);
+  margin: 2px 0px;
+  background: rgba(000, 000, 000, 0.9);
 }
 
 .modules-center {
@@ -45,16 +44,16 @@ tooltip label{
   padding: 0 15px;
   margin: 2px 0px;
   border-radius: 15px 15px 15px 15px;
-  background: rgba(000, 000, 000, 0.8);
+  background: rgba(000, 000, 000, 0.9);
 }
 
 .modules-left {
   /* border: 1px solid lighter(@active); */
   /* border: 1px solid @active; */
   padding: 0px 5px;
-  border-radius: 15px;
-  margin: 2px 5px;
-  background: rgba(000, 000, 000, 0.8);
+  border-radius: 0 15px 15px 0;
+  margin: 2px 0px;
+  background: rgba(000, 000, 000, 0.9);
 }
 
 #battery,

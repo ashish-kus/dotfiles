@@ -88,7 +88,7 @@ max-visible=10
 layer=top
 
 # Show notifications at the specified position on the output.
-anchor=bottom-right
+anchor=top-right
 
-text-color=#3B6AF2
-border-color=#3B6AF2
+text-color=#30A6E7
+border-color=#30A6E7
