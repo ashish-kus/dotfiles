@@ -1,5 +1,4 @@
 @import "./waybar.css";
-
 @define-color active @color0;
 
 * {
@@ -56,28 +55,29 @@ tooltip label{
   background: rgba(000, 000, 000, 0.9);
 }
 
-#battery,
+#pulseaudio.bluetooth,
 #custom-clipboard,
 #custom-colorpicker,
 #custom-powerDraw,
 #custom-updates,
-#custom-pacman,
-#bluetooth,
-#pulseaudio,
 #custom-hotspot,
-#pulseaudio.mic,
-#pulseaudio.bluetooth,
-#network,
-#disk,
-#memory,
-#backlight,
-#cpu,
-#temperature,
+#custom-pacman,
 #custom-weather,
+#pulseaudio.mic,
 #idle_inhibitor,
+#temperature,
+#pulseaudio,
+#bluetooth,
+#backlight,
+#battery,
+#network,
+#privacy,
+#memory,
+#window,
+#disk,
+#cpu,
 #jack,
 #tray,
-#window,
 /* #workspaces, */
 #clock {
   padding: 0 5px;
@@ -90,11 +90,19 @@ tooltip label{
 #workspaces button.active {
     border-bottom: solid 2px @active;
 }
-
+#custom-colorpicker{
+  padding: 0 4px 0 10px;
+}
 #pulseaudio{
   padding-top: 3px;
 }
-
+#pulseaudio.mic{
+  font-size:14px;
+}
+#pulseaudio.mic.muted{
+  font-size:14px;
+  color:red;
+}
 #pulseaudio.muted{
   color: #FF0000;
   padding-top: 2px;
