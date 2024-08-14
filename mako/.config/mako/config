@@ -1,3 +1,4 @@
+
 # [ Global Config ]
 # max no of notification in buffer
 max-history=5
@@ -20,20 +21,26 @@ on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 font= monospace 10
 
 # background color of notification( #RRGGBB | #RRGGBBAA )
+<<<<<<< HEAD
 background-color=#000000
 
+=======
+background-color=#000000E6
+>>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
 # Text color inside the notification( #RRGGBB | #RRGGBBAA )
-text-color=#FFFFFF
+
+# color of border of each notification( #RRGGBB | #RRGGBBAA )
 
 # Set width of notification popup.( value in px )
 width=299
 
 # maximum height of notification( value in px )
-height=99
+height=199
 
 # margin of notification which is margin for the list of notification block( value in px ).
 outer-margin=1
 # Margin of each individual notification
+<<<<<<< HEAD
 margin=0
 
 # Set padding on each side to the size specified by directional( value in px )
@@ -47,6 +54,17 @@ border-color=#FFFFFF
 
 # bordear radious of each notification(value in px )
 border-radius=0
+=======
+margin=5
+
+# Set padding on each side to the size specified by directional( value in px )
+padding=15
+
+#Set popup border size to px pixels.(value in px )
+border-size=1
+# bordear radious of each notification(value in px )
+border-radius=15
+>>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
 
 # Set popup progress indicator color to color.( value [over|source] ( #RRGGBB | #RRGGBBAA ))
 progress-color=over #0b1c1c
@@ -73,7 +91,7 @@ actions=1
 history=1
 
 # Set notification format string to format.( value: see format in man 5 mako)
-format= <b>%s</b>\n%b
+format= <b>%s</b>
 
 #  Set notification text alignment.( value: left|right|center )
 text-alignment=center
@@ -85,7 +103,7 @@ default-timeout=10000
 ignore-timeout=0
 
 # Set maximum number of visible notifications 
-max-visible=5
+max-visible=10
 
 # Arrange mako at the specified layer, relative to normal windows.(value: background, bottom, top, overlay )
 layer=top
@@ -93,3 +111,5 @@ layer=top
 # Show notifications at the specified position on the output.
 anchor=bottom-right
 
+text-color=#33ABC9
+border-color=#33ABC9

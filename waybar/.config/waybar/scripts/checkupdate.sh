@@ -12,6 +12,11 @@ notify() {
   echo "$@"
 }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
 check aur || {
   notify "Ensure aurutils is installed"
   cat <<EOF
@@ -39,6 +44,7 @@ text=${#updates[@]}
 
 tooltip="<b>$text  updates (arch+aur) </b>\n"
 # tooltip+=" <b>$(stringToLen "PkgName" 20) $(stringToLen "PrevVersion" 20) $(stringToLen "NextVersion" 20)</b>\n"
+<<<<<<< HEAD
 [ "$text" -eq 0 ] && text="" || text=" $text"
 # for i in "${updates[@]}"; do
 #   # shellcheck disable=2046
@@ -50,6 +56,9 @@ tooltip="<b>$text  updates (arch+aur) </b>\n"
 #   tooltip+="<b> $update </b>$prev $next\n"
 # done
 # tooltip=${tooltip::-2}
+=======
+[ "$text" -eq 0 ] && text="" || text=" $text"
+>>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
 
 cat <<EOF
 { "text":"$text", "tooltip":"$tooltip"}

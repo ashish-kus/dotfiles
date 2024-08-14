@@ -1,0 +1,105 @@
+# Inserts a blank line between shell prompts
+add_newline = false
+format = "$username$hostname$directory$character"
+right_format = """
+$localip\
+$shlvl\
+$singularity\
+$kubernetes\
+$vcsh\
+$fossil_branch\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$hg_branch\
+$pijul_channel\
+$docker_context\
+$package\
+$c\
+$cmake\
+$cobol\
+$daml\
+$dart\
+$deno\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$fennel\
+$golang\
+$guix_shell\
+$haskell\
+$haxe\
+$helm\
+$java\
+$julia\
+$kotlin\
+$gradle\
+$lua\
+$nim\
+$nodejs\
+$ocaml\
+$opa\
+$perl\
+$php\
+$pulumi\
+$purescript\
+$python\
+$raku\
+$rlang\
+$red\
+$ruby\
+$rust\
+$scala\
+$swift\
+$terraform\
+$vlang\
+$vagrant\
+$zig\
+$buf\
+$nix_shell\
+$conda\
+$meson\
+$spack\
+$memory_usage\
+$aws\
+$gcloud\
+$openstack\
+$azure\
+$env_var\
+$crystal\
+$custom\
+$sudo\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$time\
+$status\
+$os\
+$container\
+$shell\
+$character"""
+
+[character]
+success_symbol = '[](bold white)'
+error_symbol = '[✗](bold red)'
+vicmd_symbol = "[V](bold green)"
+
+[directory]
+truncation_length = 1
+format = ' [$path]($style)[$read_only]($read_only_style)\]'
+
+[hostname]
+ssh_only = false
+format = '[@](bold red)[$hostname](bold white)'
+disabled = false
+
+[username]
+style_user = "white bold"
+style_root = "black bold"
+format = '\[[$user]($style)'
+disabled = false
+show_always = true

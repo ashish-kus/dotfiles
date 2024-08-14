@@ -134,7 +134,10 @@ cpp()
 }
 
 
+<<<<<<< HEAD
 cup() {
   checkupdates --nocolor
   pacman -Qm | aur vercmp
 }
+=======
+>>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
