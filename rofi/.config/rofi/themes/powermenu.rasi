@@ -69,7 +69,7 @@ dummy {
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
-    str:                         "POWER MENU";
+    str:                         "SYSTEM";
     padding:                     var(general-padding);
     border:                      1px solid;
     border-color:                @primery;
@@ -144,7 +144,7 @@ element {
     padding:                     var(element-padding);
     border:                      1px solid;
     border-radius:               var(element-radius);
-    border-color:                white;
+    border-color:                transparent;
     background-color:            black;
     text-color:                  @text;
     cursor:                      pointer;
@@ -158,8 +158,8 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            @primery;
-    border:                      1px solid;
+    background-color:            black;
+    border:                      2px solid;
     border-color:                @primery;
-    text-color:                  black;
+    text-color:                  @primery;
 }

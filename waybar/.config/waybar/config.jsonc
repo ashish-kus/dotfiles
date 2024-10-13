@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "modules-left": [
     "custom/logo",
     "clock",
@@ -12,6 +12,7 @@
   ],
   "modules-center": [
     "hyprland/workspaces",
+   "custom/pacman",
     "mpd"
   ],
   "modules-right": [
@@ -36,6 +37,16 @@
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },
+  "custom/pacman": {
+  "format": "{icon}{}",
+  "return-type": "json",
+  "format-icons": {
+    "pending-updates": " ",
+    "updated": ""
+  },
+  "exec-if": "which waybar-updates",
+  "exec": "waybar-updates"
+},
   "clock": {
     "format": "{:%I:%M:%S %p}",
     "interval": 1,
@@ -172,7 +183,7 @@
     "smooth-scrolling-threshold": 1
   },
   "backlight/slider": {
-    "min": 0,
+    "min": 50,
     "max": 100,
     "orientation": "horizontal",
     "device": "intel_backlight"

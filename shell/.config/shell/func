@@ -115,7 +115,7 @@ lsbin() {
 
 cpp()
 {
-	set -e
+	set -egit clone https://github.com/nvim-lua/kickstart.nvim.git "${XDG_CONFIG_HOME:-$HOME/.config}"/nvim
 	strace -q -ewrite cp -- "${1}" "${2}" 2>&1 \
 	| awk '{
 	count += $NF
@@ -134,10 +134,20 @@ cpp()
 }
 
 
-<<<<<<< HEAD
-cup() {
-  checkupdates --nocolor
-  pacman -Qm | aur vercmp
+# switch between various nvim configs
+alias nvim-nvimDev="NVIM_APPNAME=nvimDev nvim"
+alias nvim-kickstart="NVIM_APPNAME=nvimDev nvim"
+
+function nvims() {
+  items=("default" "nvimDev" "kickstart" )
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
 }
-=======
->>>>>>> c3291b1829b598e2dbb04125ad4d8c7efb9c4baf
+
+bindkey -s ^a "nvims\n"
