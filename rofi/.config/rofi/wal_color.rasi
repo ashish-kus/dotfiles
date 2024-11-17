@@ -1,11 +1,11 @@
 * {
-   color0: #7D7897;
-    color1: #857C99;
-    color2: #886D94;
-    color3: #897B89;
-    color4: #908992;
-    color5: #917AA4;
-    color6: #9387AD;
-    color7: #977A85;
+   color0: #A19C9E;
+    color1: #A3886D;
+    color2: #A7998D;
+    color3: #AC8776;
+    color4: #CCC8B8;
+    color5: #D27C42;
+    color6: #D2B48C;
+    color7: #D28D31;
 }
 

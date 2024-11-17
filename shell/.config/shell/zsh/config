@@ -17,7 +17,8 @@ source $Plugin_path/znap/znap.zsh  # Start Znap
 
 # Initialize Prompt
 znap eval starship 'starship init zsh --print-full-init'
-hash colorscript && colorscript -r 
+# hash colorscript && colorscript -r 
+# hash colorscript && colorscript -r 
 znap prompt
 
 # `znap source` starts plugins.

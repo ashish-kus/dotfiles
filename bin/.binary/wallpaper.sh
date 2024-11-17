@@ -7,7 +7,7 @@ if ! command -v magick &>/dev/null; then
 fi
 
 # Directory containing wallpapers
-wallpaper_dir="$HOME/Pictures/Wallpaper"
+wallpaper_dir="$HOME/Pictures/Wallpapers"
 
 # Transition settings
 transition_bezier="0.0,0.0,1.0,1.0 "
@@ -29,7 +29,7 @@ fi
 
 # Create or update symlink in home directory
 ln -sf "$random_wallpaper" "$HOME/.wallpaper.png"
-ln -sf "$random_wallpaper" "$HOME/.mozilla/firefox/uenxrt3l.default-release/chrome/ASSETS/wallpaper/wallpaper.png"
+ln -sf "$random_wallpaper" "$HOME/.mozilla/firefox/kk9zw8qh.default-release/chrome/styles/ASSETS/wallpaper/wallpaper.png"
 
 cursor_pos="$(hyprctl cursorpos)"
 
