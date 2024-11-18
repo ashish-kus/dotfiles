@@ -43,7 +43,7 @@ padding=15
 #Set popup border size to px pixels.(value in px )
 border-size=1
 # bordear radious of each notification(value in px )
-border-radius=15
+border-radius=0
 
 # Set popup progress indicator color to color.( value [over|source] ( #RRGGBB | #RRGGBBAA ))
 progress-color=over #0b1c1c
@@ -88,7 +88,7 @@ max-visible=10
 layer=top
 
 # Show notifications at the specified position on the output.
-anchor=top-right
+anchor=bottom-right
 
-text-color=#538DB2
-border-color=#538DB2
+text-color=#7E8181
+border-color=#7E8181

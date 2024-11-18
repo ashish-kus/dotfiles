@@ -1,6 +1,9 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
+  "mod": "dock",
+  "margin-bottom": 2,
+
   "modules-left": [
     "custom/logo",
     "clock",
@@ -33,7 +36,8 @@
   ],
   "reload_style_on_change": true,
   "custom/logo": {
-    "format": "󰊠",
+//    "format": "󰊠",
+    "format": "",
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },

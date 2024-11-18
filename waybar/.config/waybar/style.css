@@ -11,7 +11,7 @@
 }
 
 window#waybar {
- background: rgba(0, 0, 0, 0);
+ background: rgba(0, 0, 0, 1);
  }
 
 tooltip {
@@ -25,7 +25,7 @@ tooltip label{
 }
 
 #custom-logo {
-  padding: 0 10px;
+  padding: 0 10px 0 5px;
 }
 
 .modules-right {
@@ -33,7 +33,7 @@ tooltip label{
   /* border: 1px solid @active; */
   border-radius: 15px 0 0 15px;
   padding: 0px 5px;
-  margin: 2px 0px;
+  margin: 0px 0px;
   background: rgba(000, 000, 000, 0.9);
 }
 
@@ -41,7 +41,7 @@ tooltip label{
   /* border: 1px solid lighter(@active); */
   /* border: 1px solid @active; */
   padding: 0 15px;
-  margin: 2px 0px;
+  margin: 0px 0px;
   border-radius: 15px 15px 15px 15px;
   background: rgba(000, 000, 000, 0.9);
 }
@@ -51,7 +51,7 @@ tooltip label{
   /* border: 1px solid @active; */
   padding: 0px 5px;
   border-radius: 0 15px 15px 0;
-  margin: 2px 0px;
+  margin: 0px 0px;
   background: rgba(000, 000, 000, 0.9);
 }
 

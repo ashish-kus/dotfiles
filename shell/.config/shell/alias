@@ -8,8 +8,8 @@
 #
 ###############################################################################
 
-alias termcode="lvim"
 #============================== [ GENERAL ] ===================================
+alias termcode="lvim"
 alias sudo="sudo "
 alias bye="shutdown now"
 alias sleep="systemctl suspend"
@@ -22,6 +22,7 @@ alias cpufreq='watch -n1 -t "$HOME/solis/bin/cpufreq"'
 alias gc="git clone"
 alias f="find . | grep "
 
+#============================== [ archives ] ===================================
 # Alias's for archives
 alias mktar='tar -cvf'
 alias mkbz2='tar -cvjf' 
@@ -62,6 +63,7 @@ alias cdoc="documents"
 [ -f "$HOME/.config/shell/alias" ] && alias ealias="vim $HOME/.config/shell/alias"
 [ -f "$HOME/.config/shell/path" ] && alias epath="vim $HOME/.config/shell/path"
 [ -f "$HOME/.config/shell/func" ] && alias efunc="vim $HOME/.config/shell/func"
+
 #=========================== [ CHECK_ALIAS ] ================================
 # check_alias for conditional based aliases, IF file or tool on which alias depend exist then aliass this 
 check_alias(){
@@ -83,7 +85,7 @@ check_alias center-align clock 'watch -n1 -t "date +%A%n%x%n%X | figlet  | cente
 # check_alias lvim vim "lvim"
 # unset -f check_alias
 
-#============================= [ alias for EXA ] ==================================
+#============================= [ alias for EzA ] ==================================
 if hash exa 2>/dev/null;then
  alias l='exa -lahF --color=auto --icons --sort=size --group-directories-first'
  alias lss='exa -hF --color=auto --icons --sort=size --group-directories-first'
@@ -100,7 +102,6 @@ alias mysql="sudo systemctl start mysql && sudo mycli -u root ; systemctl stop m
 #============================ [ ARCH - Special ] ===================================
 alias getix='curl http://ix.io/$1'
 alias mygip="curl ipecho.net/ip;echo "
-
 
 #============================ [ dotfiles - Special ] ===================================
 alias config="git --git-dir=$HOME/.dotfiles --work-tree=$HOME"
