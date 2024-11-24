@@ -1,0 +1,101 @@
+#!/bin/bash
+
+# Define the path to the .todo file
+TODO_FILE="$HOME/.todo"
+
+# Ensure the .todo file exists
+if [[ ! -f "$TODO_FILE" ]]; then
+  echo "Error: '$TODO_FILE' does not exist. Creating it..."
+  touch "$TODO_FILE" || {
+    echo "Failed to create '$TODO_FILE'. Check permissions."
+    exit 1
+  }
+fi
+
+# Ensure the .todo file is readable
+if [[ ! -r "$TODO_FILE" ]]; then
+  echo "Error: '$TODO_FILE' is not readable. Check permissions."
+  exit 1
+fi
+
+# Display tasks in rofi and capture the selected task or input
+SELECTED_TASK=$(cat "$TODO_FILE" | rofi -dmenu -p "To-Do")
+
+# Exit if no task is selected or input
+if [[ -z "$SELECTED_TASK" ]]; then
+  exit 0
+fi
+
+# Debugging: Output the selected task
+echo "Selected Task/Input: '$SELECTED_TASK'"
+
+# Function to remove a task
+remove_task() {
+  sed -i "/^$1$/d" "$TODO_FILE"
+  echo "Task removed: '$1'"
+}
+
+# Function to toggle the task status (mark as done/undone)
+toggle_task() {
+  if [[ "$1" == "󰱒  "* ]]; then
+    # If the task is marked as not done (󰱒), toggle to done ()
+    NEW_TASK=$(echo "$1" | sed 's/^󰱒  /  /')
+  elif [[ "$1" == "  "* ]]; then
+    # If the task is marked as done (), toggle to not done (󰱒)
+    NEW_TASK=$(echo "$1" | sed 's/^  /󰱒  /')
+  else
+    echo "Error: Invalid task format."
+    exit 1
+  fi
+
+  # Escape special characters for sed to handle them correctly
+  ESCAPED_SELECTED_TASK=$(printf '%s\n' "$1" | sed -e 's/[&/\]/\\&/g')
+  ESCAPED_NEW_TASK=$(printf '%s\n' "$NEW_TASK" | sed -e 's/[&/\]/\\&/g')
+
+  # Update the .todo file with the toggled task
+  sed -i "s|$ESCAPED_SELECTED_TASK|$ESCAPED_NEW_TASK|" "$TODO_FILE"
+  echo "Task toggled successfully!"
+}
+
+# Check if the task already exists in the list
+if grep -Fxq "$SELECTED_TASK" "$TODO_FILE"; then
+  # If a match is found, offer options to edit, delete, mark as done/undone
+  ACTION=$(echo -e "Mark as Done\nMark as Undone\nDelete Task\nEdit Task" | rofi -dmenu -p "Select an action")
+
+  case "$ACTION" in
+  "Mark as Done")
+    toggle_task "$SELECTED_TASK"
+    ;;
+  "Mark as Undone")
+    toggle_task "$SELECTED_TASK"
+    ;;
+  "Delete Task")
+    remove_task "$SELECTED_TASK"
+    ;;
+  "Edit Task")
+    # Prompt for a new task text and update the task
+    NEW_TASK=$(echo "$SELECTED_TASK" | rofi -dmenu -p "Edit Task (Edit current task text)")
+    if [[ -n "$NEW_TASK" ]]; then
+      # Now prompt for the task status (Done/Undone)
+      STATUS_ACTION=$(echo -e "Mark as Done\nMark as Undone" | rofi -dmenu -p "Select Task Status")
+      if [[ "$STATUS_ACTION" == "Mark as Done" ]]; then
+        NEW_TASK="󰱒  $NEW_TASK"
+      elif [[ "$STATUS_ACTION" == "Mark as Undone" ]]; then
+        NEW_TASK="  $NEW_TASK"
+      fi
+
+      ESCAPED_SELECTED_TASK=$(printf '%s\n' "$SELECTED_TASK" | sed -e 's/[&/\]/\\&/g')
+      ESCAPED_NEW_TASK=$(printf '%s\n' "$NEW_TASK" | sed -e 's/[&/\]/\\&/g')
+      sed -i "s|$ESCAPED_SELECTED_TASK|$ESCAPED_NEW_TASK|" "$TODO_FILE"
+      echo "Task updated to: '$NEW_TASK'"
+    fi
+    ;;
+  *)
+    echo "No action selected."
+    ;;
+  esac
+else
+  # If the task does not exist, add it to the list as a new task (󰱒  by default)
+  echo "󰱒  $SELECTED_TASK" >>"$TODO_FILE"
+  echo "New task added: '$SELECTED_TASK'"
+fi

@@ -1,0 +1,37 @@
+#!/bin/bash
+
+TODO_FILE="$HOME/.todo_list"
+
+# Create the file if it doesn't exist
+touch "$TODO_FILE"
+
+# Display the task list
+show_tasks() {
+  sed -e 's/^/[ ] /' -e 's/\[X\]/[X]/' "$TODO_FILE"
+}
+
+# Get the choice from the user
+choice=$( (
+  echo "Add new task"
+  show_tasks
+) | rofi -dmenu -i -p "TODO:")
+
+if [[ -z $choice ]]; then
+  exit 0
+fi
+
+if [[ $choice == "Add new task" ]]; then
+  # Add a new task
+  new_task=$(rofi -dmenu -i -p "New Task:")
+  if [[ -n $new_task ]]; then
+    echo "$new_task" >>"$TODO_FILE"
+  fi
+else
+  # Toggle the task as done/undone
+  line=$(grep -nF "${choice:4}" "$TODO_FILE" | cut -d: -f1)
+  if [[ $choice == "[ ]"* ]]; then
+    sed -i "${line}s/^/[X] /" "$TODO_FILE"
+  else
+    sed -i "${line}s/^\[X\] //" "$TODO_FILE"
+  fi
+fi
