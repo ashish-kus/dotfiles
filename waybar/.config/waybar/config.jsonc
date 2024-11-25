@@ -11,7 +11,8 @@
     "memory",
     "cpu",
     "temperature",
-    "custom/powerDraw"
+    "custom/powerDraw",
+    "custom/tasks"
   ],
   "modules-center": [
     "hyprland/workspaces",
@@ -199,6 +200,14 @@
       "deactivated": "󰈉"
     }
   },
+  "custom/tasks": {
+        "format": "{}",
+        "return-type": "json",
+        "interval": 10,
+        "exec": "~/.config/waybar/scripts/todoCount.sh",
+        "tooltip": false
+    },
+
   "custom/colorpicker": {
     "format": "{}",
     "return-type": "json",

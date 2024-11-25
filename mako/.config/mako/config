@@ -33,7 +33,7 @@ width=299
 height=199
 
 # margin of notification which is margin for the list of notification block( value in px ).
-outer-margin=1
+outer-margin=7, 3
 # Margin of each individual notification
 margin=5
 
@@ -43,7 +43,7 @@ padding=15
 #Set popup border size to px pixels.(value in px )
 border-size=1
 # bordear radious of each notification(value in px )
-border-radius=0
+border-radius=5
 
 # Set popup progress indicator color to color.( value [over|source] ( #RRGGBB | #RRGGBBAA ))
 progress-color=over #0b1c1c
@@ -90,5 +90,5 @@ layer=top
 # Show notifications at the specified position on the output.
 anchor=bottom-right
 
-text-color=#7E8181
-border-color=#7E8181
+text-color=#00B9FF
+border-color=#00B9FF

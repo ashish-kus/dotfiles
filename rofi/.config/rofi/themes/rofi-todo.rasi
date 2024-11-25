@@ -1,0 +1,54 @@
+@theme './default.rasi'
+@import "../colors.rasi"
+
+
+window {
+    background-color:             @bg;
+    width:                        350px;
+    border:                       2px;
+    border-radius:                2;
+    border-color:                 @primery;
+    padding:                      15px 5px;
+    margin:                       5px;
+    location:                     northwest;
+}
+
+listview {
+    lines:                       7;
+  }
+
+
+prompt {
+    background-color:            @transparent;
+    text-color:                  @text;
+    content:                     "";  
+}
+
+putbar {
+    spacing:                      0;
+    background-color:             @transparent;
+    text-color:                   @primery;
+}
+
+entry {
+    placeholder: "I can do it ......";
+    placeholder-color: #808080;
+    text-color:                  @text;
+}
+
+listview {
+    background-color:             @transparent;
+    fixed-height:                 0;
+    spacing:                      2px ;
+    scrollbar:                    false;
+    padding:                      10px 0px 0px ;
+}
+
+
+
+element.selected.normal {
+    background-color:             @primery;
+    border-radius:                0;
+    text-color:                   @text;
+}
+

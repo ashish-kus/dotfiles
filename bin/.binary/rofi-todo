@@ -19,7 +19,8 @@ if [[ ! -r "$TODO_FILE" ]]; then
 fi
 
 # Display tasks in rofi and capture the selected task or input
-SELECTED_TASK=$(cat "$TODO_FILE" | rofi -dmenu -p "To-Do")
+# SELECTED_TASK=$(cat "$TODO_FILE" | rofi -dmenu -p "To-Do")
+SELECTED_TASK=$(cat "$TODO_FILE" | rofi -dmenu -p " " -theme ~/.config/rofi/themes/rofi-todo.rasi)
 
 # Exit if no task is selected or input
 if [[ -z "$SELECTED_TASK" ]]; then
@@ -60,7 +61,7 @@ toggle_task() {
 # Check if the task already exists in the list
 if grep -Fxq "$SELECTED_TASK" "$TODO_FILE"; then
   # If a match is found, offer options to edit, delete, mark as done/undone
-  ACTION=$(echo -e "Mark as Done\nMark as Undone\nDelete Task\nEdit Task" | rofi -dmenu -p "Select an action")
+  ACTION=$(echo -e "Mark as Done\nMark as Undone\nDelete Task\nEdit Task" | rofi -dmenu -p "Action" -theme ~/.config/rofi/themes/rofi-todo.rasi)
 
   case "$ACTION" in
   "Mark as Done")
@@ -74,10 +75,10 @@ if grep -Fxq "$SELECTED_TASK" "$TODO_FILE"; then
     ;;
   "Edit Task")
     # Prompt for a new task text and update the task
-    NEW_TASK=$(echo "$SELECTED_TASK" | rofi -dmenu -p "Edit Task (Edit current task text)")
+    NEW_TASK=$(echo "$SELECTED_TASK" | rofi -dmenu -p "Edit Task" -theme ~/.config/rofi/themes/rofi-todo.rasi)
     if [[ -n "$NEW_TASK" ]]; then
       # Now prompt for the task status (Done/Undone)
-      STATUS_ACTION=$(echo -e "Mark as Done\nMark as Undone" | rofi -dmenu -p "Select Task Status")
+      STATUS_ACTION=$(echo -e "Mark as Done\nMark as Undone" | rofi -dmenu -p "Status" -theme ~/.config/rofi/themes/rofi-todo.rasi)
       if [[ "$STATUS_ACTION" == "Mark as Done" ]]; then
         NEW_TASK="󰱒  $NEW_TASK"
       elif [[ "$STATUS_ACTION" == "Mark as Undone" ]]; then
