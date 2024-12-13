@@ -1,0 +1,2 @@
+set clipboard on
+set selection-clipboard clipboard

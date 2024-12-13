@@ -3,7 +3,6 @@
   "position": "bottom",
   "mod": "dock",
   "margin-bottom": 2,
-
   "modules-left": [
     "custom/logo",
     "clock",
@@ -16,7 +15,7 @@
   ],
   "modules-center": [
     "hyprland/workspaces",
-   "custom/pacman",
+    "custom/pacman",
     "mpd"
   ],
   "modules-right": [
@@ -37,21 +36,21 @@
   ],
   "reload_style_on_change": true,
   "custom/logo": {
-//    "format": "󰊠",
+    //    "format": "󰊠",
     "format": "",
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },
   "custom/pacman": {
-  "format": "{icon}{}",
-  "return-type": "json",
-  "format-icons": {
-    "pending-updates": " ",
-    "updated": ""
+    "format": "{icon}{}",
+    "return-type": "json",
+    "format-icons": {
+      "pending-updates": " ",
+      "updated": ""
+    },
+    "exec-if": "which waybar-updates",
+    "exec": "waybar-updates"
   },
-  "exec-if": "which waybar-updates",
-  "exec": "waybar-updates"
-},
   "clock": {
     "format": "{:%I:%M:%S %p}",
     "interval": 1,
@@ -167,7 +166,7 @@
   "backlight": {
     "device": "intel_backlight",
     "format": "<span font='12'>{icon}</span>",
-    "rotate":180,
+    "rotate": 180,
     "format-icons": [
       "",
       "",
@@ -183,8 +182,8 @@
       "",
       ""
     ],
-    "on-scroll-down": "light -U 10",
-    "on-scroll-up": "light -A 10",
+    "on-scroll-down": "brightnessctl set +15%",
+    "on-scroll-up": "brightnessctl set 15%-",
     "smooth-scrolling-threshold": 1
   },
   "backlight/slider": {
@@ -201,13 +200,12 @@
     }
   },
   "custom/tasks": {
-        "format": "{}",
-        "return-type": "json",
-        "interval": 10,
-        "exec": "~/.config/waybar/scripts/todoCount.sh",
-        "tooltip": false
-    },
-
+    "format": "{}",
+    "return-type": "json",
+    "interval": 10,
+    "exec": "~/.config/waybar/scripts/todoCount.sh",
+    "tooltip": false
+  },
   "custom/colorpicker": {
     "format": "{}",
     "return-type": "json",
@@ -351,28 +349,27 @@
     "on-click": "~/.config/rofi/scripts/powermenu.sh"
   },
   "privacy": {
-      "icon-spacing": 8,
-      "icon-size": 12,
-      "transition-duration": 250,
-      "modules": [
-            {
-                "type": "screenshare",
-                "tooltip": true,
-                "tooltip-icon-size": 24
-            },
-            {
-                "type": "audio-out",
-                "tooltip": true,
-                "tooltip-icon-size": 24
-            },
-            {
-                "type": "audio-in",
-                "tooltip": true,
-                "tooltip-icon-size": 24
-            }
-      ]
+    "icon-spacing": 8,
+    "icon-size": 12,
+    "transition-duration": 250,
+    "modules": [
+      {
+        "type": "screenshare",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-out",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      },
+      {
+        "type": "audio-in",
+        "tooltip": true,
+        "tooltip-icon-size": 24
+      }
+    ]
   },
-
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
     "format-disconnected": "Disconnected <U+F001>",

@@ -20,9 +20,6 @@ configuration {
   icon-theme:           "La Capitaine";
 }
 
-* {
-  roundness:  15px;
-  radius:     15px;
-}
+
 
 @theme "./themes/default.rasi"

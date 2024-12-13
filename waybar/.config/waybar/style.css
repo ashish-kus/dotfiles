@@ -7,16 +7,14 @@
     font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
     min-height: 10px;
     color: @active;
-    /* color: White; */
-}
+ }
 
 window#waybar {
- background: rgba(0, 0, 0, 1);
+  background: #11111b;
  }
 
 tooltip {
   border-radius: 15px;
-  background: rgba(0, 0, 0, 0.9);
   color: @active;
 }
 
@@ -29,30 +27,21 @@ tooltip label{
 }
 
 .modules-right {
-  /* border: 1px solid lighter(@active); */
-  /* border: 1px solid @active; */
   border-radius: 15px 0 0 15px;
   padding: 0px 5px;
   margin: 0px 0px;
-  background: rgba(000, 000, 000, 0.9);
 }
 
 .modules-center {
-  /* border: 1px solid lighter(@active); */
-  /* border: 1px solid @active; */
   padding: 0 15px;
   margin: 0px 0px;
   border-radius: 15px 15px 15px 15px;
-  background: rgba(000, 000, 000, 0.9);
 }
 
 .modules-left {
-  /* border: 1px solid lighter(@active); */
-  /* border: 1px solid @active; */
   padding: 0px 5px;
   border-radius: 0 15px 15px 0;
   margin: 0px 0px;
-  background: rgba(000, 000, 000, 0.9);
 }
 
 #pulseaudio.bluetooth,
@@ -79,7 +68,6 @@ tooltip label{
 #cpu,
 #jack,
 #tray,
-/* #workspaces, */
 #clock {
   padding: 0 5px;
 }
@@ -133,12 +121,7 @@ tooltip label{
    min-width: 5px;
    min-height: 5px;
    background-color: #FFFFFF;
-
 }
-
-/* #clock{ */
-/*   color: #5fd1fa; */
-/* } */
 
 #battery.charging {
     color: #77DD77;
@@ -165,4 +148,3 @@ tooltip label{
         color: #000000;
     }
 }
-
