@@ -1,4 +1,3 @@
-
 # [ Global Config ]
 # max no of notification in buffer
 max-history=5
@@ -90,5 +89,5 @@ layer=top
 # Show notifications at the specified position on the output.
 anchor=bottom-right
 
-text-color=#8264A3
-border-color=#8264A3
+text-color=#F9E2AF
+border-color=#11111B
