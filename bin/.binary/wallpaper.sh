@@ -2,54 +2,66 @@
 
 # Ensure ImageMagick is installed
 if ! command -v magick &>/dev/null; then
-  echo "ImageMagick is not installed. Please install it and try again."
+  notify-send "🚨 Error: ImageMagick is not installed!"
   exit 1
 fi
 
-# Directory containing wallpapers
-wallpaper_dir="$HOME/Pictures/Wallpapers"
+# Default wallpaper directory
+DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
 
-# Transition settings
-transition_bezier="0.0,0.0,1.0,1.0 "
-transition_fps=60
-transition_type="any" # Replace with desired transition type
-transition_duration=0.7
-
-# Check if swww is running, if not start it
+# Check if swww-daemon is running, start if not
 if ! pgrep -x "swww-daemon" >/dev/null; then
   swww init
 fi
 
-if [[ $1 ]]; then
-  random_wallpaper=$1
+# Determine whether input is a directory or a file
+if [[ -d "$1" ]]; then
+  # User provided a directory, pick a random image from it
+  WALLPAPER_DIR="$1"
+  SELECTED_WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
+elif [[ -f "$1" ]]; then
+  # User provided a single image, use that
+  SELECTED_WALLPAPER="$1"
 else
-  random_wallpaper=$(find "$wallpaper_dir" -type f | shuf -n 1)
+  # No argument provided, use default wallpaper directory
+  WALLPAPER_DIR="$DEFAULT_WALLPAPER_DIR"
+  SELECTED_WALLPAPER=$(find "$WALLPAPER_DIR" -type f | shuf -n 1)
 fi
-# Select a random wallpaper from the directory
 
-# Create or update symlink in home directory
-ln -sf "$random_wallpaper" "$HOME/.wallpaper.png"
-ln -sf "$random_wallpaper" "$HOME/.mozilla/firefox/kk9zw8qh.default-release/chrome/styles/ASSETS/wallpaper/wallpaper.png"
+# Validate selected wallpaper
+if [[ ! -f "$SELECTED_WALLPAPER" ]]; then
+  notify-send "❌ Error: No valid wallpaper found!"
+  exit 1
+fi
 
-cursor_pos="$(hyprctl cursorpos)"
+# Create symlinks for the selected wallpaper
+ln -sf "$SELECTED_WALLPAPER" "$HOME/.wallpaper.png"
+ln -sf "$SELECTED_WALLPAPER" "$HOME/.mozilla/firefox/kk9zw8qh.default-release/chrome/styles/ASSETS/wallpaper/wallpaper.png"
 
-# Set the random wallpaper with transition
-swww img "$random_wallpaper" \
-  --transition-bezier $transition_bezier \
-  --transition-fps=$transition_fps \
-  --transition-type=$transition_type \
-  --transition-duration=$transition_duration \
-  --transition-pos "$cursor_pos"
+# Get cursor position
+CURSOR_POS="$(hyprctl cursorpos)"
 
-# Input image file
-INPUT_IMAGE="$random_wallpaper"
+# Transition settings
+TRANSITION_BEZIER="0.0,0.0,1.0,1.0"
+TRANSITION_FPS=60
+TRANSITION_TYPE="any"
+TRANSITION_DURATION=0.7
 
-# Extract colors directly into a variable
-ALLCOL=$(magick "$INPUT_IMAGE" -resize 100x100 -colors 256 -format %c histogram:info:-)
-# Array to hold bright colors
+# Set wallpaper with transition
+swww img "$SELECTED_WALLPAPER" \
+  --transition-bezier "$TRANSITION_BEZIER" \
+  --transition-fps="$TRANSITION_FPS" \
+  --transition-type="$TRANSITION_TYPE" \
+  --transition-duration="$TRANSITION_DURATION" \
+  --transition-pos "$CURSOR_POS"
+
+# Extract colors from wallpaper
+ALLCOL=$(magick "$SELECTED_WALLPAPER" -resize 100x100 -colors 256 -format %c histogram:info:-)
+
+# Array to store bright colors
 BRIGHT_COLORS=()
 
-# Read the colors from the variable
+# Parse colors and select bright ones
 while IFS= read -r line; do
   if [[ $line =~ \#([0-9A-Fa-f]{6}) ]]; then
     HEX="${BASH_REMATCH[1]}"
@@ -57,72 +69,73 @@ while IFS= read -r line; do
     G=$((16#${HEX:2:2}))
     B=$((16#${HEX:4:2}))
     BRIGHTNESS=$(((R + G + B) / 3))
-    if [ $BRIGHTNESS -gt 127 ]; then
+
+    if [ "$BRIGHTNESS" -gt 127 ]; then
       BRIGHT_COLORS+=("#$HEX")
     fi
   fi
 done <<<"$ALLCOL"
 
-# Select up to 8 bright colors
+# Select only the top 8 bright colors
 BRIGHT_COLORS=("${BRIGHT_COLORS[@]:0:8}")
-COLORS=""
 
-function raw_col() {
-  for color in "${BRIGHT_COLORS[@]}"; do
-    COLORS+="$color\n"
-  done
-  echo -e "$COLORS" >$HOME/.colors.raw
+# Function to save raw colors
+save_raw_colors() {
+  printf "%s\n" "${BRIGHT_COLORS[@]}" >"$HOME/.colors.raw"
 }
 
-function waybar_col() {
-  COLORS=""
+# Function to generate Waybar colors
+generate_waybar_colors() {
+  local output=""
   for i in "${!BRIGHT_COLORS[@]}"; do
-    COLORS+="@define-color color$i ${BRIGHT_COLORS[i]};\n"
+    output+="@define-color color$i ${BRIGHT_COLORS[i]};\n"
   done
-  echo -e "$COLORS" >"$HOME/.config/waybar/waybar.css"
+  echo -e "$output" >"$HOME/.config/waybar/waybar.css"
 }
 
-function hyprland_col() {
+# Function to generate Hyprland colors
+generate_hyprland_colors() {
+  echo -n "" >"$HOME/.config/hypr/colors.conf" # Clear file
   for i in "${!BRIGHT_COLORS[@]}"; do
-    # Remove the hash symbol from the color value
-    color_value=${BRIGHT_COLORS[i]#"#"}
-    COLORS+="\$color$i = $color_value;\n"
+    echo -e "\$color$i = ${BRIGHT_COLORS[i]#"#"}" >>"$HOME/.config/hypr/colors.conf"
   done
-  echo -e "$COLORS" >"$HOME/.config/hypr/colors.conf"
 }
 
-function mako_col_inj() {
+# Function to update Mako notification colors
+update_mako_colors() {
   local file_path="$HOME/.config/mako/config"
-  local file_content=""
-  local total_lines=$(wc -l <"$file_path")
-  local line_num=0
+  local temp_file="$(mktemp)"
 
-  while IFS= read -r line; do
-    ((line_num++))
-    if ((line_num <= total_lines - 2)); then
-      file_content+="$line"$'\n'
-    fi
-  done <"$file_path"
+  # Copy everything except the last two lines
+  head -n -2 "$file_path" >"$temp_file"
 
+  # Append new colors
   local text_color="${BRIGHT_COLORS[0]}"
   local border_color="${BRIGHT_COLORS[0]}"
-  file_content+="text-color=${text_color}\nborder-color=${border_color}"
+  echo -e "text-color=${text_color}\nborder-color=${border_color}" >>"$temp_file"
 
-  echo -e "$file_content" >$file_path
+  # Overwrite original config
+  mv "$temp_file" "$file_path"
+
+  # Reload Mako and notify user
   makoctl reload
-  notify-send "mako reloaded"
+  notify-send "🔄 Mako reloaded!"
 }
 
-function rasi_col() {
-  COLORS="* {\n"
-  COLORS+="   color0: ${BRIGHT_COLORS[0]};\n    color1: ${BRIGHT_COLORS[1]};\n    color2: ${BRIGHT_COLORS[2]};\n    color3: ${BRIGHT_COLORS[3]};\n    color4: ${BRIGHT_COLORS[4]};\n    color5: ${BRIGHT_COLORS[5]};\n    color6: ${BRIGHT_COLORS[6]};\n    color7: ${BRIGHT_COLORS[7]};\n"
-  COLORS+="}\n"
-  echo -e "$COLORS" >$HOME/.config/rofi/wal_color.rasi
+# Function to update Rofi color theme
+update_rofi_colors() {
+  echo -e "* {\n" >"$HOME/.config/rofi/wal_color.rasi"
+  for i in {0..7}; do
+    echo -e "    color$i: ${BRIGHT_COLORS[i]};" >>"$HOME/.config/rofi/wal_color.rasi"
+  done
+  echo "}" >>"$HOME/.config/rofi/wal_color.rasi"
 }
 
-# Call the functions
-hyprland_col
-waybar_col
-raw_col
-mako_col_inj
-rasi_col
+# Execute functions
+generate_hyprland_colors
+generate_waybar_colors
+save_raw_colors
+update_mako_colors
+update_rofi_colors
+
+notify-send "🌆 Wallpaper Updated" "New wallpaper set from: $SELECTED_WALLPAPER"

@@ -89,5 +89,5 @@ layer=top
 # Show notifications at the specified position on the output.
 anchor=bottom-right
 
-text-color=#F2CDCD
-border-color=#11111B
+text-color=#B57659
+border-color=#B57659

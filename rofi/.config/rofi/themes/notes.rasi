@@ -1,0 +1,171 @@
+configuration {
+	modi:                       "dmenu";
+  show-icons:                 false;
+}
+
+* {
+    font:                        "Grape Nuts 14";
+}
+
+window {
+    transparency:                "real";
+    location:                    center;
+    anchor:                      center;
+    fullscreen:                  false;
+    width:                       860px;
+    x-offset:                    0px;
+    y-offset:                    0px;
+    enabled:                     true;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                black;
+    cursor:                      "default";
+    background-image:            url("../images/paper.png", none);
+}
+
+mainbox {
+    enabled:                     true;
+    spacing:                     8px;
+    margin:                      0px;
+    padding:                     0px;
+    border:                      0px solid;
+    border-radius:               0px 0px 0px 0px;
+    border-color:                black;
+    background-color:            transparent;
+    children:                    [ "inputbar", "listview" ];
+}
+
+inputbar {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      95px 0px 0px 0px;
+    padding:                     0px 30px;
+    border:                      0px;
+    border-radius:               0px;
+    border-color:                #D79290;
+    background-color:            transparent;
+    text-color:                  black;
+    children:                    [ "prompt", "entry", "num-filtered-rows", "textbox-num-sep", "num-rows" ];
+}
+
+prompt {
+    enabled:                     true;
+    font:                        "Grape Nuts Bold 14";
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+entry {
+    enabled:                     true;
+    expand:                      true;
+    padding:                     0px 10px 0px 40px;
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      text;
+    placeholder:                 "Search...";
+    placeholder-color:           inherit;
+}
+num-filtered-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+textbox-num-sep {
+    enabled:                     true;
+    expand:                      false;
+    str:                         "/";
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+num-rows {
+    enabled:                     true;
+    expand:                      false;
+    background-color:            transparent;
+    text-color:                  inherit;
+}
+
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       15;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    spacing:                     4px;
+    margin:                      0px;
+    padding:                     0px 0px 0px 40px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                black;
+    background-color:            transparent;
+    text-color:                  black;
+    cursor:                      "default";
+}
+scrollbar {
+    handle-width:                5px ;
+    handle-color:                black;
+    border-radius:               0px;
+    background-color:            transparent;
+}
+
+/*****----- Elements -----*****/
+element {
+    enabled:                     true;
+    spacing:                     0px;
+    margin:                      0px;
+    padding:                     1px 0px 0px 100px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                black;
+    background-color:            transparent;
+    text-color:                  #000080;
+    cursor:                      pointer;
+}
+element normal.normal {
+    background-color:            transparent;
+    text-color:                  #000080;
+}
+element selected.normal {
+    background-color:            transparent;
+    text-color:                  #D76A67;
+}
+element alternate.normal {
+    background-color:            transparent;
+    text-color:                  #000080;
+}
+element-icon {
+    background-color:            transparent;
+    text-color:                  inherit;
+    size:                        24px;
+    cursor:                      inherit;
+}
+element-text {
+    font:                        "Grape Nuts Bold 14";
+    background-color:            transparent;
+    text-color:                  inherit;
+    highlight:                   inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}
+
+/*****----- Message -----*****/
+error-message {
+    padding:                     20px;
+    border:                      0px solid;
+    border-radius:               0px;
+    border-color:                black;
+    background-color:            white;
+    text-color:                  black;
+}
+textbox {
+    vertical-align:              0.5;
+    horizontal-align:            0.0;
+}

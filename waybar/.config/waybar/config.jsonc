@@ -11,13 +11,9 @@
     "cpu",
     "temperature",
     "custom/powerDraw",
-    "custom/tasks"
+    "custom/tasks",
   ],
-  "modules-center": [
-    "hyprland/workspaces",
-    "custom/pacman",
-    "mpd"
-  ],
+  "modules-center": ["hyprland/workspaces", "custom/pacman", "mpd"],
   "modules-right": [
     "hyprland/window",
     "tray",
@@ -32,24 +28,24 @@
     "group/audio",
     "custom/hotspot",
     "group/networking",
-    "battery"
+    "battery",
   ],
   "reload_style_on_change": true,
   "custom/logo": {
     //    "format": "󰊠",
     "format": "",
     "tooltip": false,
-    "on-click": "~/.config/rofi/scripts/powermenu.sh"
+    "on-click": "~/.config/rofi/scripts/powermenu.sh",
   },
   "custom/pacman": {
     "format": "{icon}{}",
     "return-type": "json",
     "format-icons": {
       "pending-updates": " ",
-      "updated": ""
+      "updated": "",
     },
     "exec-if": "which waybar-updates",
-    "exec": "waybar-updates"
+    "exec": "waybar-updates",
   },
   "clock": {
     "format": "{:%I:%M:%S %p}",
@@ -59,35 +55,26 @@
     "today-format": "<span color='#7645AD'><b><u>{}</u></b></span>",
     "format-calendar": "<span color='#aeaeae'><b>{}</b></span>",
     "format-calendar-weeks": "<span color='#aeaeae'><b>W{:%V}</b></span>",
-    "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>"
+    "format-calendar-weekdays": "<span color='#aeaeae'><b>{}</b></span>",
   },
   "hyprland/language": {
     "format": "Lang: {long}",
     "format-en": "AMERICA, HELL YEAH!",
     "format-tr": "As bayrakları",
-    "keyboard-name": "at-translated-set-2-keyboard"
+    "keyboard-name": "at-translated-set-2-keyboard",
   },
   "disk": {
     "interval": 30,
     "format": " {percentage_used}%",
-    "path": "/"
+    "path": "/",
   },
   "memory": {
-    "format": " {percentage}%"
+    "format": " {percentage}%",
   },
   "cpu": {
     "interval": 1,
     "format": " {usage}%",
-    "format-icons": [
-      "▁",
-      "▂",
-      "▃",
-      "▄",
-      "▅",
-      "▆",
-      "▇",
-      "█"
-    ],
+    "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█"],
   },
   "temperature": {
     "format": " {temperatureC}°C",
@@ -100,7 +87,7 @@
     "format": "{}",
     "interval": 1,
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
-    "return-type": "json"
+    "return-type": "json",
   },
   "hyprland/workspaces": {
     "format": "<span font='18px'>{icon}</span>",
@@ -111,18 +98,11 @@
       "4": "४",
       "5": "५",
       "6": "६",
-      "default": ""
+      "default": "",
     },
     "persistent-workspaces": {
-      "*": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6
-      ]
-    }
+      "*": [1, 2, 3, 4, 5, 6],
+    },
   },
   "hyprland/window": {
     "format": "( {class} )",
@@ -130,12 +110,12 @@
       "(.*) - Mozilla Firefox": "🌎 $1",
       "org.telegram.desktop": "> [$1]",
       "org.gnome.Nautilus": "> [$1]",
-      "(.*) - zsh": "> [$1]"
-    }
+      "(.*) - zsh": "> [$1]",
+    },
   },
   "tray": {
     "icon-size": 14,
-    "spacing": 10
+    "spacing": 10,
   },
   "custom/updates": {
     "format": "{}",
@@ -150,18 +130,15 @@
     "tooltip": true,
     // "tooltip-format": "{output}",
     // "exec-tooltip": "sh -c cliphist list | head -n 5",
-    "on-click": "sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'"
+    "on-click": "sh -c 'cliphist list | rofi -dmenu | cliphist decode | wl-copy'",
   },
   "group/blight": {
     "orientation": "horizontal",
     "drawer": {
       "transition-duration": 500,
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
     },
-    "modules": [
-      "backlight",
-      "backlight/slider"
-    ]
+    "modules": ["backlight", "backlight/slider"],
   },
   "backlight": {
     "device": "intel_backlight",
@@ -180,31 +157,32 @@
       "",
       "",
       "",
-      ""
+      "",
     ],
     "on-scroll-down": "brightnessctl set +15%",
     "on-scroll-up": "brightnessctl set 15%-",
-    "smooth-scrolling-threshold": 1
+    "min-brightness": "1",
+    "smooth-scrolling-threshold": 1,
   },
   "backlight/slider": {
     "min": 50,
     "max": 100,
     "orientation": "horizontal",
-    "device": "intel_backlight"
+    "device": "intel_backlight",
   },
   "idle_inhibitor": {
     "format": "<span font='12'>{icon}</span>",
     "format-icons": {
       "activated": "󰈈",
-      "deactivated": "󰈉"
-    }
+      "deactivated": "󰈉",
+    },
   },
   "custom/tasks": {
     "format": "{}",
     "return-type": "json",
     "interval": 10,
     "exec": "~/.config/waybar/scripts/todoCount.sh",
-    "tooltip": false
+    "tooltip": false,
   },
   "custom/colorpicker": {
     "format": "{}",
@@ -238,11 +216,7 @@
       "phone": "",
       "portable": "",
       "car": "",
-      "default": [
-        "🕨",
-        "🕩",
-        "🕪"
-      ]
+      "default": ["🕨", "🕩", "🕪"],
     },
     "scroll-step": 5,
     "justify": "center",
@@ -250,7 +224,7 @@
     "on-click-right": "pavucontrol",
     "tooltip-format": "{volume}%  {icon}",
     "on-scroll-up": "pactl set-sink-volume @default_sink@ +5%",
-    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%"
+    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
   },
   "pulseaudio#mic": {
     "format": "{format_source}",
@@ -259,23 +233,20 @@
     "tooltip-format": "{volume}% {format_source} ",
     "on-click": "pactl set-source-mute 0 toggle",
     "on-scroll-down": "pactl set-source-volume 0 -1%",
-    "on-scroll-up": "pactl set-source-volume 0 +1%"
+    "on-scroll-up": "pactl set-source-volume 0 +1%",
   },
   "group/audio": {
     "orientation": "horizontal",
     "drawer": {
       "transition-duration": 500,
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
     },
-    "modules": [
-      "pulseaudio",
-      "pulseaudio/slider"
-    ]
+    "modules": ["pulseaudio", "pulseaudio/slider"],
   },
   "pulseaudio/slider": {
     "min": 0,
     "max": 140,
-    "orientation": "horizontal"
+    "orientation": "horizontal",
   },
   "custom/hotspot": {
     "format": "{icon}",
@@ -284,7 +255,7 @@
     "return-type": "json",
     "format-icons": {
       "active": "󱜠",
-      "notactive": "󱜡"
+      "notactive": "󱜡",
     },
     "exec": "waybar-hotspot -a watch",
     "on-click": "waybar-hotspot -a toggle",
@@ -297,7 +268,7 @@
     "tooltip-format-wifi": "{essid} ({signalStrength}%)  | {ipaddr}",
     "tooltip-format-ethernet": "{ifname} 🖧 | {ipaddr}",
     "tooltip-format-ethernet": "{bandwidthTotalBytes}",
-    "on-click": "networkmanager_dmenu"
+    "on-click": "networkmanager_dmenu",
   },
   "network#speed": {
     "format": "{bandwidthDownBits}",
@@ -307,25 +278,22 @@
     "tooltip-format-ethernet": "{ifname} 󰈀 \n{ipaddr} | {frequency} MHz{icon} ",
     "tooltip-format-disconnected": "Not Connected to any type of Network",
     "tooltip": true,
-    "on-click": "pgrep -x rofi &>/dev/null && notify-send rofi || networkmanager_dmenu"
+    "on-click": "pgrep -x rofi &>/dev/null && notify-send rofi || networkmanager_dmenu",
   },
   "group/networking": {
     "orientation": "horizontal",
     "drawer": {
       "transition-duration": 500,
-      "transition-left-to-right": false
+      "transition-left-to-right": false,
     },
-    "modules": [
-      "network",
-      "network#speed"
-    ]
+    "modules": ["network", "network#speed"],
   },
   "battery": {
     "interval": 1,
     "states": {
       "good": 95,
       "warning": 30,
-      "critical": 20
+      "critical": 20,
     },
     "tooltip": true,
     "format": "{capacity}% <span font='16px'>{icon}</span>",
@@ -334,19 +302,8 @@
     "format-charging": "{capacity}% <span font='16px'>󰂄</span>",
     "format-plugged": "{capacity}% 󰂅",
     // "format-alt": "{time} {icon}",
-    "format-icons": [
-      "󰂃",
-      "󰁺",
-      "󰁻",
-      "󰁼",
-      "󰁽",
-      "󰁾",
-      "󰁿",
-      "󰂀",
-      "󰂁",
-      "󰁹"
-    ],
-    "on-click": "~/.config/rofi/scripts/powermenu.sh"
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
+    "on-click": "~/.config/rofi/scripts/powermenu.sh",
   },
   "privacy": {
     "icon-spacing": 8,
@@ -356,19 +313,19 @@
       {
         "type": "screenshare",
         "tooltip": true,
-        "tooltip-icon-size": 24
+        "tooltip-icon-size": 24,
       },
       {
         "type": "audio-out",
         "tooltip": true,
-        "tooltip-icon-size": 24
+        "tooltip-icon-size": 24,
       },
       {
         "type": "audio-in",
         "tooltip": true,
-        "tooltip-icon-size": 24
-      }
-    ]
+        "tooltip-icon-size": 24,
+      },
+    ],
   },
   "mpd": {
     "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) <U+F001>",
@@ -376,23 +333,23 @@
     "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped <U+F001>",
     "interval": 2,
     "consume-icons": {
-      "on": "<U+F0C4> "
+      "on": "<U+F0C4> ",
     },
     "random-icons": {
       "off": "<span color=\"#f53c3c\"><U+F074></span> ",
-      "on": "<U+F074> "
+      "on": "<U+F074> ",
     },
     "repeat-icons": {
-      "on": "<U+F01E> "
+      "on": "<U+F01E> ",
     },
     "single-icons": {
-      "on": "<U+F01E>1 "
+      "on": "<U+F01E>1 ",
     },
     "state-icons": {
       "paused": "<U+F04C>",
-      "playing": "<U+F04B>"
+      "playing": "<U+F04B>",
     },
     "tooltip-format": "MPD (connected)",
-    "tooltip-format-disconnected": "MPD (disconnected)"
-  }
+    "tooltip-format-disconnected": "MPD (disconnected)",
+  },
 }

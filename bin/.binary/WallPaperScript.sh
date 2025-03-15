@@ -1,32 +1,29 @@
 #!/bin/bash
 
 colors=(
-  "#F5E0DC" # Mocha - Rosewater
-  "#F2CDCD" # Mocha - Flamingo
-  "#F5C2E7" # Mocha - Pink
-  "#CBA6F7" # Mocha - Mauve
-  "#F38BA8" # Mocha - Red
-  "#EBA0AC" # Mocha - Maroon
-  "#FAB387" # Mocha - Peach
-  "#F9E2AF" # Mocha - Yellow
-  "#A6E3A1" # Mocha - Green
-  "#94E2D5" # Mocha - Teal
-  "#89DCEB" # Mocha - Sky
-  "#74C7EC" # Mocha - Sapphire
-  "#89B4FA" # Mocha - Blue
-  "#B4BEFE" # Mocha - Lavender
-  "#C6D0F5" # Mocha - Text
-  "#BAC2DE" # Mocha - Subtext1
-  "#A6ADC8" # Mocha - Subtext0
-  "#9399B2" # Mocha - Overlay2
-  "#7F849C" # Mocha - Overlay1
-  "#6C7086" # Mocha - Overlay0
-  "#585B70" # Mocha - Surface2
-  "#45475A" # Mocha - Surface1
-  "#313244" # Mocha - Surface0
-  "#1E1E2E" # Mocha - Base
-  "#181825" # Mocha - Mantle
-  "#11111B" # Mocha - Crust
+  "#c0caf5" # Foreground
+  "#a9b1d6" # Light Foreground
+  "#f7768e" # Red
+  "#d7daec" # Bright Foreground
+  "#db4b4b" # Crimson Red
+  "#ff7a45" # Vibrant Orange
+  "#f4c542" # Gold Yellow
+  "#81c784" # Spring Green
+  "#4fc3f7" # Sky Blue
+  "#5eafff" # Deep Cyan
+  "#ab47bc" # Orchid Purple
+  "#4b5263" # Dim Comment
+  "#a3b9d4" # Cool Foreground
+  "#cdd3e6" # Frost Foreground
+  "#ed4245" # Rose Red
+  "#ffb870" # Peach Orange
+  "#ffc96b" # Sand Yellow
+  "#99c794" # Lime Green
+  "#6fcfe3" # Aqua Blue
+  "#59c2ff" # Teal Cyan
+  "#b39ddb" # Lavender Purple
+  "#424a5d" # Muted Comment
+
 )
 check_command() {
   command -v "$1" &>/dev/null || {
@@ -54,7 +51,7 @@ svg_file="$cache_dir/wallpaper.svg"
 png_file="$cache_dir/wallpaper.png"
 
 # Default color values
-bg_color="#11111B" # Default background color
+bg_color="#000000" # Default background color
 base_color=""      # Default base color
 
 # Parse command-line arguments
@@ -143,8 +140,8 @@ function color_waybar() {
 }
 
 function color_hyprland() {
-  echo -e "\$color0 = ${base_color//#/};" >$HOME/.config/hypr/colors.conf
-  echo -e "\$color1 = ${bg_color//#/};" >>$HOME/.config/hypr/colors.conf
+  echo -e "\$color0 = ${base_color//#/}" >$HOME/.config/hypr/colors.conf
+  echo -e "\$color1 = ${bg_color//#/}" >>$HOME/.config/hypr/colors.conf
 }
 
 function color_rofi() {
@@ -168,8 +165,7 @@ function color_mako() {
     fi
   done <"$file_path"
 
-  file_content+="text-color=$base_color\nborder-color=$bg_color"
-
+  file_content+="text-color=$base_color\nborder-color=$base_color"
   echo -e "$file_content" >$file_path
   makoctl reload
 }
@@ -183,4 +179,4 @@ color_waybar
 color_hyprland
 color_rofi
 color_mako
-notify-send "Wallpaper changed"
+notify-send "Wallpaper changed $base_color & $bg_color"

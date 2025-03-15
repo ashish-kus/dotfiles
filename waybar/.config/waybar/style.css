@@ -2,23 +2,23 @@
 @define-color active @color0;
 
 * {
-    border: none;
-    font-size: 15px;
-    font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF" ;
-    min-height: 10px;
-    color: @active;
- }
+  border: none;
+  font-size: 15px;
+  font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF";
+  min-height: 10px;
+  color: @active;
+}
 
 window#waybar {
-  background: #11111b;
- }
+  background: rgba(0, 0, 0, 0.7); /* 70% opacity */
+}
 
 tooltip {
   border-radius: 15px;
   color: @active;
 }
 
-tooltip label{
+tooltip label {
   color: @active;
 }
 
@@ -77,23 +77,23 @@ tooltip label{
 }
 
 #workspaces button.active {
-    border-bottom: solid 2px @active;
+  border-bottom: solid 2px @active;
 }
-#custom-colorpicker{
+#custom-colorpicker {
   padding: 0 4px 0 10px;
 }
-#pulseaudio{
+#pulseaudio {
   padding-top: 3px;
 }
-#pulseaudio.mic{
-  font-size:14px;
+#pulseaudio.mic {
+  font-size: 14px;
 }
-#pulseaudio.mic.muted{
-  font-size:14px;
-  color:red;
+#pulseaudio.mic.muted {
+  font-size: 14px;
+  color: red;
 }
-#pulseaudio.muted{
-  color: #FF0000;
+#pulseaudio.muted {
+  color: #ff0000;
   padding-top: 2px;
   padding-right: 10px;
 }
@@ -118,33 +118,33 @@ tooltip label{
 
 #backlight-slider highlight,
 #pulseaudio-slider highlight {
-   min-width: 5px;
-   min-height: 5px;
-   background-color: #FFFFFF;
+  min-width: 5px;
+  min-height: 5px;
+  background-color: #ffffff;
 }
 
 #battery.charging {
-    color: #77DD77;
+  color: #77dd77;
 }
 
 #battery.warning:not(.charging) {
-    background-color: #ffbe61;
-    color: black;
+  background-color: #ffbe61;
+  color: black;
 }
 
 #battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+  background-color: #f53c3c;
+  color: #ffffff;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 @keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+  to {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }

@@ -1,3 +1,11 @@
 * {
-color0: #F2CDCD;color1: #11111B;}
 
+    color0: #B57659;
+    color1: #B97759;
+    color2: #B97655;
+    color3: #BD7A56;
+    color4: #BD7A59;
+    color5: #BE8648;
+    color6: #C27D59;
+    color7: #C37D57;
+}
