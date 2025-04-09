@@ -150,4 +150,23 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
+
+ftxui() {
+    [ $# -eq 0 ] && echo "Usage: ftxui <filename.cpp>" && return 1
+    local file="$1"
+    [ ! -f "$file" ] && echo "Error: File '$file' not found." && return 1
+    echo -n "  Compiling... "
+    if g++ -std=c++17 "$file" -o "out" -lftxui-component -lftxui-dom -lftxui-screen; then
+        sleep 0.2
+        echo -ne "\r\033[K  Compilation successful!"
+        sleep 0.2
+        echo -ne "\r\033[K  Running...!"
+        sleep 0.2
+        echo -ne "\r\033[K"
+        ./out
+    else
+        echo -e "\r\033[K  Compilation failed."
+    fi
+}
+
 bindkey -s ^a "nvims\n"

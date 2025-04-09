@@ -6,11 +6,10 @@
   font-size: 15px;
   font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF";
   min-height: 10px;
-  color: @active;
 }
 
 window#waybar {
-  background: rgba(0, 0, 0, 0.7); /* 70% opacity */
+  background: rgba(0, 0, 0, 0.4); /* 70% opacity */
 }
 
 tooltip {
@@ -70,15 +69,22 @@ tooltip label {
 #tray,
 #clock {
   padding: 0 5px;
+  color: @active;
 }
 
 #workspaces button {
   border-radius: 0px;
+  color: @active;
 }
 
 #workspaces button.active {
   border-bottom: solid 2px @active;
 }
+
+#workspaces button:not(.empty) {
+  color: #ffffff;
+}
+
 #custom-colorpicker {
   padding: 0 4px 0 10px;
 }

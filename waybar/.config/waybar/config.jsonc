@@ -91,6 +91,10 @@
   },
   "hyprland/workspaces": {
     "format": "<span font='18px'>{icon}</span>",
+    "show-special": true,
+    //  "special-visible-only": false, // If this and show-special are to true, special workspaces will be shown only if visible.
+    "move-to-monitor": true,
+    "expand": true,
     "format-icons": {
       "1": "१",
       "2": "२",
