@@ -60,6 +60,8 @@ run(){
       ./$FILE ;;
    lua)
       lua "./$FILE";;
+   go)
+      go run ./$FILE ;;
    py)
       python3 $FILE ;;
   cpp)
@@ -168,5 +170,9 @@ ftxui() {
         echo -e "\r\033[K  Compilation failed."
     fi
 }
+
+gcm(){
+    git add . && git commit -m "$1"
+  }
 
 bindkey -s ^a "nvims\n"

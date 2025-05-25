@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+echo "hello"
 # Automatically disables internal monitor when the lid is closed
 # and moves all windows on internal to external monitor's focused workspace.
 # Re-enables internal monitor when lid is opened.
@@ -48,7 +49,8 @@ acpi_listen | while read -r event; do
     ;;
   *LID\ open*)
     echo "Lid opened"
-    apply_monitor_config
+    #    apply_monitor_config
+    hyprctl reload
     ;;
   esac
 done
