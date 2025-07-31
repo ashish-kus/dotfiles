@@ -65,6 +65,8 @@ alias cdoc="documents"
 [ -f "$HOME/.config/shell/path" ] && alias epath="vim $HOME/.config/shell/path"
 [ -f "$HOME/.config/shell/func" ] && alias efunc="vim $HOME/.config/shell/func"
 
+
+
 #=========================== [ CHECK_ALIAS ] ================================
 # check_alias for conditional based aliases, IF file or tool on which alias depend exist then aliass this 
 check_alias(){
@@ -72,6 +74,7 @@ check_alias(){
         alias $2="$3"
     fi
 }
+check_alias yay yayclean "yay -Sc --noconfirm"
 check_alias wl-copy copy "wl-copy"
 check_alias wl-past past "wl-past"
 check_alias figlet stime 'watch -n1 -t "date +%T | figlet"'

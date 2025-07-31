@@ -1,5 +1,4 @@
-@import "./wal_color.rasi"
-
+@import "/home/ashishk/.config/huegen/themes/rofi-colors.rasi"
 * {
   debug:                          rgba(225, 000, 000, 100%);        
   bg:                             rgba(000, 000, 000, 1%);

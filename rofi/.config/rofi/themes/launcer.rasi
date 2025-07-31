@@ -2,6 +2,8 @@
 /*****----- Configuration -----*****/
 
 @theme './default.rasi'
+@import "../colors.rasi"
+
 
 configuration {
 	modi:                       "drun";
@@ -116,9 +118,9 @@ scrollbar {
 /*****----- Elements -----*****/
 element {
     enabled:                     true;
-    spacing:                     15px;
-    margin:                      0px;
-    padding:                     35px 10px;
+    spacing:                     0px;
+    margin:                      20px;
+    padding:                     35px 40px;
     border:                      0px solid;
     border-radius:               15px;
     border-color:                @selected;
@@ -136,12 +138,16 @@ element selected.normal {
     text-color:                  @foreground;
 }
 element-icon {
-    background-color:            transparent;
+    background-color:            @primery;
     text-color:                  inherit;
-    size:                        72px;
+    size:                        80px;
     cursor:                      inherit;
+    padding:                     5px 15px;
+    margin:                      0 0 15px 0;
+    border-radius:               15px;
 }
 element-text {
+    enabled:                     true;
     background-color:            transparent;
     text-color:                  inherit;
     highlight:                   inherit;

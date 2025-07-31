@@ -1,24 +1,25 @@
-extract ()
-{
-   if [ -f $@ ] ; then
-     case $1 in
-     *.tar.bz2) tar xjf $@   ;;
-     *.tar.gz)  tar xzf $@   ;;
-     *.bz2)     bunzip2 $@   ;;
-     *.rar)     unrar x $@   ;;
-     *.gz)      gunzip $@    ;;
-     *.tar)     tar xf $@    ;;
-     *.tbz2)    tar xjf $@   ;;
-     *.tgz)     tar xzf $@   ;;
-     *.zip)     unzip $@     ;;
-     *.Z)       uncompress $@;;
-     *.7z)      7z x $@      ;;
-     *)           echo " cannot extract via extract "
+extract () {
+   if [ -f "$1" ]; then
+     case "$1" in
+       *.tar.bz2)  tar xjf "$1"    ;;
+       *.tar.gz)   tar xzf "$1"    ;;
+       *.bz2)      bunzip2 "$1"    ;;
+       *.rar)      unrar x "$1"    ;;
+       *.gz)       gunzip "$1"     ;;
+       *.tar)      tar xf "$1"     ;;
+       *.tbz2)     tar xjf "$1"    ;;
+       *.tgz)      tar xzf "$1"    ;;
+       *.zip)      unzip "$1"      ;;
+       *.Z)        uncompress "$1" ;;
+       *.7z)       7z x "$1"       ;;
+       *.tar.xz)   tar xJf "$1"    ;;  # Added support for .tar.xz
+       *)          echo "Cannot extract '$1' via extract()" ;;
      esac
    else
-   echo " \033[44m $1 invalid file  \033[0m"
-  fi
+     echo -e "\033[44m '$1' is not a valid file \033[0m"
+   fi
 }
+
 
 
 battery(){
@@ -49,27 +50,37 @@ update(){
 
 
 # Run a executable file 
-run(){
 
+run() {
   FILE=$1
-  [ -f $FILE ] || echo " $1 NOT FOUND" 
-  EXTENSION=`echo "$FILE" | cut -d'.' -f2`
+  [ -f "$FILE" ] || { echo "$1 NOT FOUND"; return; }
+
+  EXTENSION=$(echo "$FILE" | cut -d'.' -f2)
 
   case "$EXTENSION" in
-   sh)
-      ./$FILE ;;
-   lua)
-      lua "./$FILE";;
-   go)
-      go run ./$FILE ;;
-   py)
-      python3 $FILE ;;
-  cpp)
-      g++ -o compiled $FILE && ./compiled ;;
+    sh)
+      ./"$FILE"
+      ;;
+    lua)
+      lua "./$FILE"
+      ;;
+    go)
+      go run ./"$FILE"
+      ;;
+    py)
+      python3 "$FILE"
+      ;;
+    cpp)
+      g++ -o compiled "$FILE" && ./compiled
+      ;;
+    js)
+      node "$FILE"
+      ;;
     *)
-      echo "File extension unknown";;
-    esac
-  }
+      echo "File extension unknown"
+      ;;
+  esac
+}
 
 pm(){
     if [ $# -eq 0 ];then
@@ -169,6 +180,17 @@ ftxui() {
     else
         echo -e "\r\033[K  Compilation failed."
     fi
+}
+
+s () {
+  fzf --ansi --disabled \
+      --bind "change:reload:command \
+          rg --line-number --no-heading --color=always --smart-case {q} \
+          || :" \
+      --bind "enter:execute(${EDITOR:-nano} +{2} {1})" \
+      --delimiter ":" \
+      --preview "command bat -p --color=always {1} --highlight-line {2}" \
+      --preview-window 'up:80%,border-bottom,~3,+{2}+3/3'
 }
 
 gcm(){

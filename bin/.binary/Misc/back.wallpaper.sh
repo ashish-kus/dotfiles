@@ -2,16 +2,17 @@
 
 # Ensure ImageMagick is installed
 if ! command -v magick &>/dev/null; then
-  notify-send "🚨 Error: ImageMagick is not installed!"
+  notify-send "Error: ImageMagick is not installed!"
   exit 1
 fi
 
 # Default wallpaper directory
 DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+# DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
 
 # Check if swww-daemon is running, start if not
 if ! pgrep -x "swww-daemon" >/dev/null; then
-  swww init
+  swww-daemon
 fi
 
 # Determine whether input is a directory or a file
@@ -36,7 +37,7 @@ fi
 
 # Create symlinks for the selected wallpaper
 ln -sf "$SELECTED_WALLPAPER" "$HOME/.wallpaper.png"
-ln -sf "$SELECTED_WALLPAPER" "$HOME/.mozilla/firefox/kk9zw8qh.default-release/chrome/styles/ASSETS/wallpaper/wallpaper.png"
+# ln -sf "$SELECTED_WALLPAPER" "$HOME/.mozilla/firefox/kk9zw8qh.default-release/chrome/styles/ASSETS/wallpaper/wallpaper.png"
 
 # Get cursor position
 CURSOR_POS="$(hyprctl cursorpos)"
@@ -95,6 +96,9 @@ generate_waybar_colors() {
 
 # Function to generate Hyprland colors
 generate_hyprland_colors() {
+
+  hyprctl keyword general:col.active_border 0xFF${BRIGHT_COLORS[i]#"#"}
+
   echo -n "" >"$HOME/.config/hypr/colors.conf" # Clear file
   for i in "${!BRIGHT_COLORS[@]}"; do
     echo -e "\$color$i = ${BRIGHT_COLORS[i]#"#"}" >>"$HOME/.config/hypr/colors.conf"
@@ -132,10 +136,10 @@ update_rofi_colors() {
 }
 
 # Execute functions
-generate_hyprland_colors
-generate_waybar_colors
-save_raw_colors
-update_mako_colors
-update_rofi_colors
+# generate_hyprland_colors
+# generate_waybar_colors
+# save_raw_colors
+# update_mako_colors
+# update_rofi_colors
 
-notify-send "🌆 Wallpaper Updated" "New wallpaper set from: $SELECTED_WALLPAPER"
+notify-send "Wallpaper Updated" "New wallpaper set from: $SELECTED_WALLPAPER"

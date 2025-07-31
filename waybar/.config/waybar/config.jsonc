@@ -1,6 +1,6 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
   "mod": "dock",
   "margin-bottom": 2,
   "modules-left": [
@@ -32,8 +32,8 @@
   ],
   "reload_style_on_change": true,
   "custom/logo": {
-    //    "format": "󰊠",
-    "format": "",
+    "format": "󰊠",
+    //    "format": "",
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh",
   },
@@ -224,11 +224,11 @@
     },
     "scroll-step": 5,
     "justify": "center",
-    "on-click": "amixer sset Master toggle",
+    "on-click": "~/.binary/volume.sh --toggle",
     "on-click-right": "pavucontrol",
     "tooltip-format": "{volume}%  {icon}",
-    "on-scroll-up": "pactl set-sink-volume @default_sink@ +5%",
-    "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+    "on-scroll-up": "~/.binary/volume.sh --inc",
+    "on-scroll-down": "~/.binary/volume.sh --dec",
   },
   "pulseaudio#mic": {
     "format": "{format_source}",

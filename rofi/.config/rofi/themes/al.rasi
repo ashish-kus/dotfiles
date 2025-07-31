@@ -18,7 +18,7 @@ configuration {
 }
 
 /*****----- Global Properties -----*****/
-@import                          "shared/colors.rasi"
+@import                          "/home/ashishk/.dotfiles/rofi/.config/rofi/colors.rasi"
 @import                          "shared/fonts.rasi"
 
 /*****----- Main Window -----*****/
@@ -151,6 +151,7 @@ element-icon {
     cursor:                      inherit;
 }
 element-text {
+    enabled:                     false; 
     background-color:            transparent;
     text-color:                  inherit;
     highlight:                   inherit;

@@ -1,4 +1,5 @@
 @import "./waybar.css";
+/* @import "../huegen/themes/waybar.css"; */
 @define-color active @color0;
 
 * {
@@ -9,7 +10,9 @@
 }
 
 window#waybar {
-  background: rgba(0, 0, 0, 0.4); /* 70% opacity */
+  /* background: rgba(26, 27, 38, 0.9);    70% opacity */
+  background: rgba(255, 255, 255, 0);
+  padding: 5px;
 }
 
 tooltip {
@@ -27,20 +30,23 @@ tooltip label {
 
 .modules-right {
   border-radius: 15px 0 0 15px;
-  padding: 0px 5px;
-  margin: 0px 0px;
+  padding: 0px 10px;
+  margin: 2px 0px;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .modules-center {
-  padding: 0 15px;
-  margin: 0px 0px;
+  margin: 2px 0px;
+  padding: 0px 10px;
   border-radius: 15px 15px 15px 15px;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 .modules-left {
-  padding: 0px 5px;
   border-radius: 0 15px 15px 0;
-  margin: 0px 0px;
+  margin: 2px 0px;
+  padding: 0px 10px;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 #pulseaudio.bluetooth,
@@ -55,6 +61,7 @@ tooltip label {
 #pulseaudio.mic,
 #idle_inhibitor,
 #temperature,
+#custom-logo,
 #pulseaudio,
 #bluetooth,
 #backlight,

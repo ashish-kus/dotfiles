@@ -129,6 +129,8 @@ if ! swww img "$png_file"; then
   exit 1
 fi
 
+ln -sf "$png_file" "$HOME/.wallpaper.png"
+
 function color_raw() {
   echo -e "$base_color" >$HOME/.colors.raw
   echo -e "$bg_color" >>$HOME/.colors.raw

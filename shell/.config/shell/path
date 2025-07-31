@@ -13,6 +13,7 @@ PATHLIST=(
     "$HOME/.local/bin"
     "$HOME/.bin"
     "$HOME/.binary/"
+    "$HOME/.binary/utils/"
     "$HOME/.npm-global/bin"
     "$HOME/.cargo/bin"
 )
