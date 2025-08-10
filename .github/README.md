@@ -4,13 +4,12 @@
   <img src="../assets/Preview/Preview-0.png" alt="My Setup Demo" >
 </p>
 
-![my lovely lock screen](../assets/Preview/Preview-0.png)
 A comprehensive collection of configuration files for my Linux desktop environment, featuring Hyprland as the primary window manager with a curated set of tools and applications.
 
 ## 🖥️ System Overview
 
 <p align="center">
-  <img src="../assets/Preview/Preview-0.gif" alt="My Setup Demo" width="600">
+  <img src="../assets/Preview/Preview-full.gif" alt="My Setup Demo" width="600">
 </p>
 
 This dotfiles repository contains configurations for a modern Linux desktop setup built around:
