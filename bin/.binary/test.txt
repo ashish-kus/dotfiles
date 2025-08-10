@@ -1,0 +1,3 @@
+# Create a working sequence file by replacing the placeholders
+cat > ~/.config/huegen/themes/sequence << 'EOF'
+EOF

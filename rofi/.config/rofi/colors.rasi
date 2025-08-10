@@ -1,9 +1,9 @@
 @import "/home/ashishk/.config/huegen/themes/rofi-colors.rasi"
 * {
   debug:                          rgba(225, 000, 000, 100%);        
-  bg:                             rgba(000, 000, 000, 1%);
+  bg:                             rgba(000, 000, 000, 80%);
   text:                           rgba(255, 255, 255, 100%);
   primery:                        @color0;
-  secondary:                      rgba(38, 139, 210, 100 %);
+  secondary:                      @color1;
   transparent:                    rgba(255, 255, 255, 0%);
 }

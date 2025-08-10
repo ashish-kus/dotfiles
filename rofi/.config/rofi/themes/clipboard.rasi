@@ -1,26 +1,25 @@
 @theme './default.rasi'
 @import "../colors.rasi"
 
-
 window {
     background-color:             @bg;
     width:                        650px;
     border:                       2px;
-    border-radius:                8;
+    border-radius:                10;
     border-color:                 @primery;
-    padding:                      15px 5px;
+    padding:                      15px 0px;
     margin:                       5px;
 }
 
 listview {
     lines:                       9;
-  }
+}
 
 
 prompt {
     background-color:            @transparent;
     text-color:                  @text;
-    text:                        "copy";
+    text:                        " copy   ";
 }
 
 putbar {
@@ -43,8 +42,17 @@ listview {
     padding:                      10px 0px 0px ;
 }
 
+element.normal {
+    text-color:                   @text;
+}
+
 element.selected.normal {
     background-color:             @primery;
     border-radius:                0;
-    text-color:                   @text;
+    text-color:                   #000000; 
+}
+
+element-text.selected.normal {
+    background-color:             @transparent;
+    text-color:                   #000000;
 }

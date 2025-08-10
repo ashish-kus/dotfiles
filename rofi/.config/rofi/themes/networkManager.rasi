@@ -4,12 +4,12 @@
 window {
     background-color:             @bg;
     width:                        350px;
-    border:                       1px;
+    border:                       2px;
     border-radius:                10px;
     border-color:                 @primery;
-    padding:                      15px 5px;
+    padding:                      15px 0px;
     margin:                       8px;
-    location:                     southeast;
+    location:                     center;
 }
 
 listview {
@@ -21,6 +21,10 @@ putbar {
     spacing:                      0;
     background-color:             @transparent;
     text-color:                   @primery;
+}
+
+prompt{
+    padding:                      0px 0 0 10px;
 }
 
 entry {

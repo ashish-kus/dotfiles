@@ -29,7 +29,7 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  false;
-    width:                       400px;
+    width:                        350px;
     x-offset:                    20px;
     y-offset:                    0px;
 
@@ -192,4 +192,9 @@ error-message {
     border-radius:               0px;
     background-color:            @background;
     text-color:                  @foreground;
+}
+
+element-text.selected.normal {
+    background-color:             @transparent;
+    text-color:                   #000000;
 }

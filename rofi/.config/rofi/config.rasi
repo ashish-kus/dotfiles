@@ -16,7 +16,7 @@ configuration {
   me-select-entry:      "";
   me-accept-entry:      [MousePrimary,MouseSecondary];
   terminal:             "foot";
-  font:                 "MonoLisa Nerd Font 10";
+  font:                 "Maple Mono 10";
   icon-theme:           "La Capitaine";
 }
 

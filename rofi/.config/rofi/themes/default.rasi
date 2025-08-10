@@ -1,11 +1,12 @@
 // @import "../colors.rasi"
 @import "/home/ashishk/.config/huegen/themes/rofi-colors.rasi"
+@import "../colors.rasi"
 
 window {
     background-color:             @bg;
     width:                        600px;
     border:                       2px;
-    border-radius:                50;
+    border-radius:                10;
     border-color:                 @primery;
     padding:                      15px;
 }
@@ -69,7 +70,7 @@ element.normal.active {
 element.selected.normal {
     background-color:             @primery;
     border-radius:                7;
-    text-color:                   @text;
+    text-color:                   #000000;
 }
 
 element.selected.urgent {
@@ -108,14 +109,17 @@ mode-switcher {
     border-color:                @secondary;
     background-color:             @transparent;
 }
+
 button.selected {
     background-color:             @transparent;
     text-color:                   @text;
 }
+
 button {
     background-color:             @transparent;
     text-color:                   @text;
 }
+
 inputbar {
     spacing:                      0;
     background-color:             @transparent;
@@ -127,24 +131,32 @@ case-indicator {
     background-color:             @transparent;
     text-color:                   @primery;
 }
+
 entry {
     spacing:                      0;
     background-color:             @transparent;
     text-color:                   @text;
 }
+
 prompt {
     spacing:                      0;
     background-color:             @transparent;
     text-color:                   @text;
 }
+
 inputbar {
     children:   [ prompt,textbox-prompt-colon,entry,case-indicator ];
 }
+
 textbox-prompt-colon {
     expand:     false;
     background-color:             @transparent;
-    str:        " :";
+//    str:        " :";
     margin:     0px 0.3em 0em 0em ;
     text-color: @text;
 }
 
+element-text.selected.normal {
+    background-color:             @transparent;
+    text-color:                   #000000;
+}

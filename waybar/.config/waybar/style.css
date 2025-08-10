@@ -11,8 +11,7 @@
 
 window#waybar {
   /* background: rgba(26, 27, 38, 0.9);    70% opacity */
-  background: rgba(255, 255, 255, 0);
-  padding: 5px;
+  background: rgba(0, 0, 0, 0.8);
 }
 
 tooltip {
@@ -32,27 +31,25 @@ tooltip label {
   border-radius: 15px 0 0 15px;
   padding: 0px 10px;
   margin: 2px 0px;
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .modules-center {
   margin: 2px 0px;
   padding: 0px 10px;
   border-radius: 15px 15px 15px 15px;
-  background: rgba(0, 0, 0, 0.8);
 }
 
 .modules-left {
   border-radius: 0 15px 15px 0;
   margin: 2px 0px;
   padding: 0px 10px;
-  background: rgba(0, 0, 0, 0.8);
 }
 
 #pulseaudio.bluetooth,
 #custom-clipboard,
 #custom-colorpicker,
 #custom-powerDraw,
+#custom-cpu-governer,
 #custom-updates,
 #custom-hotspot,
 #custom-pacman,
@@ -120,6 +117,10 @@ tooltip label {
 #pulseaudio-slider slider {
   background-color: transparent;
   box-shadow: none;
+}
+
+#custom-cpu-governer {
+  font-size: 18px;
 }
 
 #backlight-slider trough,

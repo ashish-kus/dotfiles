@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-# DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
+# DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
 
 if ! pgrep -x "swww-daemon" >/dev/null; then
   swww-daemon
@@ -35,7 +35,7 @@ CURSOR_POS="$(hyprctl cursorpos)"
 TRANSITION_BEZIER="0.0,0.0,1.0,1.0"
 TRANSITION_FPS=60
 TRANSITION_TYPE="any"
-TRANSITION_DURATION=0.7
+TRANSITION_DURATION=1.7
 
 # Set wallpaper with transition
 swww img "$SELECTED_WALLPAPER" \
@@ -51,3 +51,21 @@ makoctl reload
 
 sleep 0.5
 pkill -SIGUSR2 waybar
+
+ps -t $(who | awk '{print $2}') -o pid=,comm= | grep -E 'zsh|bash' | awk '{print $1}' | while read pid; do
+  kill -USR1 "$pid"
+done
+
+# Top Row (0-7)
+for i in {0..7}; do
+  printf "\e[48;5;${i}m   \e[0m" # 8 spaces wide
+done
+echo
+
+# Bottom Row (8-15)
+for i in {8..15}; do
+  printf "\e[48;5;${i}m   \e[0m" # 8 spaces wide
+done
+echo
+
+~/.config/huegen/themes/termcol.sh

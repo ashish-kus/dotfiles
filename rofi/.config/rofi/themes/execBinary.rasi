@@ -67,3 +67,8 @@ element.selected.normal {
     text-color:                   @text;
     padding:                      50px 15px;
 }
+
+element-text.selected.normal {
+    background-color:             @transparent;
+    text-color:                   #000000;
+}
