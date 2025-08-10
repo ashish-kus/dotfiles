@@ -9,7 +9,7 @@ A comprehensive collection of configuration files for my Linux desktop environme
 ## 🖥️ System Overview
 
 <p align="center">
-  <img src="../assets/Preview/Preview-full.gif" alt="My Setup Demo" width="600">
+  <img src="../assets/Preview/Preview-full.gif" alt="My Setup Demo" >
 </p>
 
 This dotfiles repository contains configurations for a modern Linux desktop setup built around:
