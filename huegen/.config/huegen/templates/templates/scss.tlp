@@ -1,0 +1,5 @@
+$color-primary: {color0.hex};
+$color-secondary: {color1.hex};
+$color-accent: {color2.hex};
+$color-bg: {color0.hex};
+$color-text: {color5.hex};

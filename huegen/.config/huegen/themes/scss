@@ -1,0 +1,5 @@
+$color-primary: #4AF3F7;
+$color-secondary: #00BBBF;
+$color-accent: #2BA2A8;
+$color-bg: #4AF3F7;
+$color-text: #035F73;

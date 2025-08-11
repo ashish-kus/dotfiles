@@ -1,0 +1,41 @@
+# Terminal Color Theme Template
+
+printf "\
+\033]4;0;{color0.hex}\007\
+\033]4;1;{color1.hex}\007\
+\033]4;2;{color2.hex}\007\
+\033]4;3;{color3.hex}\007\
+\033]4;4;{color4.hex}\007\
+\033]4;5;{color5.hex}\007\
+\033]4;6;{color6.hex}\007\
+\033]4;7;{color7.hex}\007\
+\033]4;8;{color8.hex}\007\
+\033]4;9;{color9.hex}\007\
+\033]4;10;{color10.hex}\007\
+\033]4;11;{color11.hex}\007\
+\033]4;12;{color12.hex}\007\
+\033]4;13;{color13.hex}\007\
+\033]4;14;{color14.hex}\007\
+\033]4;15;{color15.hex}\007\
+\033]10;{color7.hex}\007\
+\033]11;rgba(0,0,0,1)\007\
+\033]12;{color7.hex}\007\
+\033]13;{color7.hex}\007\
+\033]17;{color7.hex}\007\
+\033]19;{color0.hex}\007\
+\033]4;232;{color0.hex}\007\
+\033]4;256;{color7.hex}\007\
+\033]708;{color0.hex}\007"
+
+# Color mapping:
+# color0-7:   Standard colors (black, red, green, yellow, blue, magenta, cyan, white)
+# color8-15:  Bright variants of colors 0-7
+# ]10:        Default foreground color (uses color7 - typically white/light)
+# ]11:        Default background color (uses color0 - typically black/dark)  
+# ]12:        Cursor color (uses color7)
+# ]13:        Cursor text color (uses color7)
+# ]17:        Highlight foreground (uses color7)
+# ]19:        Highlight background (uses color0)
+# ]4;232:     Extended color palette entry (uses color0)
+# ]4;256:     Extended color palette entry (uses color7)
+# ]708:       Border/frame color (uses color0)

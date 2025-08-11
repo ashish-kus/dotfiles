@@ -1,0 +1,8 @@
+@define-color color0 {color1.hex};
+@define-color color1 {color0.hex};
+@define-color color2 {color2.hex};
+@define-color color3 {color3.hex};
+@define-color color4 {color4.hex};
+@define-color color5 {color5.hex};
+@define-color color6 {color6.hex};
+@define-color color7 {color7.hex};

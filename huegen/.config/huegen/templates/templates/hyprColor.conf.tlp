@@ -1,0 +1,8 @@
+$color1 = {color0.strip}
+$color0 = {color1.strip}
+$color2 = {color2.strip}
+$color3 = {color3.strip}
+$color4 = {color4.strip}
+$color5 = {color5.strip}
+$color6 = {color6.strip}
+$color7 = {color7.strip}

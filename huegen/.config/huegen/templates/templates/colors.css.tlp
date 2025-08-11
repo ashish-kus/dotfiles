@@ -1,0 +1,10 @@
+* {
+    color0: {color0.hex};
+    color1: {color1.hex};
+    color2: {color2.hex};
+    color3: {color3.hex};
+    color4: {color4.hex};
+    color5: {color5.hex};
+    color6: {color6.hex};
+    color7: {color7.hex};
+}
