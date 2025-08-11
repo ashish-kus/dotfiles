@@ -4,7 +4,7 @@
 
 * {
   border: none;
-  font-size: 15px;
+  font-size: 14px;
   font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF";
   min-height: 10px;
 }
@@ -50,6 +50,7 @@ tooltip label {
 #custom-colorpicker,
 #custom-powerDraw,
 #custom-cpu-governer,
+#group-hardware,
 #custom-updates,
 #custom-hotspot,
 #custom-pacman,
@@ -72,7 +73,7 @@ tooltip label {
 #jack,
 #tray,
 #clock {
-  padding: 0 5px;
+  padding: 0px 5px;
   color: @active;
 }
 
@@ -120,7 +121,7 @@ tooltip label {
 }
 
 #custom-cpu-governer {
-  font-size: 18px;
+  font-size: 14px;
 }
 
 #backlight-slider trough,

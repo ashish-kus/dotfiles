@@ -1,0 +1,7 @@
+#nandu
+program_options:
+  tray: true
+  notify: true
+device_config:
+  - id_uuid: "*"
+    post_mount: ["~/.binary/utils/usb-mounted.sh"]
