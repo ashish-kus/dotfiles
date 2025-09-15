@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configuration
-CAMERA_DEV="/dev/video0"
+CAMERA_DEV="/dev/video10"
 MPV_PROFILE="camera"
 MPV_TITLE="CameraApp"
 

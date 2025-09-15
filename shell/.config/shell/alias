@@ -101,7 +101,8 @@ fi
 #============================= [ EXTRAS ] ==========================================
 # MYSQL:
 alias mysql="sudo systemctl start mysql && sudo mysql -u root ; systemctl stop mysql"
-alias mysql="sudo systemctl start mysql && sudo mycli -u root ; systemctl stop mysql"
+# alias mysql="sudo systemctl start mysql && sudo mycli -u root ; systemctl stop mysql"
+
 
 #============================ [ ARCH - Special ] ===================================
 alias getix='curl http://ix.io/$1'

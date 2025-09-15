@@ -74,14 +74,14 @@ background = default
 foreground = default
  gradient = 1
  gradient_count = 6
- gradient_color_1 = '#4AF3F7'
- gradient_color_2 = '#00BBBF'
- gradient_color_3 = '#2BA2A8'
- gradient_color_4 = '#098D8D'
- gradient_color_5 = '#758E63'
- gradient_color_6 = '#035F73'
- gradient_color_7 = '#2A6F79'
- gradient_color_8 = '#43808C'
+ gradient_color_1 = '#A5C601'
+ gradient_color_2 = '#ECCE2C'
+ gradient_color_3 = '#68A004'
+ gradient_color_4 = '#5B6A0A'
+ gradient_color_5 = '#EABD68'
+ gradient_color_6 = '#60377B'
+ gradient_color_7 = '#9366A8'
+ gradient_color_8 = '#684E13'
 
 
 

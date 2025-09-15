@@ -1,3 +1,4 @@
+
 extract () {
    if [ -f "$1" ]; then
      case "$1" in
@@ -214,3 +215,5 @@ hist-search() {
       --preview-window 'up:80%,border-bottom,~3,wrap'
 }
 
+
+# vim: syntax=sh

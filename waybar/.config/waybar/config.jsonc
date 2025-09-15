@@ -1,9 +1,18 @@
 {
   "layer": "top",
-  "position": "bottom",
+  "position": "top",
+  "reload_style_on_change": true,
   "mod": "dock",
-  "margin-bottom": 2,
-  "modules-left": ["custom/logo", "group/hardware", "hyprland/window"],
+  "margin-top": 4,
+  "margin-left": 4,
+  "margin-right": 4,
+  "modules-left": [
+    //    "custom/launcher",
+    "custom/logo",
+    "group/hardware",
+    "hyprland/window",
+    "custom/cava",
+  ],
   "modules-center": ["hyprland/workspaces", "custom/pacman", "mpd"],
   "modules-right": [
     "tray",
@@ -21,10 +30,9 @@
     "custom/cpu-governer",
     "battery",
   ],
-  "reload_style_on_change": true,
   "custom/logo": {
     "format": "󰊠",
-    //    "format": "",
+    //"format": "",
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh",
   },
@@ -372,5 +380,10 @@
     },
     "tooltip-format": "MPD (connected)",
     "tooltip-format-disconnected": "MPD (disconnected)",
+  },
+  "custom/launcher": {
+    //"format":"<U+F44E>",
+    "format": "    ",
+    "tooltip": false,
   },
 }

@@ -1,7 +1,7 @@
 @import "/home/ashishk/.config/huegen/themes/rofi-colors.rasi"
 * {
   debug:                          rgba(225, 000, 000, 100%);        
-  bg:                             rgba(000, 000, 000, 80%);
+  bg:                             rgba(32, 29, 42, 0.9);
   text:                           rgba(255, 255, 255, 100%);
   primery:                        @color0;
   secondary:                      @color1;

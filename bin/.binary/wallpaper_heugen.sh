@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
+DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+#DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
 
 if ! pgrep -x "swww-daemon" >/dev/null; then
   swww-daemon
@@ -45,16 +45,18 @@ swww img "$SELECTED_WALLPAPER" \
   --transition-duration="$TRANSITION_DURATION" \
   --transition-pos "$CURSOR_POS"
 
-~/.binary/heugen ~/.wallpaper.png
+~/Work/Repo/Huegen/build/huegen -i ~/.wallpaper.png
+# ~/.binary/heugen ~/.wallpaper.png
+
 cat ~/.config/mako/base.conf ~/.config/huegen/themes/colors-mako.conf >~/.config/mako/config
 makoctl reload
 
-sleep 0.5
-pkill -SIGUSR2 waybar
+# sleep 0.5
+# pkill -SIGUSR2 waybar
 
-ps -t $(who | awk '{print $2}') -o pid=,comm= | grep -E 'zsh|bash' | awk '{print $1}' | while read pid; do
-  kill -USR1 "$pid"
-done
+# ps -t $(who | awk '{print $2}') -o pid=,comm= | grep -E 'zsh|bash' | awk '{print $1}' | while read pid; do
+#  kill -USR1 "$pid"
+# done
 
 # Top Row (0-7)
 for i in {0..7}; do

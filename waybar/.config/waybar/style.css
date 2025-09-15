@@ -1,5 +1,9 @@
-@import "./waybar.css";
-/* @import "../huegen/themes/waybar.css"; */
+/*@import "./waybar.css";
+  @import "../huegen/themes/waybar.css";
+  @import "../huegen/themes/waybar.css";
+*/
+
+@import url("./waybar.css");
 @define-color active @color0;
 
 * {
@@ -7,15 +11,20 @@
   font-size: 14px;
   font-family: "JetBrainsMono Nerd Font,JetBrainsMono NF";
   min-height: 10px;
+  box-shadow: none;
 }
 
 window#waybar {
-  /* background: rgba(26, 27, 38, 0.9);    70% opacity */
-  background: rgba(0, 0, 0, 0.8);
+  /* background: rgba(26, 27, 38, 0.9);    70% opacity 
+  background: rgba(0, 0, 0, 0.6); */
+  background: rgba(32, 29, 42, 0.8);
+  border: @active 1px solid;
 }
 
 tooltip {
-  border-radius: 15px;
+  background: rgba(32, 29, 42, 0.9);
+  border-radius: 0px;
+  border: @active 1px solid;
   color: @active;
 }
 
@@ -49,6 +58,7 @@ tooltip label {
 #custom-clipboard,
 #custom-colorpicker,
 #custom-powerDraw,
+#custom-cava,
 #custom-cpu-governer,
 #group-hardware,
 #custom-updates,
@@ -136,6 +146,13 @@ tooltip label {
   min-width: 5px;
   min-height: 5px;
   background-color: #ffffff;
+}
+
+#custom-launcher {
+  background-image: url("/home/ashishk/.config/utility/avatar.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 
 #battery.charging {

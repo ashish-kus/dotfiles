@@ -20,7 +20,7 @@ on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 font= Maple Mono NF 10
 
 # background color of notification( #RRGGBB | #RRGGBBAA )
-background-color=#000000FF
+background-color=#151520FF
 # Text color inside the notification( #RRGGBB | #RRGGBBAA )
 
 # color of border of each notification( #RRGGBB | #RRGGBBAA )
@@ -37,12 +37,12 @@ outer-margin=3, 3
 margin=5
 
 # Set padding on each side to the size specified by directional( value in px )
-padding=15
+padding=10, 15
 
 #Set popup border size to px pixels.(value in px )
-border-size=2
+border-size=1
 # bordear radious of each notification(value in px )
-border-radius=5
+border-radius=0
 
 # Set popup progress indicator color to color.( value [over|source] ( #RRGGBB | #RRGGBBAA ))
 progress-color=over #0b1c1c
@@ -51,12 +51,12 @@ progress-color=over #0b1c1c
 icons=1
 
 #  Set maximum icon size to px pixels.(value in px)
-max-icon-size=34
+ max-icon-size=46
 
 # Paths to search for icons when a notification specifies a name instead of a full path.(value path[:path...] )
 
 #  Position of the icon relative to the displayed text.(value: left | right | top | bottom )
-icon-location=left
+icon-location=right
 
 # enable pango - format notification( value 0|1 )
 # markup=1
@@ -91,5 +91,5 @@ anchor=top-right
 
 text-color=#7F8083
 border-color=#7F8083
-text-color=#00BBBF
-border-color=#00BBBF
+text-color=#ECCE2C
+border-color=#ECCE2C

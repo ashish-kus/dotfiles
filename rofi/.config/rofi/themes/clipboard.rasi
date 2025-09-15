@@ -5,7 +5,7 @@ window {
     background-color:             @bg;
     width:                        650px;
     border:                       2px;
-    border-radius:                10;
+    border-radius:                0;
     border-color:                 @primery;
     padding:                      15px 0px;
     margin:                       5px;
