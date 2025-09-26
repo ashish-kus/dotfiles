@@ -17,7 +17,7 @@
 window#waybar {
   /* background: rgba(26, 27, 38, 0.9);    70% opacity 
   background: rgba(0, 0, 0, 0.6); */
-  background: rgba(32, 29, 42, 0.8);
+  background: rgba(32, 29, 42, 0.9);
   border: @active 1px solid;
 }
 

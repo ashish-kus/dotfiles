@@ -71,3 +71,6 @@ done
 echo
 
 ~/.config/huegen/themes/termcol.sh
+
+# notify-send -i ~/.config/utility/avatar.png "Wallpaperr changed "
+notify-send -i ~/.wallpaper.png "Wallpaperr changed "
