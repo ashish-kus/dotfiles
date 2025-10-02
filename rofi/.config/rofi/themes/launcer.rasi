@@ -71,6 +71,7 @@ textbox-prompt-colon {
     background-color:            transparent;
     text-color:                  inherit;
 }
+
 entry {
     enabled:                     true;
     background-color:            transparent;
@@ -103,6 +104,7 @@ listview {
     text-color:                  @primery;
     cursor:                      "default";
 }
+
 scrollbar {
     handle-width:                5px ;
     handle-color:                @selected;
@@ -124,13 +126,16 @@ element {
     orientation:                 vertical;
     cursor:                      pointer;
 }
+
 element normal.normal {
     background-color:            transparent;
     text-color:                  @primery;
 }
+
 element selected.normal {
     text-color:                  @foreground;
 }
+
 element-icon {
     background-color:            @transparent;
     text-color:                  inherit;
@@ -138,6 +143,7 @@ element-icon {
     size:                        100px;
     cursor:                      inherit;
 }
+
 element-icon selected.normal{
     background-color:            @primery;
     border-radius:               20px;
