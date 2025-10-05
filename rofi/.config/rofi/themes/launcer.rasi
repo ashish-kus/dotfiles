@@ -20,7 +20,7 @@ window {
     height:                      768px;
     x-offset:                    0px;
     y-offset:                    0px;
-
+    text-color:                  white / 50%;
     enabled:                     true;
     margin:                      0px;
     padding:                     0px;
@@ -42,6 +42,7 @@ mainbox {
     border-color:                @selected;
     background-color:            transparent;
     children:                    [ "inputbar", "listview" ];
+    text-color:                  white / 50%;
 }
 
 /*****----- Inputbar -----*****/
@@ -54,7 +55,7 @@ inputbar {
     border-radius:               10px;
     border-color:                @primery;
     background-color:            white / 5%;
-    text-color:                  @primery;
+    text-color:                  white / 50%;
     children:                    [ "prompt", "entry" ];
 }
 
@@ -101,7 +102,7 @@ listview {
     border-radius:               0px;
     border-color:                @selected;
     background-color:            transparent;
-    text-color:                  @primery;
+    text-color:                  white / 50%;
     cursor:                      "default";
 }
 
@@ -122,14 +123,14 @@ element {
     border-radius:               25px;
     border-color:                @selected;
     background-color:            transparent;
-    text-color:                  @primery;
+    text-color:                  white / 50%;
     orientation:                 vertical;
     cursor:                      pointer;
 }
 
 element normal.normal {
     background-color:            transparent;
-    text-color:                  @primery;
+    text-color:                  white / 50%;
 }
 
 element selected.normal {
@@ -140,13 +141,13 @@ element-icon {
     background-color:            @transparent;
     text-color:                  inherit;
     border-radius:               20px;
-    size:                        100px;
+    size:                        120px;
     cursor:                      inherit;
 }
 
 element-icon selected.normal{
     background-color:            @primery;
-    border-radius:               20px;
+    border-radius:               30px;
 }
 
 element-text {
