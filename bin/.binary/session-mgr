@@ -1,3 +1,0 @@
-#/bin/bash
-pgrep -x wlogout && exit
-hash wlogout 2>/dev/null && wlogout -b 5 -p layer-shell -c 10px -r 10px -T 400px -B 400px &>/dev/null & disown

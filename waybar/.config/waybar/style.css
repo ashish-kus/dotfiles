@@ -22,7 +22,7 @@ window#waybar {
   background: rgba(32, 29, 42, 0.3);
   border: 2px solid @active;
  */
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 tooltip {

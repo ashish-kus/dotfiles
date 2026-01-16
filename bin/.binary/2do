@@ -14,12 +14,12 @@
 ##################################################################################
 
 #-------------------------------------------------------------------------->[ checking required files. ]
-if [ ! -d $HOME/.todo/ ]; then 
+if [ ! -d $HOME/.todo/ ]; then
   mkdir $HOME/.todo/
-  touch $HOME/.todo/TODO   
+  touch $HOME/.todo/TODO
 fi
 #--------------------------------------------------------------------------> [ Global Variables ]
-DEFAULT_LIST=$HOME/.todo/TODO   
+DEFAULT_LIST=$HOME/.todo/TODO
 LIST_DIR=$HOME/.todo/
 LISTS=($HOME/.todo/*)
 CLIST=$DEFAULT_LIST
@@ -27,110 +27,106 @@ CLIST=$DEFAULT_LIST
 # TXTRESET=" \033[0m"
 #--------------------------------------------------------------------------> [ quotes list ]
 quotes() {
-ARRAY=(
-  " “Subtracting from your list of priorities is as important as adding to it.” "
-  " “Each day I will accomplish one thing on my to do list.” "
-  " “Each day I will accomplish one thing on my to list.” "
-  " “Life should not be reduced to a to do list.” "
-  " “Forget your to-do list and create a to-be list.” "
-  " “Sometimes our stop-doing list needs to be bigger than our to-do list.” "
-  " “Before you eat the elephant, make sure you know what parts you want to eat.” "
-  " “To-do list : to-do list!” "
-  " “Each day I will accomplish one thing on my to do list.” "
-  " “Each day I will accomplish one thing on my to list.” "
-  " “Scrum, in simple terms is managing a TO-DO list.” "
-  " “Where two or three are gathered, a seemingly difficult task gets done.” "
-  " You Should Use Your Strength To Help Others. -Yuji's Grandfather "
-)
-  echo -e "${ARRAY[ $RANDOM % ${#ARRAY[@]}]}"
+  ARRAY=(
+    " “Subtracting from your list of priorities is as important as adding to it.” "
+    " “Each day I will accomplish one thing on my to do list.” "
+    " “Each day I will accomplish one thing on my to list.” "
+    " “Life should not be reduced to a to do list.” "
+    " “Forget your to-do list and create a to-be list.” "
+    " “Sometimes our stop-doing list needs to be bigger than our to-do list.” "
+    " “Before you eat the elephant, make sure you know what parts you want to eat.” "
+    " “To-do list : to-do list!” "
+    " “Each day I will accomplish one thing on my to do list.” "
+    " “Each day I will accomplish one thing on my to list.” "
+    " “Scrum, in simple terms is managing a TO-DO list.” "
+    " “Where two or three are gathered, a seemingly difficult task gets done.” "
+    " You Should Use Your Strength To Help Others. -Yuji's Grandfather "
+  )
+  echo -e "${ARRAY[$RANDOM % ${#ARRAY[@]}]}"
 }
 #--------------------------------------------------------------------------> [ select List ]
 ListSelection() {
   LISTS_LEN=${#LISTS[@]}
-  if [ $LISTS_LEN -gt 1 ];
-  then
-     for (( i=0 ; i<$LISTS_LEN ; i++));
-     do
-        echo "$i) $(basename ${LISTS[$i]})"
-     done
-     echo "<ENTER>(default)"
-     read -p "LIST No. :" choice
-        if [[ $choice == "" ]]; then
-          CLIST=$DEFAULT_LIST
-        elif [[  $choice =~ ^[0-9]+$ ]] && [[ $choice -lt $LISTS_LEN ]] ; then
-            CLIST=${LISTS[$choice]}
-            echo " $(basename ${LISTS[$choice]}):" 
-            cat -n $CLIST
-        else
-            echo "bad Choice "
-            ListSelection
-       fi 
+  if [ $LISTS_LEN -gt 1 ]; then
+    for ((i = 0; i < $LISTS_LEN; i++)); do
+      echo "$i) $(basename ${LISTS[$i]})"
+    done
+    echo "<ENTER>(default)"
+    read -p "LIST No. :" choice
+    if [[ $choice == "" ]]; then
+      CLIST=$DEFAULT_LIST
+    elif [[ $choice =~ ^[0-9]+$ ]] && [[ $choice -lt $LISTS_LEN ]]; then
+      CLIST=${LISTS[$choice]}
+      echo " $(basename ${LISTS[$choice]}):"
+      cat -n $CLIST
+    else
+      echo "bad Choice "
+      ListSelection
+    fi
   else
     CLIST=$DEFAULT_LIST
     echo "DEFAULT_list"
   fi
- }
-#---------------------------------------------------------------------------> [ add-task ] 
-add_task(){
+}
+#---------------------------------------------------------------------------> [ add-task ]
+add_task() {
   read -p "$Green TASK: $Color_Off" TASK
-  if [[ $TASK == "" ]]; then 
+  if [[ $TASK == "" ]]; then
     return
   else
     ATTRIBUTES="\033[0;32m "
 
-#   echo -e $ATTRIBUTES $TASK $TXTRESET >> $CLIST
-    echo -e  $TASK  >> $CLIST
+    #   echo -e $ATTRIBUTES $TASK $TXTRESET >> $CLIST
+    echo -e $TASK >>$CLIST
   fi
   add_task
 }
-#-------------------------------------------------------------------------->[ add list ] 
-add_list(){
-  read -p "LISR_NAME: "  NAME
+#-------------------------------------------------------------------------->[ add list ]
+add_list() {
+  read -p "LISR_NAME: " NAME
   touch $LIST_DIR/$NAME
 }
 #-------------------------------------------------------------------------->[ DELETE A LIST ]
-delete_list(){
+delete_list() {
   LISTS=($HOME/.todo/*)
   LISTS_LEN=${#LISTS[@]}
-  if [ $LISTS_LEN -gt 1 ];
-  then
-     for (( i=0 ; i<$LISTS_LEN ; i++));
-     do
-        echo "$i) $(basename ${LISTS[$i]})"
-     done
-  fi 
+  if [ $LISTS_LEN -gt 1 ]; then
+    for ((i = 0; i < $LISTS_LEN; i++)); do
+      echo "$i) $(basename ${LISTS[$i]})"
+    done
+  fi
   read -p "RM list no. :" no
   rm -rf ${LISTS[$no]}
   echo " $(basename ${LISTS[$no]}) DELETED"
 }
 #----------------------------------------------------------------------->  [ show task ]
-show_tasks(){
-  echo -e "$UYellow$(basename $CLIST: )$Color_Off "
+show_tasks() {
+  echo -e "$UYellow$(basename $CLIST:)$Color_Off "
   cat -n $CLIST
 }
 #------------------------------------------------------------------------> [ clear_lilst ] remove all TASKs ]
-clear_list(){
+clear_list() {
   read -p "This will remoce all TASK from the list [y/N]:" delete
-  if [[ $delete == "y" ]] ; then
-      > $CLIST
-    else
-      echo "List not cleared"
+  if [[ $delete == "y" ]]; then
+    >$CLIST
+  else
+    echo "List not cleared"
   fi
 }
 #------------------------------------------------------------------------> [ DELETE A TASK ]
-delete_task(){
- read -p "TASK NO. :" taskno
- if [[ $taskno != "" ]]; then
-   sed -i "${taskno}d" $CLIST
- else
-   echo "❌"
- fi
+delete_task() {
+  read -p "TASK NO. :" taskno
+  if [[ $taskno != "" ]]; then
+    sed -i "${taskno}d" $CLIST
+  else
+    echo "❌"
+  fi
 }
 
 #------------------------------------------------------------------------> [ Quotes generator ]
 
 #------------------------------------------------------------------------> [ HELP ]
-help(){
+help() {
   echo "OPTION: <ENTER> to exit"
   echo "        a,add      : to add task to perticular list by default its TODO."
   echo "        ls,tasklist: to list all the task in the list chosen"
@@ -156,30 +152,39 @@ show_tasks
 while read -p "OPTION\h: " OPTION; do
   case $OPTION in
 
-    "") quotes
-        exit
-      ;;
-    l|lists) ListSelection
-      ;;
-    a|add) add_task
-      ;;
-   al|addlist) add_list
-      ;;
-  rml|removelist) delete_list
-      ;;
-   ls|tasklist) show_tasks
-      ;;
-    d|done|--delete) delete_task
-      ;;
-    c|clear) clear
-      ;;
-    cl|cleanlist) clear_list
-      ;;
-    h|help) help 
-      ;;
-    *) echo "<ENTER> to exit OR help to know more"
-      ;;
+  "")
+    quotes
+    exit
+    ;;
+  l | lists)
+    ListSelection
+    ;;
+  a | add)
+    add_task
+    ;;
+  al | addlist)
+    add_list
+    ;;
+  rml | removelist)
+    delete_list
+    ;;
+  ls | tasklist)
+    show_tasks
+    ;;
+  d | done | --delete)
+    delete_task
+    ;;
+  c | clear)
+    clear
+    ;;
+  cl | cleanlist)
+    clear_list
+    ;;
+  h | help)
+    help
+    ;;
+  *)
+    echo "<ENTER> to exit OR help to know more"
+    ;;
   esac
 done
-
-

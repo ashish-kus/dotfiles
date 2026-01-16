@@ -12,10 +12,10 @@
 # reverting to default cga palette: 'ttyscheme cga'	  #
 ###########################################################
 
-help_text () {
-    while IFS= read -r line; do
-	echo "$line"
-    done <<EOF
+help_text() {
+  while IFS= read -r line; do
+    echo "$line"
+  done <<EOF
 Usage: ttyscheme [FLAGS] [COLORSCHEME]
 	-l	list color schemes
 	-p	output command to manually apply scheme
@@ -26,18 +26,21 @@ EOF
 }
 
 while getopts 'plash' opt; do
-    case "$opt" in
-	p) TTYSCHEME_PRINT=1 ;;
-	l) TTYSCHEME_LIST=1 ;;
-	a) TTYSCHEME_ARRAY=1 ;;
-	s) TTYSCHEME_ARRAY_SIMPLE=1 ;;
-	h) help_text; exit 0 ;;
-	*) exit 1 ;;
-    esac
+  case "$opt" in
+  p) TTYSCHEME_PRINT=1 ;;
+  l) TTYSCHEME_LIST=1 ;;
+  a) TTYSCHEME_ARRAY=1 ;;
+  s) TTYSCHEME_ARRAY_SIMPLE=1 ;;
+  h)
+    help_text
+    exit 0
+    ;;
+  *) exit 1 ;;
+  esac
 done
-shift $((OPTIND-1))
+shift $((OPTIND - 1))
 
-#                   N: black    red    green  yellow   blue   magenta  cyan    white  B: black    red    green  yellow   blue   magenta  cyan    white   
+#                   N: black    red    green  yellow   blue   magenta  cyan    white  B: black    red    green  yellow   blue   magenta  cyan    white
 COLORS='3024night=    #090300 #db2d20 #01a252 #fded02 #01a0e4 #a16a94 #b5e4f4 #a5a2a2   #5c5855 #e8bbd0 #3a3432 #4a4543 #807d7c #d6d5d4 #cdab53 #f7f7f7
 3024day=              #f7f7f7 #db2d20 #01a252 #fded02 #01a0e4 #a16a94 #b5e4f4 #a5a2a2   #5c5855 #e8bbd0 #3a3432 #4a4543 #807d7c #d6d5d4 #cdab53 #090300
 aci=                  #0d1926 #ff0883 #83ff08 #ff8308 #0883ff #8308ff #08ff83 #b6b6b6   #424242 #ff1e8e #8eff1e #ff8e1e #1e8eff #8e1eff #1eff8e #c2c2c2
@@ -192,72 +195,72 @@ zenburn=              #3f3f3f #705050 #60b48a #f0dfaf #506070 #dc8cc3 #8cd0d3 #d
 unset SELECT
 
 if [ -n "$TTYSCHEME_LIST" ]; then
-    while IFS= read -r line; do
-	echo "${line%%=*}"
-    done <<EOF
+  while IFS= read -r line; do
+    echo "${line%%=*}"
+  done <<EOF
 $COLORS
 EOF
-    exit 0
+  exit 0
 elif [ -n "$1" ]; then
-    while IFS= read -r line; do
-	if [ "$1" = "${line%%=*}" ]; then
-	    SELECT="${line#*=}"
-	    break
-	fi
-    done <<EOF
+  while IFS= read -r line; do
+    if [ "$1" = "${line%%=*}" ]; then
+      SELECT="${line#*=}"
+      break
+    fi
+  done <<EOF
 $COLORS
 EOF
 fi
 
 if [ -n "$SELECT" ]; then
-    set -- 0 1 2 3 4 5 6 7 8 9 A B C D E F
+  set -- 0 1 2 3 4 5 6 7 8 9 A B C D E F
 
-    unset str
-    for col in $SELECT; do
-	str="${str}\033]P${1}${col#\#}"
-	shift
-    done
+  unset str
+  for col in $SELECT; do
+    str="${str}\033]P${1}${col#\#}"
+    shift
+  done
 
-    if [ -n "$TTYSCHEME_PRINT" ]; then
-	printf '%s' "printf '%b' '${str}'"
-	exit 0
-    else
-	# apply scheme
-	printf '%b' "$str"
-	# clear screen
-	command -v 'clear' >/dev/null &&
-	    clear ||
-		printf '%b' '\033[2J\033[H'
-    fi
+  if [ -n "$TTYSCHEME_PRINT" ]; then
+    printf '%s' "printf '%b' '${str}'"
+    exit 0
+  else
+    # apply scheme
+    printf '%b' "$str"
+    # clear screen
+    command -v 'clear' >/dev/null &&
+      clear ||
+      printf '%b' '\033[2J\033[H'
+  fi
 elif [ -n "$1" -o -z "${TTYSCHEME_ARRAY}${TTYSCHEME_ARRAY_SIMPLE}" ]; then
-    echo 'Invalid color scheme. Pass -l for a list of available schemes or -h for further help.'
-    exit 1
+  echo 'Invalid color scheme. Pass -l for a list of available schemes or -h for further help.'
+  exit 1
 fi
 
 if [ -n "$TTYSCHEME_ARRAY" ]; then
-    cnt=0
-    for bkgrnd in 40 41 42 43 44 45 46 47; do
-	printf '%b' "\033[${bkgrnd}m"
-	for bold in 22 1; do
-	    printf '%b' "\033[${bold}m"
-	    for frgrnd in 30 31 32 33 34 35 36 37; do
-		cntprt="$cnt"
-		while [ "${#cntprt}" -lt 3 ]; do
-		    cntprt=" ${cntprt}"
-		done
-		printf '%b' "\033[${frgrnd}m ${cntprt} "
-		cnt="$((cnt+1))"
-	    done
-	done
-	printf '%b\n' '\033[0m'
+  cnt=0
+  for bkgrnd in 40 41 42 43 44 45 46 47; do
+    printf '%b' "\033[${bkgrnd}m"
+    for bold in 22 1; do
+      printf '%b' "\033[${bold}m"
+      for frgrnd in 30 31 32 33 34 35 36 37; do
+        cntprt="$cnt"
+        while [ "${#cntprt}" -lt 3 ]; do
+          cntprt=" ${cntprt}"
+        done
+        printf '%b' "\033[${frgrnd}m ${cntprt} "
+        cnt="$((cnt + 1))"
+      done
     done
+    printf '%b\n' '\033[0m'
+  done
 elif [ -n "$TTYSCHEME_ARRAY_SIMPLE" ]; then
-    unset str
-    for bkgrnd in 40 41 42 43 44 45 46 47; do
-	str="${str}\033[${bkgrnd}m       "
-    done
-    str="${str}\033[0m"
-    for i in 1 2 3 4 5 6 7; do
-	printf '%b\n' "$str"
-    done
+  unset str
+  for bkgrnd in 40 41 42 43 44 45 46 47; do
+    str="${str}\033[${bkgrnd}m       "
+  done
+  str="${str}\033[0m"
+  for i in 1 2 3 4 5 6 7; do
+    printf '%b\n' "$str"
+  done
 fi

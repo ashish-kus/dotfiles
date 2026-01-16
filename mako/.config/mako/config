@@ -93,7 +93,5 @@ anchor=top-right
 # border-color=#FA561F
 #
 #
-
-# Color overrides
-text-color=#33ffaa
-border-color=#33ffaa
+text-color=#F8CF7C
+border-color=#F8CF7C

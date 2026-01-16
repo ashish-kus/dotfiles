@@ -1,5 +1,0 @@
-#!/bin/bash
-
-[ -f "$HOME/.config/shell/path" ] && . "$HOME/.config/shell/path"
-
-bemenu-run
