@@ -1,14 +1,13 @@
 #!/bin/bash
 
-# Check if QuakeTerminal already exists
-winid=$(hyprctl clients -j | jq -r '.[] | select(.title=="QuakeTerminal") | .address')
+# Check if QuickTerm already exists (match by class/app-id)
+winid=$(hyprctl clients -j | jq -r '.[] | select(.class=="qterm") | .address')
 
 if [ -n "$winid" ]; then
-  # If exists, kill it
+  # If exists, close it
   hyprctl dispatch closewindow address:$winid
   exit 0
 fi
 
-# Otherwise launch foot with special title, running tmux
-foot -T QuakeTerminal sh -c "tmux new-session -A -s quickTerminal" 2>/dev/null &
-pid=$!
+# Otherwise launch foot with fixed app-id and tmux
+foot --app-id=Qterm sh -c "tmux new-session -A -s Qterm" >/dev/null 2>&1 &

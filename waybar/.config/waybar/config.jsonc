@@ -1,57 +1,60 @@
 {
   "layer": "top",
-  "position": "top",
+  "position": "bottom",
   "reload_style_on_change": true,
   "mod": "dock",
-  "margin-top": 4,
+  "margin-bottom": 4,
   "margin-left": 4,
   "margin-right": 4,
   "modules-left": [
     //    "custom/launcher",
     "custom/logo",
-    "group/hardware",
+    "disk",
+    "memory",
+    "cpu",
+    "temperature",
+    "custom/powerDraw",
+    "custom/tasks",
     "hyprland/window",
     "custom/cava",
   ],
-  "modules-center": ["hyprland/workspaces", "custom/pacman", "mpd"],
-  "modules-right": [
-    "tray",
-    "custom/updates",
-    "privacy",
-    "custom/clipboard",
-    "group/blight",
-    "idle_inhibitor",
-    "custom/colorpicker",
-    "bluetooth",
-    "pulseaudio#mic",
-    "group/audio",
-    "custom/hotspot",
-    "group/networking",
-    "custom/cpu-governer",
-    "battery",
-  ],
+  "modules-center": ["hyprland/workspaces"],
+  "modules-right": ["group/control", "group/system"],
   "custom/logo": {
-    "format": "󰊠",
-    //"format": "",
+    "format": "ॐ",
+    // "format": "󰊠 ",
+    // "format": "",
+    // "format": "",
+
     "tooltip": false,
     "on-click": "~/.config/rofi/scripts/powermenu.sh",
   },
-  "group/hardware": {
+
+  "group/system": {
     "orientation": "horizontal",
-    "drawer": {
-      "transition-duration": 500,
-      "transition-left-to-right": true,
-    },
+    "modules": ["clock", "battery", "custom/cpu-governer"],
+    "class": "system-group", // Add this
+  },
+
+  "group/control": {
+    "orientation": "horizontal",
     "modules": [
-      "clock",
-      "disk",
-      "memory",
-      "cpu",
-      "temperature",
-      "custom/powerDraw",
-      "custom/tasks",
+      "wlr/taskbar",
+      "tray",
+      "custom/updates",
+      "privacy",
+      "custom/clipboard",
+      "group/blight",
+      "idle_inhibitor",
+      "custom/colorpicker",
+      "bluetooth",
+      "pulseaudio#mic",
+      "group/audio",
+      "custom/hotspot",
+      "group/networking",
     ],
   },
+
   "custom/pacman": {
     "format": "{icon}{}",
     "return-type": "json",
@@ -119,8 +122,9 @@
     "return-type": "json",
   },
   "hyprland/workspaces": {
-    "format": "<span font='18px'>{icon}</span>",
+    "format": "{icon}",
     "show-special": true,
+    "active-only": false,
     //  "special-visible-only": false, // If this and show-special are to true, special workspaces will be shown only if visible.
     "move-to-monitor": true,
     "expand": true,
@@ -131,10 +135,10 @@
       "4": "४",
       "5": "५",
       "6": "६",
-      "default": "",
+      "default": "",
     },
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5, 6],
+      "*": [1, 2, 3, 4, 5],
     },
   },
   "hyprland/window": {
@@ -171,7 +175,7 @@
   },
   "backlight": {
     "device": "intel_backlight",
-    "format": "<span font='12'>{icon}</span>",
+    "format": "{icon}",
     "rotate": 180,
     "format-icons": [
       "",
@@ -200,7 +204,7 @@
     "device": "intel_backlight",
   },
   "idle_inhibitor": {
-    "format": "<span font='12'>{icon}</span>",
+    "format": "{icon}",
     "format-icons": {
       "activated": "󰈈",
       "deactivated": "󰈉",
@@ -325,10 +329,10 @@
       "critical": 20,
     },
     "tooltip": true,
-    "format": "{capacity}% <span font='14px'>{icon}</span>",
+    "format": "{capacity}% {icon}",
     "format-time": "{H}h {M}min",
     "tooltip": "{time}",
-    "format-charging": "{capacity}% <span font='16px'>󰂄</span>",
+    "format-charging": "{capacity}% 󰂄",
     "format-plugged": "{capacity}% 󰂅",
     // "format-alt": "{time} {icon}",
     "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"],
@@ -385,5 +389,22 @@
     //"format":"<U+F44E>",
     "format": "    ",
     "tooltip": false,
+  },
+
+  "wlr/taskbar": {
+    "format": "{icon}",
+    "icon-size": 18,
+    "all-outputs": true,
+    "tooltip-format": "{title}",
+    "on-click": "activate",
+    "on-click-middle": "close",
+    "ignore-list": ["Alacritty"],
+    "app_ids-mapping": {
+      "firefoxdeveloperedition": "firefox-developer-edition",
+    },
+    "rewrite": {
+      "Firefox Web Browser": "Firefox",
+      "Foot Server": "Terminal",
+    },
   },
 }

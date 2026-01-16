@@ -4,3 +4,5 @@
 source ~/.config/shell/shell.conf
 
 
+
+. "$HOME/.local/share/../bin/env"

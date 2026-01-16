@@ -12,7 +12,7 @@
 alias termcode="lvim"
 alias sudo="sudo "
 alias bye="shutdown now"
-alias sleep="systemctl suspend"
+# alias sleep="systemctl suspend"
 alias mkdir="mkdir -p"
 alias c="clear -x"
 alias clear="clear -x"

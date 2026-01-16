@@ -80,3 +80,5 @@ _open_files_for_editing() {
 #
 source .config/shell/shell.conf
 . "$HOME/.cargo/env"
+
+. "$HOME/.local/share/../bin/env"

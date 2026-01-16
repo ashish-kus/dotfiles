@@ -1,7 +1,7 @@
 #!/bin/bash
 
-DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
-#DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
+# DEFAULT_WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+DEFAULT_WALLPAPER_DIR="$HOME/Pictures/MinecraftWallpapers/"
 
 if ! pgrep -x "swww-daemon" >/dev/null; then
   swww-daemon
@@ -45,7 +45,7 @@ swww img "$SELECTED_WALLPAPER" \
   --transition-duration="$TRANSITION_DURATION" \
   --transition-pos "$CURSOR_POS"
 
-~/Work/Repo/Huegen/build/huegen -i ~/.wallpaper.png
+~/Work/Repo/Huegen/build/heugen ~/.wallpaper.png
 # ~/.binary/heugen ~/.wallpaper.png
 
 cat ~/.config/mako/base.conf ~/.config/huegen/themes/colors-mako.conf >~/.config/mako/config

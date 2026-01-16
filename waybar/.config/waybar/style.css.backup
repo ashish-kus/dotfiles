@@ -7,7 +7,7 @@
 
 */
 
-@import url("file:///home/ashishk/.config/waybar/colors.css");
+@import url("file:///home/ashishk/.colors.css");
 
 * {
   border: none;
@@ -77,7 +77,6 @@ tooltip label {
 #privacy,
 #memory,
 #window,
-#taskbar,
 #disk,
 #cpu,
 #jack,
@@ -85,16 +84,6 @@ tooltip label {
 #clock {
   padding: 0px 5px;
   color: @active;
-}
-
-#taskbar button {
-  margin: 0 5px;
-  padding: 0;
-  border-radius: 0;
-}
-
-#taskbar button.active {
-  border-bottom: 2px solid @active;
 }
 
 #workspaces button {
@@ -109,6 +98,7 @@ tooltip label {
   transition: all 0.5s cubic-bezier(0.55, -0.68, 0.48, 1.682);
 }
 
+#taskbar button.active,
 #workspaces button.active {
   border-radius: 15px;
   background-color: #cdd6f4;
