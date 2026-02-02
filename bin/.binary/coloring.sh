@@ -9,7 +9,18 @@ MAKO_CONFIG="$HOME/.config/mako/config"
 MAKO_BASE="$HOME/.config/mako/base.conf"
 HYPR_COLORS="$HOME/.config/hypr/hyprcolor.conf"
 ROFI_COLORS="$HOME/.config/rofi/colors.rasi"
+
+WALLPAPER_DIR="$HOME/Pictures/Wallpapers"
+
 # FOOT_CONFIG="$HOME/.config/foot/foot.ini"
+
+if [ ! -d "$WALLPAPER_DIR" ]; then
+  echo "Error: Wallpaper directory '$WALLPAPER_DIR' does not exist"
+fi
+
+WALLPAPERS=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.png" \))
+RANDOM_WALLPAPER=$(echo "$WALLPAPERS" | shuf -n 1)
+swww img "$RANDOM_WALLPAPER"
 
 # Function to convert hex to RGB
 hex_to_rgb() {

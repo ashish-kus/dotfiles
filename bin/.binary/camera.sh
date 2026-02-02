@@ -14,7 +14,7 @@
 ##################################################################################
 
 # Configuration
-DEFAULT_CAMERA="/dev/video0"
+DEFAULT_CAMERA="/dev/video1"
 MPV_PROFILE="camera"
 MPV_TITLE="CameraApp"
 

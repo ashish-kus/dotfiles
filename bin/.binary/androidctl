@@ -1,0 +1,158 @@
+#!/bin/bash
+# ========= CONFIG =========
+PHONE_IP="192.168.1.10"
+PORT="5555"
+ADB="adb"
+CONNECTION_TIMEOUT=5
+# ==========================
+
+connect() {
+  $ADB connect $PHONE_IP:$PORT >/dev/null 2>&1
+}
+
+check_reachable() {
+  # Check if device is network reachable
+  if ! ping -c 1 -W 2 $PHONE_IP >/dev/null 2>&1; then
+    echo "Error: Device $PHONE_IP is not reachable on the network"
+    return 1
+  fi
+
+  # Try to connect
+  connect
+
+  # Check if device is connected via adb
+  if ! $ADB devices | grep -q "$PHONE_IP:$PORT.*device$"; then
+    echo "Error: Could not establish ADB connection to $PHONE_IP:$PORT"
+    echo "Make sure USB debugging is enabled and authorized"
+    return 1
+  fi
+
+  return 0
+}
+
+send_key() {
+  if ! check_reachable; then
+    exit 1
+  fi
+  $ADB shell input keyevent "$1"
+}
+
+get_now_playing() {
+  if ! check_reachable; then
+    exit 1
+  fi
+
+  echo "Fetching now playing info..."
+
+  # Try to get media session info (works on Android 5.0+)
+  local media_info=$($ADB shell dumpsys media_session 2>/dev/null)
+
+  if echo "$media_info" | grep -q "state=PlaybackState"; then
+    # Extract metadata
+    local track=$(echo "$media_info" | grep -A 1 "metadata:description=" | grep "title=" | sed 's/.*title=\(.*\)/\1/' | head -1)
+    local artist=$(echo "$media_info" | grep -A 1 "metadata:description=" | grep "subtitle=" | sed 's/.*subtitle=\(.*\)/\1/' | head -1)
+    local state=$(echo "$media_info" | grep "state=PlaybackState" | grep -oP "state=\K[0-9]+" | head -1)
+
+    # Decode state (3=playing, 2=paused, 1=stopped)
+    case $state in
+    3) state_text="Playing" ;;
+    2) state_text="Paused" ;;
+    1) state_text="Stopped" ;;
+    *) state_text="Unknown" ;;
+    esac
+
+    echo ""
+    echo "Status: $state_text"
+    if [ ! -z "$track" ]; then
+      echo "Track:  $track"
+    fi
+    if [ ! -z "$artist" ]; then
+      echo "Artist: $artist"
+    fi
+
+    if [ -z "$track" ] && [ -z "$artist" ]; then
+      echo "No detailed metadata available"
+    fi
+  else
+    echo "No active media session found"
+    echo "Make sure music is playing or paused"
+  fi
+}
+
+show_help() {
+  cat <<EOF
+Android Media Control Script
+Usage: $0 {command}
+
+Commands:
+  play|pause    Toggle media playback
+  next          Skip to next track
+  prev          Go to previous track
+  volup         Increase volume
+  voldown       Decrease volume
+  mute          Toggle mute
+  nowplaying    Show currently playing track info
+  connect       Connect to device at $PHONE_IP:$PORT
+  status        Show connected devices
+  help          Show this help message
+
+Configuration:
+  Phone IP: $PHONE_IP
+  Port:     $PORT
+
+Examples:
+  $0 play
+  $0 next
+  $0 nowplaying
+  $0 volup
+
+Note: Device reachability is checked before each command.
+
+EOF
+}
+
+usage() {
+  show_help
+  exit 1
+}
+
+case "$1" in
+play | pause)
+  send_key KEYCODE_MEDIA_PLAY_PAUSE
+  ;;
+next)
+  send_key KEYCODE_MEDIA_NEXT
+  ;;
+prev)
+  send_key KEYCODE_MEDIA_PREVIOUS
+  ;;
+volup)
+  send_key KEYCODE_VOLUME_UP
+  ;;
+voldown)
+  send_key KEYCODE_VOLUME_DOWN
+  ;;
+mute)
+  send_key KEYCODE_VOLUME_MUTE
+  ;;
+nowplaying | np | now)
+  get_now_playing
+  ;;
+connect)
+  if check_reachable; then
+    echo "Successfully connected to $PHONE_IP"
+  fi
+  ;;
+status)
+  $ADB devices
+  ;;
+scrcpy)
+  scrcpy --no-audio --max-size 1024 --video-bit-rate 2M
+  ;;
+help | --help | -h)
+  show_help
+  ;;
+*)
+  usage
+  ;;
+esac
