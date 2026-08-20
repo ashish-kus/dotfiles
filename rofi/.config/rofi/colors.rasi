@@ -6,7 +6,7 @@
   debug:                          rgba(225, 000, 000, 100%);        
   bg:                             rgba(32, 29, 42, 0.3);
   text:                           rgba(255, 255, 255, 100%);
-  primery:                        rgba(235, 5, 22, 100%);
-  secondary:                      rgba(20, 250, 233, 100%);
+  primery:                        rgba(209, 46, 0, 100%);
+  secondary:                      rgba(46, 209, 255, 100%);
   transparent:                    rgba(255, 255, 255, 0%);
 }

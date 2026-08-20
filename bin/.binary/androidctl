@@ -1,6 +1,6 @@
 #!/bin/bash
 # ========= CONFIG =========
-PHONE_IP="192.168.1.10"
+PHONE_IP="192.168.1.14"
 PORT="5555"
 ADB="adb"
 CONNECTION_TIMEOUT=5

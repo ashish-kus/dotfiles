@@ -77,6 +77,10 @@ run() {
     js)
       node "$FILE"
       ;;
+  dart)
+      dart "$FILE"
+      ;;
+
     *)
       echo "File extension unknown"
       ;;

@@ -22,7 +22,6 @@ window {
     location:                    center;
     anchor:                      center;
     fullscreen:                  true;
-    width:                       1366px;
     x-offset:                    0px;
     y-offset:                    0px;
     enabled:                     true;

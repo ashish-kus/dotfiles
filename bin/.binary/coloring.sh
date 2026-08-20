@@ -20,7 +20,7 @@ fi
 
 WALLPAPERS=$(find "$WALLPAPER_DIR" -type f \( -name "*.jpg" -o -name "*.png" \))
 RANDOM_WALLPAPER=$(echo "$WALLPAPERS" | shuf -n 1)
-swww img "$RANDOM_WALLPAPER"
+awww img "$RANDOM_WALLPAPER"
 
 # Function to convert hex to RGB
 hex_to_rgb() {
